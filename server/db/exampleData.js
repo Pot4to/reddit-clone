@@ -1,3 +1,8 @@
+const Comment = require('./schemas/comment.js');
+const Post = require('./schemas/post.js');
+const Subreddit = require('./schemas/subreddit.js');
+const User = require('./schemas/user.js');
+
 const users = [
     {
       username: 'nick123',
@@ -93,3 +98,26 @@ const posts = [
     subReddit: 'memes'
   }
 ];
+
+// insert dummy data into db
+var insertData = () => {
+  users.forEach((user) => {
+    var newUser = new User(user);
+    newUser.save((err) => err ? console.log('Error inserting user', err) : null);
+  });
+
+  comments.forEach((comment) => {
+    var newComment = new Comment(comment);
+    newComment.save((err) => err ? console.log('Error inserting comment', err) : null);
+  });
+
+  subReddits.forEach((subReddit) => {
+    var newSubReddit = new Subreddit(subReddit);
+    newSubReddit.save((err) => err ? console.log('Error inserting Subreddit', err) : null);
+  });
+
+  posts.forEach((post) => {
+    var newPost = new Post(post);
+    newPost.save((err) => err ? console.log('Error inserting post', err) : null);
+  });
+};
