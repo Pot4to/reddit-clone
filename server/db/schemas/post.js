@@ -3,7 +3,8 @@ const db = require('../index.js');
 mongoose.Promise = global.Promise;
 
 const postSchema = new mongoose.Schema({
-    author: String,
+    identification: Number,
+    username: String,
     likes: { type: Number, default: 0 },
     url: String,
     subreddit: String,
