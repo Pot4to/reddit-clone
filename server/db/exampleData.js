@@ -1,7 +1,7 @@
-const Comment = require('./schemas/comment.js');
-const Post = require('./schemas/post.js');
-const Subreddit = require('./schemas/subreddit.js');
-const User = require('./schemas/user.js');
+const Comment = require('./schemas/comment.js').Comment;
+const Post = require('./schemas/post.js').Post;
+const Subreddit = require('./schemas/subreddit.js').Subreddit;
+const User = require('./schemas/user.js').User;
 
 const users = [
     {
@@ -29,7 +29,7 @@ const users = [
 
 const comments = [
   {
-    id: 1,
+    identification: 1,
     author: 'nick123',
     likes: 27,
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -38,7 +38,7 @@ const comments = [
     post: 1
   },
   {
-    id: 2,
+    identification: 2,
     author: 'joseph123',
     likes: 27,
     text: 'Dummy text Dummy text Dummy text Dummy text Dummy text Dummy text Dummy text.',
@@ -47,7 +47,7 @@ const comments = [
     post: 1
   },
   {
-    id: 3,
+    identification: 3,
     author: 'david123',
     likes: 27,
     text: 'More Lorem Ipsum More Lorem Ipsum More Lorem Ipsum More Lorem Ipsum More Lorem Ipsum.',
@@ -59,22 +59,22 @@ const comments = [
 
 const subReddits = [
   {
-    id: 12,
+    identification: 12,
     name: 'Cats'
   },
   {
-    id: 8,
+    identification: 8,
     name: 'Tech'
   },
   {
-    id: 4,
+    identification: 4,
     name: 'Memes'
   },
 ];
 
 const posts = [
   {
-    id: 1,
+    identification: 1,
     name: 'Stray Cat Wanders Into Police Station',
     url: 'https://i.imgur.com/lyEmz0U.jpg',
     likes: 57,
@@ -82,7 +82,7 @@ const posts = [
     subReddit: 'cats'
   },
   {
-    id: 2,
+    identification: 2,
     name: 'Mark Zuckerberg while being questioned by the senate',
     url: 'https://i.imgur.com/i44HiFN.jpg',
     likes: 117,
@@ -90,7 +90,7 @@ const posts = [
     subReddit: 'tech'
   },
   {
-    id: 3,
+    identification: 3,
     name: 'This meme isn’t fine as it is Memes',
     url: 'https://www.reddit.com/r/memes/comments/8ba611/this_meme_isnt_fine_as_it_is/',
     likes: 312,
@@ -103,21 +103,23 @@ const posts = [
 var insertData = () => {
   users.forEach((user) => {
     var newUser = new User(user);
-    newUser.save((err) => err ? console.log('Error inserting user', err) : null);
+    newUser.save((err) => err ? console.log('Error inserting user', err) : console.log('Users inserted'));
   });
 
   comments.forEach((comment) => {
     var newComment = new Comment(comment);
-    newComment.save((err) => err ? console.log('Error inserting comment', err) : null);
+    newComment.save((err) => err ? console.log('Error inserting comment', err) : console.log('Comments inserted'));
   });
 
   subReddits.forEach((subReddit) => {
     var newSubReddit = new Subreddit(subReddit);
-    newSubReddit.save((err) => err ? console.log('Error inserting Subreddit', err) : null);
+    newSubReddit.save((err) => err ? console.log('Error inserting Subreddit', err) : console.log('Subreddits inserted'));
   });
 
   posts.forEach((post) => {
     var newPost = new Post(post);
-    newPost.save((err) => err ? console.log('Error inserting post', err) : null);
+    newPost.save((err) => err ? console.log('Error inserting post', err) : console.log('Posts inserted'));
   });
 };
+
+insertData();
