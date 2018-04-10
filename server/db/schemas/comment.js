@@ -3,6 +3,7 @@ const db = require('../index.js');
 mongoose.Promise = global.Promise;
 
 const commentSchema = new mongoose.Schema({
+    identification: Number,
     author: String, 
     likes: {type: Number, default: 0}, 
     text: String, 
