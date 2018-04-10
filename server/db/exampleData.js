@@ -28,7 +28,7 @@ const comments = [
     author: 'nick123',
     likes: 27,
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    parent: {},
+    parent: null,
     children: [2, 3],
     post: 1
   },
@@ -55,21 +55,22 @@ const comments = [
 const subReddits = [
   {
     id: 12,
-    name: 'Stray Cat Wanders Into Police Station'
+    name: 'Cats'
   },
   {
     id: 8,
-    name: 'Mark Zuckerberg while being questioned by the senate'
+    name: 'Tech'
   },
   {
     id: 4,
-    name: 'This meme isn’t fine as it is'
+    name: 'Memes'
   },
 ];
 
 const posts = [
   {
     id: 1,
+    name: 'Stray Cat Wanders Into Police Station',
     url: 'https://i.imgur.com/lyEmz0U.jpg',
     likes: 57,
     username: 'nick123',
@@ -77,6 +78,7 @@ const posts = [
   },
   {
     id: 2,
+    name: 'Mark Zuckerberg while being questioned by the senate',
     url: 'https://i.imgur.com/i44HiFN.jpg',
     likes: 117,
     username: 'joseph123',
@@ -84,6 +86,7 @@ const posts = [
   },
   {
     id: 3,
+    name: 'This meme isn’t fine as it is Memes',
     url: 'https://www.reddit.com/r/memes/comments/8ba611/this_meme_isnt_fine_as_it_is/',
     likes: 312,
     username: 'david123',
