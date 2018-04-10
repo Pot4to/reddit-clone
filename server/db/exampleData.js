@@ -28,7 +28,7 @@ const comments = [
     author: 'nick123',
     likes: 27,
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    parent: {},
+    parent: null,
     children: [2, 3],
     post: 1
   },
