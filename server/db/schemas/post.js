@@ -7,6 +7,7 @@ const postSchema = new mongoose.Schema({
     likes: { type: Number, default: 0 },
     url: String,
     subreddit: String,
+    name: String,
 },
     {
         timestamps: true
