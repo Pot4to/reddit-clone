@@ -35,6 +35,7 @@ class App extends React.Component {
     <a href="#" className="w3-bar-item w3-button w3-hide-small w3-hover-white">trending</a>
     <a href="#" className="w3-bar-item w3-button w3-hide-small w3-hover-white">new</a>
   </div>
+  
 </div>
         </div>);
     }
