@@ -3,8 +3,8 @@ const db = require('../index.js');
 mongoose.Promise = global.Promise;
 
 const subredditSchema = new mongoose.Schema({
+    identification: Number,
     name: String,
-    identification: Number
 },
     {
         timestamps: true
