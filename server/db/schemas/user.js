@@ -5,9 +5,6 @@ mongoose.Promise = global.Promise;
 const userSchema = new mongoose.Schema({
     username: String, 
     password: String, 
-    comments: [{type: String}], 
-    subscriptions: [{type: String}], 
-    posts: [{type: String}], 
 },
     {
         timestamps: true
