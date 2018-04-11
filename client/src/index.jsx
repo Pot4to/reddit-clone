@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import connect from 'react-redux';
+// import connect from 'react-redux';
 
 class App extends React.Component {
     constructor(props) {
@@ -9,6 +8,10 @@ class App extends React.Component {
       state: {
         view: 'feed';
       }
+    }
+
+    componentDidMount() {
+
     }
 
     // mapStateToProps = state => {
@@ -25,7 +28,14 @@ class App extends React.Component {
 
     render() {
         return (<div>
-            <h1>React App Working</h1>
+            <div className="w3-top">
+  <div className="w3-bar w3-theme w3-top w3-left-align w3-large">
+    <a className="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" ><i className="fa fa-bars"></i></a>
+    <a href="#" className="w3-bar-item w3-button w3-theme-l1">Reddit 0.5</a>
+    <a href="#" className="w3-bar-item w3-button w3-hide-small w3-hover-white">trending</a>
+    <a href="#" className="w3-bar-item w3-button w3-hide-small w3-hover-white">new</a>
+  </div>
+</div>
         </div>);
     }
 
