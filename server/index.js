@@ -18,9 +18,7 @@ app.get('/api/comments/*', function(req, res) {
         if (err) return res.status(404).send();
         res.status(200).send(data);
     })
-
 })
-
 
 let PORT = 3000;
 
