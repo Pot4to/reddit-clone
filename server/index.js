@@ -13,12 +13,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api', router);
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
-app.get('/api/comments/*', function(req, res) {
-    db.recursiveGetComments(req.url.slice(14), function(err, data) {
+
+
+
+
+
+app.get('/api/comments/*', (req, res) => {
+    db.recursiveGetComments(req.url.slice(14), (err, data) => {
         if (err) return res.status(404).send();
         res.status(200).send(data);
     })
-})
+});
+
+
+
+
+
 
 let PORT = 3000;
 
