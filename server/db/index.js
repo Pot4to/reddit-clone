@@ -38,24 +38,4 @@ db.recursiveGetComments = (postId, callback) => {
     loop(callback);
 }
 
-db.getComments = (postId, callback) => {
-    Posts.find({parent: postId}).exec((err, data) => {
-        if (err) return callback(err);
-        else {
-            Posts.find({parent: data[0]._id}).exec((err, data) => {
-                callback(err, data);
-            })
-
-
-
-            // let stack = data.slice();
-            // let comments = [];
-            
-            // while (stack.length > 0) {
-
-            // }
-        }
-    })
-}
-
 module.exports = db;
