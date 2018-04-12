@@ -22,7 +22,7 @@ const Posts = mongoose.model('Posts', postSchema);
 
 const getOne = (postId, cb) => {
     Posts.find({_id: ObjectId(postId)}, (err, post) => {
-        err ? console.log(err) : cb(post);
+        err ? cb(err) : cb(post);
     });
 };
 
@@ -30,7 +30,6 @@ const adjustLike = (postId, incBool) => {  // pass true to increment
     Posts.findOneAndUpdate({_id: postId}, {$inc : {'likes' : incBool ? 1 : -1}})
          .exec((err, data) => err ? console.log('Error updating post likes', err) : console.log('Succesful increment of likes'));
 };
-
 
 module.exports.Posts = Posts;
 module.exports.getOne = getOne;

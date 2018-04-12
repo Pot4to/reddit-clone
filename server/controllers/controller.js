@@ -1,10 +1,10 @@
 const Likes = require('../db/schemas/likes.js');
 const Posts = require('../db/schemas/posts.js');
 
-const getSinglePost = () => {
-  
+const getSinglePost = (req, res) => {
+    
 };
 
-const incrementVoteOnPost = () => {
+const incrementVoteOnPost = (req, res) => {
     
 };

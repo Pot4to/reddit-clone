@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const controller = require('../contollers/controller.js');
 
 // handle POST for Vote
-router.post('/post/vote', (req, res) => res.status(201).send('Server received POST'));
+router.post('/post/vote', getSinglePost);
 
 // handle GET for Post
-router.get('/post', (req, res) => res.status(200).send('Server received GET'));
+router.get('/post', incrementVoteOnPost);
 
 module.exports = router;
