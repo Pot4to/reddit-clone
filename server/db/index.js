@@ -40,7 +40,7 @@ db.recursiveGetComments = (postId, callback) => {
 }
 
 db.getOnePost = (postId, cb) => {
-    Posts.find({identification: postId}, (err, post) => { // change id to ObjectId(id)
+    Posts.find({_id: ObjectId(postId)}, (err, post) => { // change id to ObjectId(id)
         err ? cb(err) : cb(post);
     });
 };
@@ -59,7 +59,7 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
                 return false;
             } else {
                 data[0].update({type: type}, (err) => { // change type, run findOneAndUpdate
-                    Posts.findOneAndUpdate({identification: postId}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
+                    Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
                          .exec((err) => err ? console.log('Error updating post likes', err) : null);
                 });
             }
@@ -72,7 +72,7 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
             });
             newLike.save((err) => {
                 if (err) { console.log('Error saving new like', err); }
-                Posts.findOneAndUpdate({identification: postId}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
+                Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
                          .exec((err) => err ? console.log('Error updating post likes', err) : null);
             });
 

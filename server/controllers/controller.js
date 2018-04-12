@@ -12,8 +12,8 @@ const getPosts = (req, res) => {
     });
 };
 
-const incrementVoteOnPost = (req, res) => {
-    var [postId, username, type] = req.body;
+const incrementVoteOnPost = (req, res) => { // use req.params
+    const {postId, username, type} = req.params;
     db.adjustLike(postId, username, type);
     res.status(200).send();
 };

@@ -9,7 +9,9 @@ class Home extends React.Component {
             subreddits: [],
             mySubreddits: [],
             posts: []
-        }
+        };
+
+        this.fetchPosts = this.fetchPosts.bind(this);
     }
 
     componentDidMount() {
@@ -23,10 +25,6 @@ class Home extends React.Component {
                      posts: response.data
                  });
              });
-    }
-
-    sendLike() {
-
     }
 
     render() {
@@ -58,7 +56,7 @@ class Home extends React.Component {
                         <button className="ui button">New</button>
                     </div>
                 </div>
-                {this.state.posts.map((post) => <Post key={post._id} post={post} />)}
+                {this.state.posts.map((post) => <Post key={post._id} post={post} fetchPosts={this.fetchPosts}/>)}
             </div>
         );
     }
