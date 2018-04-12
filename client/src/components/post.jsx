@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Post = () => {
+const Post = (props) => {
     return (
         <div className="ui cards">
             <div className="card">
                 <div className="content">
-                <div className="header">Post Title</div>
-                <div className="meta">Username</div>
-                <div className="meta">Vote Count</div>
-                <div className="meta">Comment Button</div>
+                <div className="header">{props.post.title}</div>
+                <div className="meta">{props.post.username}</div>
+                <div className="meta">Likes: {props.post.likes}</div>
+                <div className="meta">Comment</div>
                 </div>
             </div>
         </div>
