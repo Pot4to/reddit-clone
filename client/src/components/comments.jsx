@@ -13,6 +13,8 @@ class Comments extends React.Component {
         }
         this.renderComments = this.renderComments.bind(this);
         this.formatCommentObject = this.formatCommentObject.bind(this);
+        this.commentOnAComment = this.commentOnAComment.bind(this);
+        this.changeVisibleComment = this.changeVisibleComment.bind(this);
     }
 
     componentWillMount() {
@@ -26,17 +28,17 @@ class Comments extends React.Component {
 
     commentOnAComment(event, commentId) {
         event.preventDefault();
+
         console.log(`username: ${this.state.username}, text: ${this.state.newCommentText}, parent: ${commentId}`);
-        this.setState({ activeComment: '0' });
+        this.setState({ activeComment: '0'});
         // $.ajax({
         //     url: `http://localhost:3000/api/comments/${this.props.parent._id}`,
         //     method: 'POST',
         //     data: {
         //         username: `${this.state.username}`,
         //         text: `${this.state.newCommentText}`,
-        //         parent: `${commentId}`
         //     }
-        // }).done(this.setState({comments: this.state.comments[0], activeComment: 0}))
+        // }).done(this.setState({activeComment: '0'}))
     }
 
     formatCommentObject(comments) {
@@ -55,6 +57,11 @@ class Comments extends React.Component {
         this.setState({activeComment: id})
     }
 
+    cancelCommentOnComment(event) {
+        event.preventDefault();
+        this.setState({activeComment: '0'});
+    }
+
     renderComments(postId) {
         let divArray = [];
         let rank = 0;
@@ -68,7 +75,8 @@ class Comments extends React.Component {
 
                 <div className={this.state.activeComment === comment._id ? 'active' : 'hidden'}>
                     <input onChange={(event) => this.setState({newCommentText: event.target.value})}></input>
-                    <a href='#' className='commentReply' onClick={(event) => this.commentOnAComment(event, comment._id)}>Reply</a>
+                    <a href='#' className='commentReply' onClick={(event) => this.commentOnAComment(event, comment._id)}>/_Reply_</a>
+                    <a href='#' onClick={(event) => this.cancelCommentOnComment(event)}>/_Cancel_/</a>
                 </div>
 
                 <a href='#' className={this.state.activeComment === comment._id ? 'hidden' : 'active'} onClick={(event) => this.changeVisibleComment(event, comment._id)}> Click to reply </a>
