@@ -6,6 +6,6 @@ const controller = require('../controllers/controller.js');
 router.post('/post/vote', (req, res) => controller.incrementVoteOnPost(req, res));
 
 // handle GET for Vote
-router.get('/post', (req, res) => controller.getSinglePost(req, res));
+router.get('/post/:postId', (req, res) => controller.getSinglePost(req, res));
 
 module.exports = router;

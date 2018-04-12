@@ -1,7 +1,7 @@
 const db = require('../db/index.js');
 
 const getSinglePost = (req, res) => {
-    db.getOnePost(req.body, (post) => {
+    db.getOnePost(req.params.postId, (post) => {
         res.status(201).send(post);
     });
 };

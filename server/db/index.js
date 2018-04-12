@@ -40,7 +40,7 @@ db.recursiveGetComments = (postId, callback) => {
 }
 
 db.getOnePost = (postId, cb) => {
-    Posts.find({_id: ObjectId(postId)}, (err, post) => {
+    Posts.find({identification: postId}, (err, post) => { // change id to ObjectId(id)
         err ? cb(err) : cb(post);
     });
 };
@@ -49,19 +49,27 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
     // check if postId and username exists in likes table
     Likes.find({postId: postId, username: username}, (err, data) => {
         if (data.length > 0) {  // user found
-            // check if type of like is same
-            if (type === data[0].type){
+            if (type === data[0].type){ // check if type of like is same
                 return false;
             } else {
-                // change type, run findOneAndUpdate
-                user.update({type: type}, (err) => {
-                    Posts.findOneAndUpdate({_id: postId}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
+                data[0].update({type: type}, (err) => { // change type, run findOneAndUpdate
+                    Posts.findOneAndUpdate({identification: postId}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
                          .exec((err) => err ? console.log('Error updating post likes', err) : null);
                 });
             }
         } else {
-            // add user to likes table and
-            
+            // add user to likes table and increment likes for that post
+            var newLike = new Likes({
+                username: username,
+                postId: postId,
+                type: type
+            });
+            newLike.save((err) => {
+                if (err) { console.log('Error saving new like', err); }
+                Posts.findOneAndUpdate({identification: postId}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
+                         .exec((err) => err ? console.log('Error updating post likes', err) : null);
+            });
+
         }
     });
 };
