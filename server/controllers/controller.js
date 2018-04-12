@@ -1,10 +1,17 @@
-const Likes = require('../db/schemas/likes.js');
-const Posts = require('../db/schemas/posts.js');
+const db = require('../db/index.js');
 
 const getSinglePost = (req, res) => {
-    
+    db.getOnePost(req.body, (post) => {
+        res.status(201).send(post);
+    });
 };
 
 const incrementVoteOnPost = (req, res) => {
-    
+    var [postId, username, type] = req.body;
+    db.adjustLike(postId, username, type);
+    res.status(200).send();
 };
+
+
+module.exports.getSinglePost = getSinglePost;
+module.exports.incrementVoteOnPost = incrementVoteOnPost;
