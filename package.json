@@ -6,7 +6,8 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "insert-data": "node server/db/exampleData.js"
+    "insert-data": "node server/db/exampleData.js",
+    "start": "npm-run-all -p react-dev server-dev"
   },
   "author": "Joseph Nguyen, Aaron Melendez, David Engelstad, Nick Vrdoljak",
   "license": "ISC",
@@ -19,10 +20,12 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.17.0",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
     "mongoose": "^4.13.12",
+    "npm-run-all": "^4.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.7",
