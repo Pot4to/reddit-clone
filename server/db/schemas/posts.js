@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('../index.js');
+const ObjectId = require('mongoose').Types.ObjectId;
 mongoose.Promise = global.Promise;
 
 const postSchema = new mongoose.Schema({
@@ -17,6 +18,19 @@ const postSchema = new mongoose.Schema({
     }
 );
 
-let Posts = mongoose.model('Posts', postSchema);
+const Posts = mongoose.model('Posts', postSchema);
 
-module.exports = Posts;
+const getOne = (postId, cb) => {
+    Posts.find({_id: ObjectId(postId)}, (err, post) => {
+        err ? console.log(err) : cb(post);
+    });
+};
+
+const adjustLike = (postId, incBool) => {  // pass true to increment
+    Posts.findOneAndUpdate({_id: postId}, {$inc : {'likes' : incBool ? 1 : -1}})
+         .exec((err, data) => err ? console.log('Error updating post likes', err) : console.log('Succesful increment of likes'));
+};
+
+
+module.exports.Posts = Posts;
+module.exports.getOne = getOne;
