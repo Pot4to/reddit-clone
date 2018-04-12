@@ -22,7 +22,7 @@ class Comments extends React.Component {
     renderComments(postId, commentObj) {
         if (this.state.comments.length === 0) {
             return <h5>No Comments</h5>
-        } else if (commentObj !== undefined && commentObj[postId] !== undefined) {
+        } else if (commentObj !== undefined && commentObj[postId] === undefined) {
             return <div></div>
         } else {
 
