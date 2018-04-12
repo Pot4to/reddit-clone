@@ -6,7 +6,10 @@ class Comments extends React.Component {
     constructor(props) {
         super(props);
         this.state =  {
-            comments: []
+            comments: [],
+            newCommentText: '',
+            username: 'nickv',
+            activeComment: '0'
         }
         this.renderComments = this.renderComments.bind(this);
         this.formatCommentObject = this.formatCommentObject.bind(this);
@@ -21,6 +24,21 @@ class Comments extends React.Component {
         })
     }
 
+    commentOnAComment(event, commentId) {
+        event.preventDefault();
+        console.log(`username: ${this.state.username}, text: ${this.state.newCommentText}, parent: ${commentId}`);
+        this.setState({ activeComment: '0' });
+        // $.ajax({
+        //     url: `http://localhost:3000/api/comments/${this.props.parent._id}`,
+        //     method: 'POST',
+        //     data: {
+        //         username: `${this.state.username}`,
+        //         text: `${this.state.newCommentText}`,
+        //         parent: `${commentId}`
+        //     }
+        // }).done(this.setState({comments: this.state.comments[0], activeComment: 0}))
+    }
+
     formatCommentObject(comments) {
         let commentObj = {};
         for (var comment of comments) {
@@ -32,6 +50,11 @@ class Comments extends React.Component {
         this.setState({ comments: [commentObj] });
     }
 
+    changeVisibleComment (event, id) {
+        event.preventDefault();
+        this.setState({activeComment: id})
+    }
+
     renderComments(postId) {
         let divArray = [];
         let rank = 0;
@@ -39,11 +62,16 @@ class Comments extends React.Component {
         let formatter = (comment) => {
             return (
             <div style={{border: '1px solid black'}} className={`commentLevel_${rank}`} key={comment._id}>
-                <h5>{comment._id}</h5>
                 <h5 className='commentLikes'>Likes: {comment.likes}</h5>
                 <h5 className='commentText'>Text: {comment.text}</h5>
                 <h5 className='commentUsername'>Username: {comment.username}</h5>
-                <h5 className='commentReply'>LEVEL: {rank}</h5>
+
+                <div className={this.state.activeComment === comment._id ? 'active' : 'hidden'}>
+                    <input onChange={(event) => this.setState({newCommentText: event.target.value})}></input>
+                    <a href='#' className='commentReply' onClick={(event) => this.commentOnAComment(event, comment._id)}>Reply</a>
+                </div>
+
+                <a href='#' className={this.state.activeComment === comment._id ? 'hidden' : 'active'} onClick={(event) => this.changeVisibleComment(event, comment._id)}> Click to reply </a>
             </div>)
         }
         
