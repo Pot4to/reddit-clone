@@ -45,6 +45,12 @@ db.getOnePost = (postId, cb) => {
     });
 };
 
+db.getMultiplePosts = (cb) => {
+    Posts.find((err, posts) => {
+        err ? cb(err) : cb(posts);
+    });
+};
+
 db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decrement'
     // check if postId and username exists in likes table
     Likes.find({postId: postId, username: username}, (err, data) => {

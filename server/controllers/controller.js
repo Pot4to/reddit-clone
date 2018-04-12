@@ -6,6 +6,12 @@ const getSinglePost = (req, res) => {
     });
 };
 
+const getPosts = (req, res) => {
+    db.getMultiplePosts((data) => {
+        res.status(200).send(data);
+    });
+};
+
 const incrementVoteOnPost = (req, res) => {
     var [postId, username, type] = req.body;
     db.adjustLike(postId, username, type);
@@ -15,3 +21,4 @@ const incrementVoteOnPost = (req, res) => {
 
 module.exports.getSinglePost = getSinglePost;
 module.exports.incrementVoteOnPost = incrementVoteOnPost;
+module.exports.getPosts = getPosts;
