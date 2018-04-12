@@ -37,7 +37,6 @@ class Comments extends React.Component {
         let rank = 0;
 
         let formatter = (comment) => {
-            console.log(rank);
             return (
             <div style={{border: '1px solid black'}} className={`commentLevel_${rank}`} key={comment._id}>
                 <h5>{comment._id}</h5>
@@ -80,20 +79,3 @@ class Comments extends React.Component {
 }
 
 export default Comments;
-
-        // let leveler = (comment, rank) => {
-        //     console.log(this.state.comments);
-        //     console.log('comment is ', comment, 'about to check if', this.state.comments[0][comment.parent], ' is undefined');
-
-        //     if (this.state.comments[0][comment.parent] !== undefined) {
-        //         console.log('not undefined, calling again with ', comment.parent, rank);
-        //         if (rank > 5) return 'dsfasdf'
-        //         rank++;
-        //         leveler( rank);
-        //     } else {
-
-        //         store = rank;
-        //     }
-
-        //     return store;
-        // }
