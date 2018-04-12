@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('../index.js');
+
 mongoose.Promise = global.Promise;
 
 const postSchema = new mongoose.Schema({
@@ -17,6 +18,7 @@ const postSchema = new mongoose.Schema({
     }
 );
 
-let Posts = mongoose.model('Posts', postSchema);
+const Posts = mongoose.model('Posts', postSchema);
+
 
 module.exports = Posts;

@@ -1,5 +1,5 @@
-const Likes = require('./schemas/likes.js').Likes;
-const Posts = require('./schemas/posts.js').Posts;
+const Likes = require('./schemas/likes.js');
+const Posts = require('./schemas/posts.js');
 const Subreddits = require('./schemas/subreddit.js').Subreddit;
 const Subscriptions = require('./schemas/subscriptions.js').Subscription;
 const Users = require('./schemas/user.js').User;
@@ -8,17 +8,20 @@ const likes = [
   {
     identification: 24,
     username: 'nick123',
-    postId: 1,  
+    postId: 1,
+    type: 'increment'
   },
   {
     identification: 42,
     username: 'nick123',
-    postId: 2,  
+    postId: 2,
+    type: 'decrement' 
   },
   {
     identification: 11,
     username: 'david123',
-    postId: 2,  
+    postId: 2,
+    type: 'increment'
   },
 ];
 
