@@ -68,19 +68,20 @@ class Comments extends React.Component {
 
         let formatter = (comment) => {
             return (
-            <div style={{border: '1px solid black'}} className={`commentLevel_${rank}`} key={comment._id}>
-                <h5 className='commentLikes'>Likes: {comment.likes}</h5>
-                <h5 className='commentText'>Text: {comment.text}</h5>
-                <h5 className='commentUsername'>Username: {comment.username}</h5>
+                <div style={{border: '1px solid black'}} className={`commentLevel_${rank}`} key={comment._id}>
+                    <h5 className='commentLikes'>Likes: {comment.likes}</h5>
+                    <h5 className='commentText'>Text: {comment.text}</h5>
+                    <h5 className='commentUsername'>Username: {comment.username}</h5>
 
-                <div className={this.state.activeComment === comment._id ? 'active' : 'hidden'}>
-                    <input onChange={(event) => this.setState({newCommentText: event.target.value})}></input>
-                    <a href='#' className='commentReply' onClick={(event) => this.commentOnAComment(event, comment._id)}>/_Reply_</a>
-                    <a href='#' onClick={(event) => this.cancelCommentOnComment(event)}>/_Cancel_/</a>
+                    <div className={this.state.activeComment === comment._id ? 'active' : 'hidden'}>
+                        <input onChange={(event) => this.setState({newCommentText: event.target.value})}></input>
+                        <a href='#' className='commentReply' onClick={(event) => this.commentOnAComment(event, comment._id)}>/_Reply_</a>
+                        <a href='#' onClick={(event) => this.cancelCommentOnComment(event)}>/_Cancel_/</a>
+                    </div>
+
+                    <a href='#' className={this.state.activeComment === comment._id ? 'hidden' : 'active'} onClick={(event) => this.changeVisibleComment(event, comment._id)}> Click to reply </a>
                 </div>
-
-                <a href='#' className={this.state.activeComment === comment._id ? 'hidden' : 'active'} onClick={(event) => this.changeVisibleComment(event, comment._id)}> Click to reply </a>
-            </div>)
+            )
         }
         
         let recursion = (postId) => {
