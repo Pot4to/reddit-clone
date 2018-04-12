@@ -1,7 +1,14 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux'; //make store available to all components
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import rootReducer from "../reducers/index";
+import allReducers from "../reducers/index";
 
-const store = createStore(rootReducer);
+const store = createStore(allReducers);
+
+ReactDOM.render(
+    <Provider store={store}>
+    <App />
+    </Provider>,
+    document.getElementById('app')
+);

@@ -1,6 +1,4 @@
-const initialState = {
-    articles: []
-  };
-const rootReducer = (state = initialState, action) => state;
+import { combineReducers } from 'react-redux';
+import viewReducer from './reducer-view';
 
-export default rootReducer;
+const allReducers = combineReducers();
