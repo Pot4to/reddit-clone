@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Login from './components/login.jsx'
 // import connect from 'react-redux';
 
 class App extends React.Component {
@@ -35,8 +36,9 @@ class App extends React.Component {
     <a href="#" className="w3-bar-item w3-button w3-hide-small w3-hover-white">trending</a>
     <a href="#" className="w3-bar-item w3-button w3-hide-small w3-hover-white">new</a>
   </div>
-  
-</div>
+  </div>
+  <br/><br/>
+  <Login />
         </div>);
     }
 
