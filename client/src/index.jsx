@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Comments from './components/comments.jsx'
 // import connect from 'react-redux';
 
 class App extends React.Component {
@@ -37,12 +38,14 @@ class App extends React.Component {
   </div>
   
 </div>
+<h1>COMMENTS</h1>
+          <Comments post={{_id: '5ace72088ce4a740e83be47e'}}/>
         </div>);
     }
 
 }
 
-
+let x = { _id: '5ace72088ce4a740e83be47e'}
 
 ReactDOM.render(
     <App />,
