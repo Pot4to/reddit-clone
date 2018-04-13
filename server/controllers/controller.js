@@ -12,7 +12,7 @@ const getPosts = (req, res) => {
     });
 };
 
-const incrementVoteOnPost = (req, res) => { // use req.params
+const incrementVoteOnPost = (req, res) => {
     const {postId, username, type} = req.params;
     db.adjustLike(postId, username, type);
     res.status(201).send();
@@ -39,6 +39,10 @@ const postSubreddit = (req, res) => {
         res.status(200).send();
     })
 }
+
+const addPost = (req, res) => {
+    
+};
 
 
 module.exports.getSinglePost = getSinglePost;

@@ -108,5 +108,10 @@ db.postSubreddit = (name, description, callback) => {
         callback(null);
     })
 }
+db.savePost = (post) => {
+    const newPost = new Posts(post);
+    newPost.save((err) => err ? console.log('Error saving new post', err) : null);
+};
+
 
 module.exports = db;
