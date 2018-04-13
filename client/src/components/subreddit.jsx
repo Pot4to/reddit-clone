@@ -1,47 +1,67 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
-import Post from './post';
+import axios from 'axios';
+import Post from './post.jsx';
 
 class Subreddit extends React.Component {
     constructor(props) {
         super(props);
         this.state =  {
-          subPost: [],
+          subPosts: [],
           currentUser: '',
           subscribed: false,
         }
-        this.subscribeUser = this.subscribeUser.bind(this);
+        // this.subscribeUser = this.subscribeUser.bind(this);
         this.getSubPost = this.getSubPost.bind(this);
     }
     
     componentWillMount() {
-      getSubPost(this.props.title);
+      this.getSubPost('test');
     }
 
     getSubPost(subreddit) {
-        $.get(`/subreddit/${subreddit}`, function(data) {
-            this.setState({ subPost: data});
-        });
+        var appThis = this;
+       axios.get(`api/subreddit/${subreddit}`, {
+           params: {
+               id: subreddit,
+               name: 'hello'
+           }
+       })
+       .then(function (response) {
+           appThis.setState({ subPosts: response.data })
+           console.log('get sub post response: ', response.data);
+       })
+       .catch(function(error) {
+           console.log(error);
+       });
     }
 
-    subscribeUser() {
-      $.get('/subscribe', { username: this.state.currentUser, postId: this.props.id }, function(data) {
-        this.setState({ subscribed: true });
-      });
-    }
+    // subscribeUser() {
+    // }
 
     render() {
         return (
             <div>
                 <h1>{ this.props.title }</h1>
                 <div>
-                {this.state.subPost.map(post => <Post post={post}>)}
+                {this.state.subPosts.map(post => <Post post={post} />)}
                 </div>
-                <button onClick={subscribeUser()}>Subscribe!</button>
+                {/* <button onClick={this.subscribeUser()}>Subscribe!</button> */}
             </div>
         )
     }
 }
 
 export default Subreddit;
+
+// axios.get('/user', {
+//     params: {
+//       ID: 12345
+//     }
+//   })
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
