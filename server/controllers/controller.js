@@ -40,8 +40,21 @@ const postSubreddit = (req, res) => {
     })
 }
 
+
+const getSubredditPost = (req, res) => {
+    console.log('req body inside controller: ', req.query.id);
+    db.getSubredditPosts(req.query.id, function(error, data) {
+      if (error) {
+        res.statusCode = 404;
+        res.send('Error locating subreddit posts');
+      } else {
+        res.statusCode = 200;
+        res.send(data);
+      }
+    });
+  
 const addPost = (req, res) => {
-    
+
 };
 
 
@@ -51,3 +64,4 @@ module.exports.getPosts = getPosts;
 module.exports.getCommentsForPost = getCommentsForPost; 
 module.exports.postOnAComment = postOnAComment;
 module.exports.postSubreddit = postSubreddit;
+module.exports.getSubredditPost = getSubredditPost;

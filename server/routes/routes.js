@@ -25,8 +25,10 @@ router.post('/comments/*', (req, res) => controller.postOnAComment(req, res));
 //handle POST for creating a new subreddit
 router.post('/subreddits', (req, res) => controller.postSubreddit(req, res));
 
+//handles GET for getting all post under a subreddit
+router.get('/subreddit/*', (req, res) => controller.getSubredditPost(req, res));
+
 // handle POST for Create Post
 router.post('/create-post/:username/:title/:url/:text', (req, res) => console.log(req.params));
-
 
 module.exports = router;
