@@ -117,7 +117,7 @@ db.savePost = (post) => {
 
 db.getSubredditPosts = (subredditID, cb) => {
     Posts
-      .find({ subreddit: subredditID}, (err, posts) => {
+      .find({ subReddit: subredditID}, (err, posts) => {
           return err ? cb(err, null) : cb(null, posts);
       });
 };

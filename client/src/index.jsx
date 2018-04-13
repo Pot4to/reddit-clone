@@ -4,6 +4,7 @@ import Comments from './components/comments.jsx'
 import Login from './components/login.jsx';
 import Home from './components/home.jsx';
 import CreateSubreddit from './components/createSubreddit.jsx';
+import Subreddit from './components/subreddit.jsx';
 import CreatePost from './components/createPost.jsx';
 import Post from './components/post.jsx';
 import axios from 'axios';
@@ -39,13 +40,13 @@ class App extends React.Component {
         );  
     }
 
-    handleChangePost(event) {
+    // handleChangePost(event) {
 
-    }
+    // }
 
     renderSubs() {
         return this.state.subreddits.map((sub) => {
-            return (< div className = "column" key={Math.random()} > {sub.name} </div >);
+            return (< div className = "column" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
         }).slice(0, 5);
     }
 
@@ -62,6 +63,7 @@ class App extends React.Component {
             return (<Home changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
+            return (<Subreddit activeSub={this.state.activeSub} />)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
         } else if (view === 'createPost' && this.state.loggedIn === true) {
@@ -101,7 +103,9 @@ class App extends React.Component {
                             {this.renderSubs()}
                         </div>
                     </div>
-
+                    <div>
+                        <Login />
+                    </div>
                     <div>
                         {this.renderView()}
                     </div>

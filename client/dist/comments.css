@@ -33,6 +33,35 @@
     border-left: 1px, solid, black;
     border-right: 1px, solid, black;
     border-bottom: 1px, solid, black;
-    margin-left: 100px;
+    margin-left: 150px;
+    margin-top: 5px;
+}
+.commentLevel_5 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-bottom: 1px, solid, black;
+    margin-left: 200px;
+    margin-top: 5px;
+}
+.commentLevel_6 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-bottom: 1px, solid, black;
+    margin-left: 250px;
+    margin-top: 5px;
+}
+.commentLevel_7 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-top: none;
+    border-bottom: 1px, solid, black;
+    margin-left: 300px;
+    margin-top: 5px;
+}
+.commentLevel_8 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-bottom: 1px, solid, black;
+    margin-left: 350px;
     margin-top: 5px;
 }
