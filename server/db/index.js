@@ -48,7 +48,7 @@ db.getOnePost = (postId, cb) => {
 };
 
 db.getMultiplePosts = (cb) => {
-    Posts.find((err, posts) => {
+    Posts.find({parent: null}, (err, posts) => {
         err ? cb(err) : cb(posts);
     });
 };
