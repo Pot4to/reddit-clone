@@ -21,7 +21,8 @@ app.use(cookieParser());
 app.use(session({
     secret: 'secret',
     resave: false,
-    saveUnitialized: false
+    saveUnitialized: false,
+    unset: 'destroy'
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -52,6 +53,7 @@ app.post('/api/user/signup', (req, res) => {
         }
         passport.authenticate('local')(req, res, function() {
             console.log('success');
+            res.send('Signed Up');
         });
     })
 })
@@ -73,7 +75,15 @@ app.get('/api/user/login/:username/:password', (req, res) => {
 app.post('/api/user/login', passport.authenticate('local'), function(req, res) {
     console.log('In Post Login Success', req.session.passport);
     // res.redirect(`/user/${req.session.passport.user}`)
-    console.log('Logged in as ', req.session);
+    // console.log(req.user.id);
+    res.send(req.user.id);
+})
+
+app.get('/api/logout', function(req, res) {
+    console.log('BEFORE LOGOUT ', req.session);
+    req.logout();
+    console.log('AFTER LOGOUT ', req.session);
+    res.send('Success');
 })
 
 
