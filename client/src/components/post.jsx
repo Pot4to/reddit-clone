@@ -5,7 +5,7 @@ class Post extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
         };
 
         this.like = this.like.bind(this);
@@ -22,11 +22,6 @@ class Post extends React.Component {
              .then(this.props.fetchPosts);
     }
 
-    handleTitleClick() {
-        // open this.props.post.url in a new window
-
-    }
-
     render() {
         return (
             <div className="ui cards">
@@ -40,7 +35,7 @@ class Post extends React.Component {
                             <button className="ui button" onClick={this.dislike}>Dislike</button>
                         </div>
                     </div>
-                    <div className="meta">Comment</div>
+                    <a className="meta">Comments</a>
                     </div>
                 </div>
             </div>

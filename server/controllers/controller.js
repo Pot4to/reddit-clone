@@ -2,7 +2,7 @@ const db = require('../db/index.js');
 
 const getSinglePost = (req, res) => {
     db.getOnePost(req.params.postId, (post) => {
-        res.status(201).send(post);
+        res.status(200).send(post);
     });
 };
 
@@ -15,7 +15,7 @@ const getPosts = (req, res) => {
 const incrementVoteOnPost = (req, res) => { // use req.params
     const {postId, username, type} = req.params;
     db.adjustLike(postId, username, type);
-    res.status(200).send();
+    res.status(201).send();
 };
 
 const getCommentsForPost = (req, res) => {
