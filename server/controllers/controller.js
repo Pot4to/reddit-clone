@@ -2,7 +2,7 @@ const db = require('../db/index.js');
 
 const getSinglePost = (req, res) => {
     db.getOnePost(req.params.postId, (post) => {
-        res.status(201).send(post);
+        res.status(200).send(post);
     });
 };
 
@@ -12,10 +12,10 @@ const getPosts = (req, res) => {
     });
 };
 
-const incrementVoteOnPost = (req, res) => { // use req.params
+const incrementVoteOnPost = (req, res) => {
     const {postId, username, type} = req.params;
     db.adjustLike(postId, username, type);
-    res.status(200).send();
+    res.status(201).send();
 };
 
 const getCommentsForPost = (req, res) => {
@@ -40,6 +40,7 @@ const postSubreddit = (req, res) => {
     })
 }
 
+
 const getSubredditPost = (req, res) => {
     console.log('req body inside controller: ', req.query.id);
     db.getSubredditPosts(req.query.id, function(error, data) {
@@ -51,6 +52,9 @@ const getSubredditPost = (req, res) => {
         res.send(data);
       }
     });
+  
+const addPost = (req, res) => {
+
 };
 
 

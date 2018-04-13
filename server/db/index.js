@@ -48,7 +48,7 @@ db.getOnePost = (postId, cb) => {
 };
 
 db.getMultiplePosts = (cb) => {
-    Posts.find((err, posts) => {
+    Posts.find({parent: null}, (err, posts) => {
         err ? cb(err) : cb(posts);
     });
 };
@@ -108,6 +108,11 @@ db.postSubreddit = (name, description, callback) => {
         callback(null);
     })
 }
+db.savePost = (post) => {
+    const newPost = new Posts(post);
+    newPost.save((err) => err ? console.log('Error saving new post', err) : null);
+};
+
 
 db.getSubredditPosts = (subredditID, cb) => {
     Posts
