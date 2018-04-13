@@ -71,17 +71,6 @@ const addPost = (req, res) => {
     });
 };
 
-const addPost = (req, res) => {
-    const {username, title, url, text} = req.params;
-    db.savePost({
-        username: username,
-        title: title,
-        url: url,
-        text: text,
-        parent: null
-    });
-};
-
 
 
 module.exports.getSinglePost = getSinglePost;
