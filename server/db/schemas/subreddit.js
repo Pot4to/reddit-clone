@@ -5,10 +5,13 @@ mongoose.Promise = global.Promise;
 const subredditSchema = new mongoose.Schema({
     identification: Number,
     name: String,
+    description: String,
 },
     {
         timestamps: true
     }
 );
 
-module.exports.Subreddit = mongoose.model('Subreddit', subredditSchema);
+const Subreddit = mongoose.model('Subreddit', subredditSchema);
+
+module.exports = Subreddit;

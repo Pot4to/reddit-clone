@@ -1,7 +1,6 @@
 const Users = require('../../db/schemas/user.js');
 const express = require('express');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
 
 
 const UserController = {

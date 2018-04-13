@@ -78,6 +78,7 @@ app.post('/api/user/login', passport.authenticate('local'), function(req, res) {
 
 
 
+app.use('/api', router);
 
 
 let PORT = 3000;

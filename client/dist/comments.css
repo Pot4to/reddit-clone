@@ -1,0 +1,38 @@
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.commentLevel_1 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-bottom: 1px, solid, black;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.commentLevel_2 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-bottom: 1px, solid, black;
+    margin-left: 50px;
+    margin-top: 5px;
+}
+.commentLevel_3 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-top: none;
+    border-bottom: 1px, solid, black;
+    margin-left: 100px;
+    margin-top: 5px;
+}
+.commentLevel_4 {
+    border-left: 1px, solid, black;
+    border-right: 1px, solid, black;
+    border-bottom: 1px, solid, black;
+    margin-left: 100px;
+    margin-top: 5px;
+}
