@@ -12,22 +12,6 @@ class App extends React.Component {
       }
     }
 
-    componentDidMount() {
-
-    }
-
-    // mapStateToProps = state => {
-    //     return {
-
-    //     }
-    // }
-
-    // mapDispatchToProps = () => {
-    //     return {
-            
-    //     }
-    // }
-
     render() {
         return (
         <div>
