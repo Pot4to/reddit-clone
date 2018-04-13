@@ -64,6 +64,18 @@ const subs = (req, res) => {
     })
 }
 
+const addPost = (req, res) => {
+    const {username, title, url, text} = req.params;
+    db.savePost({
+        username: username,
+        title: title,
+        url: url,
+        text: text,
+        parent: null
+    });
+};
+
+
 
 module.exports.getSinglePost = getSinglePost;
 module.exports.incrementVoteOnPost = incrementVoteOnPost;
@@ -73,3 +85,4 @@ module.exports.postOnAComment = postOnAComment;
 module.exports.postSubreddit = postSubreddit;
 module.exports.getSubredditPost = getSubredditPost;
 module.exports.subs = subs;
+module.exports.addPost = addPost;
