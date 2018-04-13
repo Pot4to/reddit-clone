@@ -52,10 +52,6 @@ const getSubredditPost = (req, res) => {
       }
     });
 }
-  
-// const addPost = (req, res) => {
-
-// };
 
 const subs = (req, res) => {
     db.getSubreddits((err, data) => {
@@ -63,6 +59,18 @@ const subs = (req, res) => {
         res.status(200).send(data);
     })
 }
+
+const addPost = (req, res) => {
+    const {username, title, url, text} = req.params;
+    db.savePost({
+        username: username,
+        title: title,
+        url: url,
+        text: text,
+        parent: null
+    });
+};
+
 
 
 module.exports.getSinglePost = getSinglePost;
@@ -73,3 +81,4 @@ module.exports.postOnAComment = postOnAComment;
 module.exports.postSubreddit = postSubreddit;
 module.exports.getSubredditPost = getSubredditPost;
 module.exports.subs = subs;
+module.exports.addPost = addPost;
