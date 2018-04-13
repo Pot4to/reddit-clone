@@ -6,8 +6,6 @@ import Home from './components/home.jsx';
 import CreateSubreddit from './components/createSubreddit.jsx';
 import CreatePost from './components/createPost.jsx';
 import Post from './components/post.jsx';
-import Login from './components/login.jsx';
-
 import axios from 'axios';
 import $ from 'jquery';
 
