@@ -27,15 +27,14 @@ const getCommentsForPost = (req, res) => {
 
 const postOnAComment = (req, res) => {
     db.postOnAComment(req.body.parent, req.body.username, req.body.text, (err) => {
-        if (err) return console.log(err);
+        if (err) return res.status(404).send();
         res.status(200).send();
     })
 };
 
 const postSubreddit = (req, res) => {
-    console.log(req.body);
     db.postSubreddit(req.body.name, req.body.description, (err) => {
-        if (err) return console.log(err);
+        if (err) return res.status(404).send();
         res.status(200).send();
     })
 }
@@ -52,10 +51,18 @@ const getSubredditPost = (req, res) => {
         res.send(data);
       }
     });
+}
   
-const addPost = (req, res) => {
+// const addPost = (req, res) => {
 
-};
+// };
+
+const subs = (req, res) => {
+    db.getSubreddits((err, data) => {
+        if (err) return res.status(400).send();
+        res.status(200).send(data);
+    })
+}
 
 
 module.exports.getSinglePost = getSinglePost;
@@ -65,3 +72,4 @@ module.exports.getCommentsForPost = getCommentsForPost;
 module.exports.postOnAComment = postOnAComment;
 module.exports.postSubreddit = postSubreddit;
 module.exports.getSubredditPost = getSubredditPost;
+module.exports.subs = subs;

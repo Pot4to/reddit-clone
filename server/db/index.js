@@ -125,4 +125,12 @@ db.subscribeUser = () => {
   
 };
 
+db.getSubreddits = (callback) => {
+    Subreddit.find({}, (err, data) => {
+        if (err) return callback(err);
+        callback(null, data);
+    })
+}
+
+
 module.exports = db;

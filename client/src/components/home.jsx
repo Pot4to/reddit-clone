@@ -14,7 +14,7 @@ class Home extends React.Component {
         this.fetchPosts = this.fetchPosts.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.fetchPosts();
     }
 
@@ -31,8 +31,6 @@ class Home extends React.Component {
         return (
             <div>
                 <div>
-                    <h1 className="float-left space-right">Logo</h1>
-                    <div className="clear-float"></div>
                     <div className="ui buttons">
                         <button className="ui button">Top</button>
                         <button className="ui button">New</button>

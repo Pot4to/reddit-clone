@@ -31,4 +31,7 @@ router.get('/subreddit/*', (req, res) => controller.getSubredditPost(req, res));
 // handle POST for Create Post
 router.post('/create-post/:username/:title/:url/:text', (req, res) => console.log(req.params));
 
+//handle GET for the list of subreddits
+router.get('/subs', (req, res) => controller.subs(req, res));
+
 module.exports = router;
