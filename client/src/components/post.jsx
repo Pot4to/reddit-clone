@@ -5,12 +5,11 @@ class Post extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
         };
 
         this.like = this.like.bind(this);
         this.dislike = this.dislike.bind(this);
-        this.render = this.render.bind(this);
     }
 
     like() {
@@ -28,7 +27,7 @@ class Post extends React.Component {
             <div className="ui cards">
                 <div className="card">
                     <div className="content">
-                    <div className="header">{this.props.post.title}</div>
+                    <a className="header" href={this.props.post.url} target="_blank">{this.props.post.title}</a>
                     <div className="meta">{this.props.post.username}</div>
                     <div className="meta">Likes: {this.props.post.likes}
                         <div className="ui large buttons">
@@ -36,7 +35,7 @@ class Post extends React.Component {
                             <button className="ui button" onClick={this.dislike}>Dislike</button>
                         </div>
                     </div>
-                    <div className="meta">Comment</div>
+                    <a className="meta">Comments</a>
                     </div>
                 </div>
             </div>

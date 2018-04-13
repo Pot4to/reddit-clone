@@ -73,3 +73,20 @@ table {
 	position: relative;
 	margin: auto;
 }
+
+/***************************
+        Comment Box
+****************************/
+
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
+}
+
+.show, .hide {
+	resize: none;
+	width: 80%;
+}
