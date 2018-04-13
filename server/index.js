@@ -55,7 +55,7 @@ app.post('/api/user/signup', (req, res) => {
         });
     })
 })
- 
+
 app.get('/api/user/login/:username/:password', (req, res) => {
     // console.log('Here in login GET')
     console.log('In Login Get ...', req.params);
@@ -69,10 +69,12 @@ app.get('/api/user/login/:username/:password', (req, res) => {
     });
 });
 
-app.post('/api/user/login/:username/:password', passport.authenticate('local'), function(req, res) {
-    
-})
 
+app.post('/api/user/login', passport.authenticate('local'), function(req, res) {
+    console.log('In Post Login Success', req.session.passport);
+    // res.redirect(`/user/${req.session.passport.user}`)
+    console.log('Logged in as ', req.session);
+})
 
 
 

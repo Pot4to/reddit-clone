@@ -29,7 +29,11 @@ class Login extends React.Component {
 
     onLoginHandler() {
         console.log('fired login handler');
-        axios.get(`/api/user/login/${this.state.username}/${this.state.password}`)
+        var user = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        axios.post(`/api/user/login`, user)
           .then( response => {
               console.log('Server replied with ... ', response);
               console.log('Is logged in ? ', response.status === 202);
