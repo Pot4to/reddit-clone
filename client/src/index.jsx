@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Comments from './components/comments.jsx'
 // import connect from 'react-redux';
 import Home from './components/home.jsx';
+import CreateSubreddit from './components/createSubreddit.jsx';
 
 class App extends React.Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class App extends React.Component {
                     <div className="column">MySubreddit4</div>
                 </div>
             </div>
+            <div><CreateSubreddit /></div>
             <div><Comments post={x}/></div>
         </div>);
     }

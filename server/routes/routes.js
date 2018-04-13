@@ -20,4 +20,7 @@ router.get('/comments/*', (req, res) => controller.getCommentsForPost(req, res))
 //handle POST for comments on either posts or other comments
 router.post('/comments/*', (req, res) => controller.postOnAComment(req, res));
 
+//handle POST for creating a new subreddit
+router.post('/subreddits', (req, res) => controller.postSubreddit(req, res));
+
 module.exports = router;

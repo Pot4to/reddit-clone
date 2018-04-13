@@ -26,12 +26,15 @@ const getCommentsForPost = (req, res) => {
 };
 
 const postOnAComment = (req, res) => {
-    console.log(req.body.text, req.body.username, req.body.parent);
     db.postOnAComment(req.body.parent, req.body.username, req.body.text, (err) => {
         if (err) return console.log(err);
         res.status(200).send();
     })
 };
+
+const postSubreddit = (req, res) => {
+    console.log(req.body);
+}
 
 
 module.exports.getSinglePost = getSinglePost;
@@ -39,3 +42,4 @@ module.exports.incrementVoteOnPost = incrementVoteOnPost;
 module.exports.getPosts = getPosts;
 module.exports.getCommentsForPost = getCommentsForPost; 
 module.exports.postOnAComment = postOnAComment;
+module.exports.postSubreddit = postSubreddit;
