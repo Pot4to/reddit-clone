@@ -34,7 +34,6 @@ class App extends React.Component {
                     <div className="column">MySubreddit4</div>
                 </div>
             </div>
-
         </div>);
     }
 

@@ -10,7 +10,6 @@ class Post extends React.Component {
 
         this.like = this.like.bind(this);
         this.dislike = this.dislike.bind(this);
-        this.render = this.render.bind(this);
     }
 
     like() {
@@ -23,12 +22,17 @@ class Post extends React.Component {
              .then(this.props.fetchPosts);
     }
 
+    handleTitleClick() {
+        // open this.props.post.url in a new window
+
+    }
+
     render() {
         return (
             <div className="ui cards">
                 <div className="card">
                     <div className="content">
-                    <div className="header">{this.props.post.title}</div>
+                    <a className="header" href={this.props.post.url} target="_blank">{this.props.post.title}</a>
                     <div className="meta">{this.props.post.username}</div>
                     <div className="meta">Likes: {this.props.post.likes}
                         <div className="ui large buttons">
