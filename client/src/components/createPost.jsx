@@ -18,6 +18,7 @@ class CreatePost extends React.Component {
     handleSubmit() {
         var username = "aaron123";
         axios.post(`api/create-post/${username}/${this.state.title}/${this.state.url}/${this.state.text}`); // need to access username from props
+        // change view prop in index.jsx state to home page view
     }
 
     handleChange(e) {
