@@ -34,8 +34,7 @@ class App extends React.Component {
                     <div className="column">MySubreddit4</div>
                 </div>
             </div>
-            <div><CreateSubreddit /></div>
-            <div><Comments post={x}/></div>
+
         </div>);
     }
 
