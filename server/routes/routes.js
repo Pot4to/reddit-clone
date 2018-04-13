@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('./controllers/UserController');
+const controller = require('../controllers/controller.js');
 
 // router.route('/user/login/:username/:password')
 //   .get(UserController.Login)
 // const controller = require('../controllers/controller.js');
+
 // handle POST for Vote
 router.post('/post/vote/:postId/:username/:type', (req, res) => controller.incrementVoteOnPost(req, res));
 

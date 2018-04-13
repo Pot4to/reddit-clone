@@ -21,8 +21,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^2.0.0",
-    "axios": "^0.18.0",
     "body-parser": "^1.17.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.0",

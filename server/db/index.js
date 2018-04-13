@@ -97,4 +97,16 @@ db.postOnAComment = (parent, username, text, callback) => {
     })
 }
 
+db.postSubreddit = (name, description, callback) => {
+    
+    let sub = new Subreddit ({
+        name,
+        description,
+    });
+    sub.save((err) => {
+        if (err) return callback(err);
+        callback(null);
+    })
+}
+
 module.exports = db;

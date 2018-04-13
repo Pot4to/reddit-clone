@@ -34,6 +34,10 @@ const postOnAComment = (req, res) => {
 
 const postSubreddit = (req, res) => {
     console.log(req.body);
+    db.postSubreddit(req.body.name, req.body.description, (err) => {
+        if (err) return console.log(err);
+        res.status(200).send();
+    })
 }
 
 
