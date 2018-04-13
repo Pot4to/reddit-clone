@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import connect from 'react-redux';
 import Comments from './components/comments.jsx'
+import Login from './components/login.jsx';
 import Home from './components/home.jsx';
 import CreateSubreddit from './components/createSubreddit.jsx';
 import CreatePost from './components/createPost.jsx';

@@ -21,6 +21,7 @@ class Login extends React.Component {
         axios.post('/api/user/signup', user)
           .then( response => {
              console.log('Server replied with... ', response);
+             res.send('Successful Signup');
           })
           .catch( err => {
               console.log('Server replied with ...', err);
@@ -36,12 +37,21 @@ class Login extends React.Component {
         axios.post(`/api/user/login`, user)
           .then( response => {
               console.log('Server replied with ... ', response);
-              console.log('Is logged in ? ', response.status === 202);
-              
           })
           .catch( err => {
               console.log('Server errored out with ', err);
           })
+
+    }
+
+    logoutHandler() {
+        axios.get('/api/logout')
+          .then(response => {
+              console.log('Sucessfully Logged Out', response);
+          })
+          .catch( err => {
+              console.log('There was an error Logging Out', err);
+          });
     }
     
     render() {
@@ -54,6 +64,7 @@ class Login extends React.Component {
                 <br/><br/>
                 <button onClick={this.signUpHandler.bind(this)} > Sign Up</button>
                 <button onClick={this.onLoginHandler.bind(this)} >Login</button>
+                <button onClick={this.logoutHandler.bind(this)} >Logout</button>
             </div>
         )
     }
