@@ -1,8 +1,8 @@
 const Likes = require('./schemas/likes.js');
 const Posts = require('./schemas/posts.js');
-const Subreddits = require('./schemas/subreddit.js').Subreddit;
-const Subscriptions = require('./schemas/subscriptions.js').Subscription;
-const Users = require('./schemas/user.js').User;
+const Subreddits = require('./schemas/subreddit.js');
+const Subscriptions = require('./schemas/subscriptions.js');
+const Users = require('./schemas/user.js');
 
 const likes = [
   {
@@ -34,7 +34,8 @@ const posts = [
     username: 'nick123',
     subReddit: 'cats',
     text: 'filler text',
-    parent: null
+    parent: null,
+    subreddit: 'test'
   },
   {
     identification: 2,
@@ -44,7 +45,8 @@ const posts = [
     username: 'joseph123',
     subReddit: 'tech',
     text: 'filler text',
-    parent: null
+    parent: null,
+    subreddit: 'test'
   },
   {
     identification: 3,
@@ -54,7 +56,8 @@ const posts = [
     username: 'david123',
     subReddit: 'memes',
     text: 'filler text',
-    parent: null
+    parent: null,
+    subreddit: 'test'
   },
   {
     identification: 12,
