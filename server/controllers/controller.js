@@ -59,10 +59,7 @@ const subs = (req, res) => {
         res.status(200).send(data);
     })
 }
-<<<<<<< HEAD
-  
-=======
->>>>>>> implement getSubredditPost
+
 const addPost = (req, res) => {
     const {username, title, url, text} = req.params;
     db.savePost({
