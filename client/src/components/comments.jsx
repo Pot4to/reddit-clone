@@ -15,30 +15,35 @@ class Comments extends React.Component {
         this.formatCommentObject = this.formatCommentObject.bind(this);
         this.commentOnAComment = this.commentOnAComment.bind(this);
         this.changeVisibleComment = this.changeVisibleComment.bind(this);
+        this.getAndRenderComments = this.getAndRenderComments.bind(this);
     }
 
     componentWillMount() {
+        this.getAndRenderComments();
+    }
+
+    getAndRenderComments() {
         $.ajax({
             url: `http://localhost:3000/api/comments/${this.props.post._id}`,
             method: 'GET'
         }).done((data) => {
             this.formatCommentObject(data);
-        })
+        });
     }
 
     commentOnAComment(event, commentId) {
         event.preventDefault();
-
-        console.log(`username: ${this.state.username}, text: ${this.state.newCommentText}, parent: ${commentId}`);
-        this.setState({ activeComment: '0'});
-        // $.ajax({
-        //     url: `http://localhost:3000/api/comments/${this.props.parent._id}`,
-        //     method: 'POST',
-        //     data: {
-        //         username: `${this.state.username}`,
-        //         text: `${this.state.newCommentText}`,
-        //     }
-        // }).done(this.setState({activeComment: '0'}))
+        $.ajax({
+            url: `http://localhost:3000/api/comments/${commentId}`,
+            method: 'POST',
+            data: {
+                username: `${this.state.username}`,
+                text: `${this.state.newCommentText}`,
+                parent: `${commentId}`
+            }
+        }).done((response) => {
+            this.setState({activeComment: '0', }, () => this.getAndRenderComments());
+        })
     }
 
     formatCommentObject(comments) {
@@ -59,7 +64,7 @@ class Comments extends React.Component {
 
     cancelCommentOnComment(event) {
         event.preventDefault();
-        this.setState({activeComment: '0'});
+        this.setState({activeComment: '0'}, );
     }
 
     renderComments(postId) {
@@ -107,6 +112,11 @@ class Comments extends React.Component {
     render() {
         return (
             <div>
+
+                <form onSubmit={(event) => this.commentOnAComment(event, this.props.post._id)}>
+                    <textarea onChange={(event) => this.setState({newCommentText: event.target.value})} rows="4" cols="50" placeholder='No Trolling Please' />
+                    <button>Send</button>
+                </form>
                 
                 <div>{this.renderComments(this.props.post._id)}</div>
             

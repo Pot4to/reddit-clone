@@ -1,3 +1,5 @@
+// import Post from '../../client/src/components/post.js';
+
 const mongoose = require('mongoose');
 const mongoUri = 'mongodb://localhost/reddit';
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -79,5 +81,20 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
         }
     });
 };
+
+db.postOnAComment = (parent, username, text, callback) => {
+    let post = new Posts({
+        username, 
+        parent, 
+        text,
+        title: null,
+        url: null,
+        subreddit: null,  
+    });
+    post.save((err) => {
+        if (err) return callback(err);
+        callback(null);
+    })
+}
 
 module.exports = db;
