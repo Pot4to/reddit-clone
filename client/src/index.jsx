@@ -24,6 +24,7 @@ class App extends React.Component {
       }
 
     this.fetchSubs = this.fetchSubs.bind(this);
+    this.changeActivePost = this.changeActivePost.bind(this);
     }
 
     componentWillMount() {
@@ -50,12 +51,17 @@ class App extends React.Component {
         }).slice(0, 5);
     }
 
+    changeActivePost(event, post) {
+        event.preventDefault();
+        this.setState({activePost: post, view: 'comments'});
+    }
+
     renderView() {
         const { view } = this.state;
 
         if (view === 'feed') {
             // home feed with all the top posts
-            return (<Home />)
+            return (<Home changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
@@ -68,6 +74,13 @@ class App extends React.Component {
             // view to sign up
         } else if (view === 'comments') {
             // view to display comments on a post
+            return (
+            <div>
+                <Post post={this.state.activePost} />
+                <div>
+                <Comments post={this.state.activePost}/></div>
+            </div>
+            )
         } else if (view === 'post') {
 
         }
@@ -77,7 +90,7 @@ class App extends React.Component {
         return (
             <div>
                 <div>
-                    {/* THIS IS A TESTING AREA, PLEASE DO NOT ALTER CODE BELOW THIS <DIV> */}
+                    {/* THIS IS A TESTING AREA, use this area to try out your features */}
                 </div>    
 
 

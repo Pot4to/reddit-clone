@@ -27,7 +27,7 @@ class Post extends React.Component {
             <div className="ui cards">
                 <div className="card">
                     <div className="content">
-                    <a className="header" href={this.props.post.url} target="_blank">{this.props.post.title}</a>
+                    <div className="header" onClick={(event) => this.props.changeActivePost(event, this.props.post) } >{this.props.post.title}</div>
                     <div className="meta">{this.props.post.username}</div>
                     <div className="meta">Likes: {this.props.post.likes}
                         <div className="ui large buttons">
