@@ -59,6 +59,7 @@ const subs = (req, res) => {
         res.status(200).send(data);
     })
 }
+  
 const addPost = (req, res) => {
     const {username, title, url, text} = req.params;
     db.savePost({
