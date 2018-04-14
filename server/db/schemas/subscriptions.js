@@ -4,8 +4,8 @@ mongoose.Promise = global.Promise;
 
 const subscriptionSchema = new mongoose.Schema({
     identification: Number,
-    username: String,           //username
-    postId: String,             //comment or post that the user liked
+    username: String,                   //username
+    subredditId: String,                //id of subreddit that the user is subscribed to
 },
     {
         timestamps: true
