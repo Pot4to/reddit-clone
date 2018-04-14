@@ -16,15 +16,15 @@ class Subreddit extends React.Component {
     }
     
     componentWillMount() {
-      this.getSubPost('test');
+      console.log(this.props);  
+      this.getSubPost(this.props.activeSub._id);
     }
 
-    getSubPost(subreddit) {
+    getSubPost(subredditId) {
         var appThis = this;
-       axios.get(`api/subreddit/${subreddit}`, {
+       axios.get(`api/subreddit/${subredditId}`, {
            params: {
-               id: subreddit,
-               name: 'hello'
+               id: subredditId 
            }
        })
        .then(function (response) {

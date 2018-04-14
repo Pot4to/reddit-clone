@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
     parent: String,                     //ID (self referencing) of the parent post or comment. For posts this will be null.
     url: String,                        //For post, null for comment
     likes: {type: Number, default: 0},  //Linked to the likes table
-    subreddit: String,                  //ID of subreddit
+    subReddit: String,                  //ID of subreddit
 },
     {
         timestamps: true

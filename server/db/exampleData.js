@@ -35,7 +35,6 @@ const posts = [
     subReddit: 'cats',
     text: 'filler text',
     parent: null,
-    subreddit: 'test'
   },
   {
     identification: 2,
@@ -43,10 +42,9 @@ const posts = [
     url: 'https://i.imgur.com/i44HiFN.jpg',
     likes: 117,
     username: 'joseph123',
-    subReddit: 'tech',
+    subReddit: '5ad13856c24d420bf38c237e',
     text: 'filler text',
     parent: null,
-    subreddit: 'test'
   },
   {
     identification: 3,
@@ -57,7 +55,6 @@ const posts = [
     subReddit: 'memes',
     text: 'filler text',
     parent: null,
-    subreddit: 'test'
   },
   {
     identification: 12,
@@ -67,7 +64,7 @@ const posts = [
     username: 'nick123',
     subReddit: null,
     text: 'comment text',
-    parent: 1
+    parent: 1,
   },
   {
     identification: 42,

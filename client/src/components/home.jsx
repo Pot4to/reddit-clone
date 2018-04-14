@@ -36,7 +36,7 @@ class Home extends React.Component {
                         <button className="ui button">New</button>
                     </div>
                 </div>
-                {this.state.posts.map((post) => <Post key={post._id} post={post} changeActivePost={this.props.changeActivePost} />)}
+                {this.state.posts.map((post) => <Post key={post._id} post={post} changeActivePost={this.props.changeActivePost} fetchPosts={this.fetchPosts} />)}
             </div>
         );
     }
