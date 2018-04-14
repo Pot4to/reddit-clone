@@ -25,7 +25,7 @@ class App extends React.Component {
         loggedIn: false,
         activePost: '',
         activeSub: '',
-        username: 'newUser1'
+        username: ''
       }
 
     this.fetchSubs = this.fetchSubs.bind(this);
@@ -91,7 +91,7 @@ class App extends React.Component {
             return <CreateSubreddit />
         } else if (view === 'createPost' && this.state.loggedIn === true) {
             // view to create a new post
-            return <CreatePost username={this.state.username} />
+            return <CreatePost changeView={this.changeView} subreddit={this.state.activeSub} username={this.state.username} />
         } else if (view === 'logIn') {
             //view to log in
         } else if (view === 'signUp') {
@@ -108,7 +108,7 @@ class App extends React.Component {
         } else if ((view === 'createSubreddit' || view === 'createPost') && this.state.loggedIn === false) {
             this.setState({view: 'logIn'});
         } else if (view === 'user') {
-            <User changeActivePost={this.changeActivePost} username={this.state.username} />
+            return <User changeActivePost={this.changeActivePost} username={this.state.username} />
         }
     }
 
@@ -150,7 +150,7 @@ class App extends React.Component {
             </div>
 
             <div>
-                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} currentUser={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
+                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
             </div>
 
             <div className='ui buttons'>

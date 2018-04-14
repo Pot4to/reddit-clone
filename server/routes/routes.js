@@ -33,7 +33,7 @@ router.get('/subs', (req, res) => controller.subs(req, res));
 router.post('/subscription/*', (req, res) => controller.subscribe(req, res));
 
 // handle GET for a particular users posts
-router.get('/user/:username', (req, res) => controller.getUserPosts(req, res));
+router.get('/userPosts/:username', (req, res) => controller.getUserPosts(req, res));
 
 
 module.exports = router;

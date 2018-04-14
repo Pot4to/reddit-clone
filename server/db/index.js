@@ -126,9 +126,12 @@ db.postSubreddit = (name, description, image, cb) => {
     })
 }
 
-db.savePost = (post) => {
+db.savePost = (post, cb) => {
     const newPost = new Posts(post);
-    newPost.save((err) => err ? console.log('Error saving new post', err) : null);
+    newPost.save((err) => {
+        if (err) return cb(err);
+        cb(null);
+    });
 };
 
 
@@ -162,9 +165,11 @@ db.getSubreddits = (cb) => {
 }
 
 db.getUserPosts = (username, cb) => {
+    console.log('getting user posts');
     Posts.find({username: username}).exec((err, data) => {
         if (err) cb(err);
-        cb(err, data)
+        console.log(data);
+        cb(null, data);
     });
 }
 

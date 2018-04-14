@@ -15,12 +15,13 @@ class CreatePost extends React.Component {
     }
 
     
-    handleSubmit() {
-        axios.post(`api/create-post/${this.props.username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit}`)
+    handleSubmit(e) {
+        e.preventDefault();
+        axios.post(`http://localhost:3000/api/create-post/${this.props.username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit}`)
         .then(() => {
             // change view prop in index.jsx state to home page view
             console.log('after the post call')
-            this.props.changeView(null, 'feed');
+            this.props.changeView(e, 'feed');
         });
     }
 
@@ -51,7 +52,7 @@ class CreatePost extends React.Component {
                 <textarea name="text" onChange={this.handleChange}></textarea>
                 </div>
             </div>
-            <div className="ui submit button" onClick={this.handleSubmit}>Submit</div>
+            <div className="ui submit button" onClick={(e) => this.handleSubmit(e)}>Submit</div>
             </div>
         </div>
         );

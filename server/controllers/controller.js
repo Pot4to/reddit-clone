@@ -78,6 +78,9 @@ const addPost = (req, res) => {
         text: text,
         parent: null,
         subreddit: subreddit
+    }, (err) => {
+        if (err) return res.status(404).send();
+        res.status(200).send();
     });
 };
 
@@ -97,7 +100,7 @@ const subscribe = (req, res) => {
 const getUserPosts = (req, res) => {
     const {username} = req.params;
     db.getUserPosts(username, (err, data) => {
-        if (err) return console.log(err);
+        if (err) return res.status(404).send();
         res.status(200).send(data);
     });
 

@@ -10,17 +10,12 @@ class User extends React.Component {
         }
     }
 
-//props: 
-
-//  username
-//  changeactivepost(event,post)
-
-
     componentWillMount() {
-//server call for all of users particular posts
-        axios.get(`http://localhost:3000/api/user/${this.props.username}`)
+
+        //server call for all of users particular posts
+        axios.get(`http://localhost:3000/api/userPosts/${this.props.username}`)
             .then((data) => {
-                this.setState({posts: data});
+                this.setState({posts: data.data});
             });
     }
 
@@ -28,13 +23,13 @@ class User extends React.Component {
         return (
             <div>
 
-                {
-                    this.state.posts.map((post) => { 
+                { this.state.posts.length > 0 ? 
+                    (this.state.posts.map((post) => { 
                         return (
-                            <div className="ui cards">
+                            <div key={Math.random()} className="ui cards">
                                 <div className="card">
                                     <div className="content">
-                                        <div className="header" >{post.title}</div>
+                                        <div className="header" onClick={(event) => this.props.changeActivePost(event, post)} >{post.title}</div>
                                         <div className='meta'>{post.text}</div>
                                         <div className="meta">Likes: {post.likes}
                                         </div>
@@ -42,7 +37,7 @@ class User extends React.Component {
                                 </div>
                             </div>
                         )
-                    })
+                    })) : (<div>User has no posts</div>)
                 }
             </div>
         )
