@@ -54,13 +54,18 @@ class Subreddit extends React.Component {
     render() {
         return (
             <div>
-                <h1>{ this.props.title }</h1>
+                <h2 className="subreddit-header space-left">
+                    <img className="subreddit-header-image" src={require("../../dist/defaultsubreddit.png")} />
+                    Subreddit Topic {/* { this.props.title } */}
+                </h2>
+                    {/* <div class="subreddit content"> */}
+                    {/* </div> */}
                 <div>
-                {this.state.subPosts.map(post => <Post post={post} />)}
+                        {this.state.subPosts.map(post => <Post post={post} />)}
                 </div>
                 <button onClick={() => {this.subscribeUser('testsubredditId', 'testUserId')}}>Subscribe!</button>
             </div>
-        )
+        );
     }
 }
 
