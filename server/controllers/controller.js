@@ -94,6 +94,15 @@ const subscribe = (req, res) => {
     });
 }
 
+const getUserPosts = (req, res) => {
+    const {username} = req.params;
+    db.getUserPosts(username, (err, data) => {
+        if (err) return console.log(err);
+        res.status(200).send(data);
+    });
+
+}
+
 
 module.exports.getSinglePost = getSinglePost;
 module.exports.incrementVoteOnPost = incrementVoteOnPost;
@@ -105,3 +114,4 @@ module.exports.getSubredditPost = getSubredditPost;
 module.exports.subs = subs;
 module.exports.addPost = addPost;
 module.exports.subscribe = subscribe;
+module.exports.getUserPosts = getUserPosts;

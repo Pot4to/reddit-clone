@@ -14,13 +14,13 @@ router.get('/home/posts/:criteria', (req, res) => controller.getPosts(req, res))
 // handle GET for comments on a given post
 router.get('/comments/*', (req, res) => controller.getCommentsForPost(req, res));
 
-//handle POST for comments on either posts or other comments
+// handle POST for comments on either posts or other comments
 router.post('/comments/*', (req, res) => controller.postOnAComment(req, res));
 
-//handle POST for creating a new subreddit
+// handle POST for creating a new subreddit
 router.post('/subreddits', (req, res) => controller.postSubreddit(req, res));
 
-//handles GET for getting all post under a subreddit
+// handle GET for getting all post under a subreddit
 router.get('/subreddit/*', (req, res) => controller.getSubredditPost(req, res));
 
 // handle POST for Create Post
@@ -31,6 +31,9 @@ router.get('/subs', (req, res) => controller.subs(req, res));
 
 // handle POST for subscribing user
 router.post('/subscription/*', (req, res) => controller.subscribe(req, res));
+
+// handle GET for a particular users posts
+router.get('/user/:username', (req, res) => controller.getUserPosts(req, res));
 
 
 module.exports = router;

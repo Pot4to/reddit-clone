@@ -87,7 +87,7 @@ class Comments extends React.Component {
                             <div className="meta">Likes: {comment.likes}
                             <br/>
 
-                                <div className="ui large buttons">
+                                <div className="ui small buttons">
 
                                     <button className="ui button" onClick={this.like}>Like</button>
                                     <button className="ui button" onClick={this.dislike}>Dislike</button>

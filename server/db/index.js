@@ -13,26 +13,26 @@ const Likes = require('./schemas/likes.js');
 
 const db = mongoose.connect(mongoUri);
 
-db.recursiveGetComments = (postId, callback) => {
+db.recursiveGetComments = (postId, callbcback) => {
 
     let children = [];
     let stack = [{_id: postId}];
 
-    let loop = (callback) => {
+    let loop = (cb) => {
         if (stack.length > 0) {
             let post = stack.pop();
             Posts.find({parent: post._id}).exec((err, data) => {
                 if (err) {
-                    return callback(err);
+                    return cb(err);
                 } else if (data.length > 0) {
                     children = children.concat(data);
                     stack = stack.concat(data);
-                    loop(callback);
+                    loop(cb);
                 } else {
                     if (stack.length > 0) {
-                        loop(callback);
+                        loop(cb);
                     } else if (stack.length === 0) {
-                        callback(null, children);
+                        cb(null, children);
                     }
                 }
             })
@@ -61,31 +61,21 @@ db.adjustLike = (postId, username, postOwner, type) => {  // type = 'increment' 
                 return false;
             } else {
                 data[0].update({type: type}, (err) => { // change type, run findOneAndUpdate
-
-
+                    //update likes count on posts
                     Posts.findOneAndUpdate({_id: ObjectId(postId)}, { $inc : {'likes' : type === 'increment' ? 1 : -1 }})
                     .exec((err) => {
                         if (err) return console.log('Error updating post likes', err);
+
+                        //now update likes count on the owner of the post
                         User.findOneAndUpdate({ username: postOwner }, { $inc : {'userKarma' : type === 'increment' ? 1 : -1 }})
                         .exec((err) => {
                             err ? console.log('Error updating user karma', err) : null;
-                        })
-
-                    
-                    
-                    
-                    //need to update the user karma for the user who posted the liked or disliked post 
-                    //above updated the likes count on the post
-                    
-                    //update likes count on the postOwner
-
-
+                        });
                     });
-                })
+                });
             }
         } else {
             // add user to likes table and increment likes for that post
-            // need to add: increment user karma for the user who posted the liked post
             var newLike = new Likes({
                 username: username,
                 postId: postId,
@@ -93,26 +83,22 @@ db.adjustLike = (postId, username, postOwner, type) => {  // type = 'increment' 
             });
             newLike.save((err) => {
                 if (err) { console.log('Error saving new like', err); }
-
-
+                //above incremented like count on post
                 Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
                 .exec((err) => {
                     if (err) return console.log('Error updating post likes', err);
-                    User.findOneAndUpdate({ username: postOwner }, { $inc: { 'userKarma': type === 'increment' ? 1 : -1 } })
-                        .exec((err) => {
-                            err ? console.log('Error updating user karma', err) : null;
-                        })
-                })
-                    //above incremented like count on post
-
-
                     //increment likes count on the post owner
+                    User.findOneAndUpdate({ username: postOwner }, { $inc: { 'userKarma': type === 'increment' ? 1 : -1 } })
+                    .exec((err) => {
+                        err ? console.log('Error updating user karma', err) : null;
+                    })
+                });
             });
         }
     });
 };
 
-db.postOnAComment = (parent, username, text, callback) => {
+db.postOnAComment = (parent, username, text, cb) => {
     let post = new Posts({
         username, 
         parent, 
@@ -122,12 +108,12 @@ db.postOnAComment = (parent, username, text, callback) => {
         subreddit: null,  
     });
     post.save((err) => {
-        if (err) return callback(err);
-        callback(null);
+        if (err) return cb(err);
+        cb(null);
     })
 }
 
-db.postSubreddit = (name, description, image, callback) => {
+db.postSubreddit = (name, description, image, cb) => {
     
     let sub = new Subreddit ({
         name,
@@ -135,8 +121,8 @@ db.postSubreddit = (name, description, image, callback) => {
         image, 
     });
     sub.save((err) => {
-        if (err) return callback(err);
-        callback(null);
+        if (err) return cb(err);
+        cb(null);
     })
 }
 
@@ -168,11 +154,15 @@ db.subscribeUser = (subredditId, userId, cb) => {
     
 };
 
-db.getSubreddits = (callback) => {
+db.getSubreddits = (cb) => {
     Subreddit.find({}, (err, data) => {
-        if (err) return callback(err);
-        callback(null, data);
+        if (err) return cb(err);
+        cb(null, data);
     })
+}
+
+db.getUserPosts = (username, cb) => {
+    Posts.find({username: username}).exec((err, data) => cb(err, data));
 }
 
 
