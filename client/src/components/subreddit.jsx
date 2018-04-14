@@ -16,25 +16,22 @@ class Subreddit extends React.Component {
     }
     
     componentWillMount() {
-      console.log(this.props.activeSub._id, 'props');  
       this.getSubPost(this.props.activeSub._id);
     }
 
     getSubPost(subredditId) {
         var appThis = this;
-       axios.get(`api/subreddit/${subredditId}`, {
-           params: {
-               id: 'cats' //need to change to subredditId
-           }
-       })
-       .then(function (response) {
-            
-           console.log('get sub post response: ', response);
-           appThis.setState({ subPosts: response.data })
-       })
-       .catch(function(error) {
-           console.log(error);
-       });
+        axios.get(`api/subreddit/${subredditId}`, {
+            params: {
+                id: subredditId //need to change to subredditId
+            }
+        })
+        .then(function (response) {
+            appThis.setState({ subPosts: response.data });
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
     }
 
     subscribeUser(subRedditId, userId) {
@@ -55,18 +52,18 @@ class Subreddit extends React.Component {
         return (
             <div>
                 <div className="subscribe-button">
-                <button onClick={() => {this.subscribeUser('testsubredditId', 'testUserId')}}>Subscribe</button>
+                <button onClick={() => {this.subscribeUser(this.props.subreddit._id, this.props.username._id)}}>Subscribe</button>
                 </div>
 
                 <div>
-                <h2 className="subreddit-header space-left border-dotted-blue">
-                    <img className="subreddit-header-image" src={require("../../dist/defaultsubreddit.png")} />
-                    Subreddit Topic {/* { this.props.title } */}
+                <h2 className="subreddit-header space-left border-dotted-blue" >
+                    {this.props.activeSub.name}
                 </h2>
+                <h5>{this.props.activeSub.description}</h5>
                 </div>
 
                 <div>
-                    {this.state.subPosts.map(post => <Post post={post} />)}
+                    {this.state.subPosts.map(post => <Post key={Math.random()} post={post} />)}
                 </div>
             </div>
         );

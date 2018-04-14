@@ -70,6 +70,7 @@ const subs = (req, res) => {
 }
 
 const addPost = (req, res) => {
+    console.log('adding post')
     const {username, title, url, text, subreddit} = req.params;
     db.savePost({
         username: username,
@@ -77,7 +78,7 @@ const addPost = (req, res) => {
         url: url,
         text: text,
         parent: null,
-        subreddit: subreddit
+        subReddit: subreddit
     }, (err) => {
         if (err) return res.status(404).send();
         res.status(200).send();

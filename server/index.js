@@ -39,16 +39,6 @@ app.use((req, res, next) => {
 });
 
 
-
-
-
-app.get('/api/comments/*', (req, res) => {
-    db.recursiveGetComments(req.url.slice(14), (err, data) => {
-        if (err) return res.status(404).send();
-        res.status(200).send(data);
-    })
-});
-
 app.post('/api/user/signup', (req, res) => {
     User.register( new User({ username: req.body.username }), req.body.password, function(err, User) {
         if (err) {

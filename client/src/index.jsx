@@ -33,7 +33,7 @@ class App extends React.Component {
     this.changeView = this.changeView.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         axios.get('/api/user/loggedIn')
         .then(response => {
             if (response.data.user) {
@@ -73,7 +73,7 @@ class App extends React.Component {
     }
     
     changeView(event, view) {
-        event.preventDefault();
+        if (event) event.preventDefault();
         this.setState({view: view});
     }
 
@@ -91,7 +91,11 @@ class App extends React.Component {
             return <CreateSubreddit />
         } else if (view === 'createPost' && this.state.loggedIn === true) {
             // view to create a new post
-            return <CreatePost changeView={this.changeView} subreddit={this.state.activeSub} username={this.state.username} />
+            if (this.state.activeSub === '') {
+                return <div> You must be on a subreddit in order to create a post</div>
+            } else {
+                return <CreatePost changeView={this.changeView} subreddit={this.state.activeSub === '' ? 'main' : this.state.activeSub} username={this.state.username} />
+            }
         } else if (view === 'logIn') {
             //view to log in
         } else if (view === 'signUp') {
