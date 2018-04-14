@@ -71,6 +71,19 @@ const addPost = (req, res) => {
     });
 };
 
+const subscribe = (req, res) => {
+    console.log('req body inside subscribe controller: ', req.body.subRedditId, req.body.userId);
+    db.subscribeUser(req.body.subRedditId, req.body.userId, function(error) {
+      if (error) {
+        res.statusCode = 404;
+        res.send('Error subscribing');
+      } else {
+        res.statusCode = 201;
+        res.send('Successfully Subscribed!');
+      }
+    });
+}
+
 
 
 module.exports.getSinglePost = getSinglePost;
@@ -82,3 +95,4 @@ module.exports.postSubreddit = postSubreddit;
 module.exports.getSubredditPost = getSubredditPost;
 module.exports.subs = subs;
 module.exports.addPost = addPost;
+module.exports.subscribe = subscribe;

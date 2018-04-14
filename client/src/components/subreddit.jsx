@@ -11,12 +11,12 @@ class Subreddit extends React.Component {
           currentUser: '',
           subscribed: false,
         }
-        // this.subscribeUser = this.subscribeUser.bind(this);
+        this.subscribeUser = this.subscribeUser.bind(this);
         this.getSubPost = this.getSubPost.bind(this);
     }
     
     componentWillMount() {
-      console.log(this.props);  
+      console.log(this.props.activeSub._id, 'props');  
       this.getSubPost(this.props.activeSub._id);
     }
 
@@ -24,20 +24,32 @@ class Subreddit extends React.Component {
         var appThis = this;
        axios.get(`api/subreddit/${subredditId}`, {
            params: {
-               id: subredditId 
+               id: 'memes' //need to change to subredditId
            }
        })
        .then(function (response) {
+            
+           console.log('get sub post response: ', response);
            appThis.setState({ subPosts: response.data })
-           console.log('get sub post response: ', response.data);
        })
        .catch(function(error) {
            console.log(error);
        });
     }
 
-    // subscribeUser() {
-    // }
+    subscribeUser(subRedditId, userId) {
+       var appThis = this;
+       axios.post(`api/subscription/${userId}`, {
+               userId,
+               subRedditId
+       })
+       .then(function(response) {
+           console.log('subscribe subreddit inside response: ', response);
+       })
+       .catch(function(error) {
+          console.log(error);
+       }); 
+    }
 
     render() {
         return (
@@ -46,22 +58,10 @@ class Subreddit extends React.Component {
                 <div>
                 {this.state.subPosts.map(post => <Post post={post} />)}
                 </div>
-                {/* <button onClick={this.subscribeUser()}>Subscribe!</button> */}
+                <button onClick={() => {this.subscribeUser('testsubredditId', 'testUserId')}}>Subscribe!</button>
             </div>
         )
     }
 }
 
 export default Subreddit;
-
-// axios.get('/user', {
-//     params: {
-//       ID: 12345
-//     }
-//   })
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
