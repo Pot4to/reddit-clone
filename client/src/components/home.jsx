@@ -49,6 +49,7 @@ class Home extends React.Component {
                 </div>
                 {this.state.posts.map((post) => {
                     return <Post 
+                            username={this.props.username} 
                             key={post._id} 
                             post={post} 
                             changeActivePost={this.props.changeActivePost} 

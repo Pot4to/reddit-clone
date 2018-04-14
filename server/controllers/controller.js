@@ -21,8 +21,9 @@ const getPosts = (req, res) => {
 };
 
 const incrementVoteOnPost = (req, res) => {
-    const {postId, username, type} = req.params;
-    db.adjustLike(postId, username, type);
+    console.log(req.params);
+    const {postId, username, postOwner, type} = req.params;
+    db.adjustLike(postId, username, postOwner, type);
     res.status(201).send();
 };
 
@@ -41,7 +42,7 @@ const postOnAComment = (req, res) => {
 };
 
 const postSubreddit = (req, res) => {
-    db.postSubreddit(req.body.name, req.body.description, (err) => {
+    db.postSubreddit(req.body.name, req.body.description, req.body.image, (err) => {
         if (err) return res.status(404).send();
         res.status(200).send();
     })
@@ -77,6 +78,9 @@ const addPost = (req, res) => {
         text: text,
         parent: null,
         subreddit: subreddit
+    }, (err) => {
+        if (err) return res.status(404).send();
+        res.status(200).send();
     });
 };
 
@@ -93,6 +97,15 @@ const subscribe = (req, res) => {
     });
 }
 
+const getUserPosts = (req, res) => {
+    const {username} = req.params;
+    db.getUserPosts(username, (err, data) => {
+        if (err) return res.status(404).send();
+        res.status(200).send(data);
+    });
+
+}
+
 
 module.exports.getSinglePost = getSinglePost;
 module.exports.incrementVoteOnPost = incrementVoteOnPost;
@@ -104,3 +117,4 @@ module.exports.getSubredditPost = getSubredditPost;
 module.exports.subs = subs;
 module.exports.addPost = addPost;
 module.exports.subscribe = subscribe;
+module.exports.getUserPosts = getUserPosts;

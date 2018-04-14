@@ -54,6 +54,11 @@ class Comments extends React.Component {
             }
             commentObj[comment.parent].push(comment);
         }
+        for (var key in commentObj) {
+            commentObj[key].sort((a, b) => {
+                return b.likes - a.likes;
+            });
+        }
         this.setState({ comments: [commentObj] });
     }
 
@@ -82,7 +87,7 @@ class Comments extends React.Component {
                             <div className="meta">Likes: {comment.likes}
                             <br/>
 
-                                <div className="ui large buttons">
+                                <div className="ui small buttons">
 
                                     <button className="ui button" onClick={this.like}>Like</button>
                                     <button className="ui button" onClick={this.dislike}>Dislike</button>

@@ -6,6 +6,7 @@ const subredditSchema = new mongoose.Schema({
     identification: Number,
     name: String,
     description: String,
+    image: String,
 },
     {
         timestamps: true

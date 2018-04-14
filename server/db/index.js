@@ -13,32 +13,32 @@ const Likes = require('./schemas/likes.js');
 
 const db = mongoose.connect(mongoUri);
 
-db.recursiveGetComments = (postId, callback) => {
+db.recursiveGetComments = (postId, cb) => {
 
     let children = [];
     let stack = [{_id: postId}];
 
-    let loop = (callback) => {
+    let loop = (cb) => {
         if (stack.length > 0) {
             let post = stack.pop();
             Posts.find({parent: post._id}).exec((err, data) => {
                 if (err) {
-                    return callback(err);
+                    return cb(err);
                 } else if (data.length > 0) {
                     children = children.concat(data);
                     stack = stack.concat(data);
-                    loop(callback);
+                    loop(cb);
                 } else {
                     if (stack.length > 0) {
-                        loop(callback);
+                        loop(cb);
                     } else if (stack.length === 0) {
-                        callback(null, children);
+                        cb(null, children);
                     }
                 }
             })
         }
     }
-    loop(callback);
+    loop(cb);
 }
 
 db.getOnePost = (postId, cb) => {
@@ -53,7 +53,7 @@ db.getMultiplePosts = (cb) => {
     });
 };
 
-db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decrement'
+db.adjustLike = (postId, username, postOwner, type) => {  // type = 'increment' or 'decrement'
     // check if postId and username exists in likes table
     Likes.find({postId: postId, username: username}, (err, data) => {
         if (data.length > 0) {  // user found
@@ -61,8 +61,17 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
                 return false;
             } else {
                 data[0].update({type: type}, (err) => { // change type, run findOneAndUpdate
-                    Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
-                         .exec((err) => err ? console.log('Error updating post likes', err) : null);
+                    //update likes count on posts
+                    Posts.findOneAndUpdate({_id: ObjectId(postId)}, { $inc : {'likes' : type === 'increment' ? 1 : -1 }})
+                    .exec((err) => {
+                        if (err) return console.log('Error updating post likes', err);
+
+                        //now update likes count on the owner of the post
+                        User.findOneAndUpdate({ username: postOwner }, { $inc : {'userKarma' : type === 'increment' ? 1 : -1 }})
+                        .exec((err) => {
+                            err ? console.log('Error updating user karma', err) : null;
+                        });
+                    });
                 });
             }
         } else {
@@ -74,15 +83,22 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
             });
             newLike.save((err) => {
                 if (err) { console.log('Error saving new like', err); }
+                //above incremented like count on post
                 Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
-                         .exec((err) => err ? console.log('Error updating post likes', err) : null);
+                .exec((err) => {
+                    if (err) return console.log('Error updating post likes', err);
+                    //increment likes count on the post owner
+                    User.findOneAndUpdate({ username: postOwner }, { $inc: { 'userKarma': type === 'increment' ? 1 : -1 } })
+                    .exec((err) => {
+                        err ? console.log('Error updating user karma', err) : null;
+                    })
+                });
             });
-
         }
     });
 };
 
-db.postOnAComment = (parent, username, text, callback) => {
+db.postOnAComment = (parent, username, text, cb) => {
     let post = new Posts({
         username, 
         parent, 
@@ -92,26 +108,30 @@ db.postOnAComment = (parent, username, text, callback) => {
         subreddit: null,  
     });
     post.save((err) => {
-        if (err) return callback(err);
-        callback(null);
+        if (err) return cb(err);
+        cb(null);
     })
 }
 
-db.postSubreddit = (name, description, callback) => {
+db.postSubreddit = (name, description, image, cb) => {
     
     let sub = new Subreddit ({
         name,
         description,
+        image, 
     });
     sub.save((err) => {
-        if (err) return callback(err);
-        callback(null);
+        if (err) return cb(err);
+        cb(null);
     })
 }
 
-db.savePost = (post) => {
+db.savePost = (post, cb) => {
     const newPost = new Posts(post);
-    newPost.save((err) => err ? console.log('Error saving new post', err) : null);
+    newPost.save((err) => {
+        if (err) return cb(err);
+        cb(null);
+    });
 };
 
 
@@ -137,11 +157,20 @@ db.subscribeUser = (subredditId, userId, cb) => {
     
 };
 
-db.getSubreddits = (callback) => {
+db.getSubreddits = (cb) => {
     Subreddit.find({}, (err, data) => {
-        if (err) return callback(err);
-        callback(null, data);
+        if (err) return cb(err);
+        cb(null, data);
     })
+}
+
+db.getUserPosts = (username, cb) => {
+    console.log('getting user posts');
+    Posts.find({username: username}).exec((err, data) => {
+        if (err) cb(err);
+        console.log(data);
+        cb(null, data);
+    });
 }
 
 

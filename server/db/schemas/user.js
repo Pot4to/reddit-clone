@@ -7,6 +7,7 @@ mongoose.Promise = global.Promise;
 const userSchema = new mongoose.Schema({
     username: String, 
     password: String, 
+    userKarma: { type: Number, default: 0 },
 },
     {
         timestamps: true

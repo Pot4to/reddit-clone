@@ -9,6 +9,7 @@ import CreatePost from './components/createPost.jsx';
 import Post from './components/post.jsx';
 import Login from './components/login.jsx';
 import LoggedIn from './components/loggedIn.jsx';
+import User from './components/user.jsx';
 
 
 import axios from 'axios';
@@ -60,10 +61,6 @@ class App extends React.Component {
         );  
     }
 
-    // handleChangePost(event) {
-
-    // }
-
     renderSubs() {
         return this.state.subreddits.map((sub) => {
             return (< div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
@@ -71,7 +68,7 @@ class App extends React.Component {
     }
 
     changeActivePost(event, post) {
-        event.preventDefault();
+        if (event) event.preventDefault();
         this.setState({activePost: post, view: 'comments'});
     }
     
@@ -85,16 +82,16 @@ class App extends React.Component {
 
         if (view === 'feed') {
             // home feed with all the top posts
-            return (<Home changeActivePost={this.changeActivePost} />)
+            return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
-            return (<Subreddit activeSub={this.state.activeSub} />)
+            return (<Subreddit changeView={this.changeView} activeSub={this.state.activeSub} />)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
             return <CreateSubreddit />
         } else if (view === 'createPost' && this.state.loggedIn === true) {
             // view to create a new post
-            return <CreatePost />
+            return <CreatePost changeView={this.changeView} subreddit={this.state.activeSub} username={this.state.username} />
         } else if (view === 'logIn') {
             //view to log in
         } else if (view === 'signUp') {
@@ -103,15 +100,15 @@ class App extends React.Component {
             // view to display comments on a post
             return (
             <div>
-                <Post post={this.state.activePost} />
+                <Post username={this.state.username} post={this.state.activePost} changeActivePost={this.changeActivePost}/>
                 <div>
-                <Comments post={this.state.activePost}/></div>
+                <Comments username={this.state.username} post={this.state.activePost}/></div>
             </div>
             )
-        } else if (view === 'post') {
-
         } else if ((view === 'createSubreddit' || view === 'createPost') && this.state.loggedIn === false) {
             this.setState({view: 'logIn'});
+        } else if (view === 'user') {
+            return <User changeActivePost={this.changeActivePost} username={this.state.username} />
         }
     }
 
@@ -136,7 +133,7 @@ class App extends React.Component {
         return (
         <div>
             <div>
-                    {/* THIS IS A TESTING AREA, use this area to try out your features */}
+                {/* THIS IS A TESTING AREA, use this area to try out your features */}
             </div>    
 
             <div>
@@ -153,7 +150,7 @@ class App extends React.Component {
             </div>
 
             <div>
-                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} currentUser={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
+                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
             </div>
 
             <div className='ui buttons'>

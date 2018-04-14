@@ -8,6 +8,7 @@ class CreateSubreddit extends React.Component {
         this.state = {
             name: '',
             description: '',
+            image: '',
         }
     }
 
@@ -16,6 +17,7 @@ class CreateSubreddit extends React.Component {
         this.sendRequest({
             name: this.state.name,
             description: this.state.description,
+            image: this.state.image
         })
 
     }
@@ -37,6 +39,7 @@ class CreateSubreddit extends React.Component {
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <input onChange={(event) => this.setState({name: event.target.value})} type="text" placeholder="Subreddit Name" />
                         <input onChange={(event) => this.setState({ description: event.target.value })} type="text" placeholder="Description" />
+                        <input onChange={(event) => this.setState({ image: event.target.value })} type="text" placeholder="Image" />
                         <button>Submit</button>
                     </form>
                 </div>
