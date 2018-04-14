@@ -6,6 +6,8 @@ import CreateSubreddit from './components/createSubreddit.jsx';
 import Subreddit from './components/subreddit.jsx';
 import CreatePost from './components/createPost.jsx';
 import Post from './components/post.jsx';
+import Login from './components/login.jsx';
+
 import axios from 'axios';
 import $ from 'jquery';
 
@@ -16,7 +18,7 @@ class App extends React.Component {
         view: 'feed',
         subreddits: [],
         posts: [],
-        loggedIn: false,
+        loggedIn: true,
         activePost: '',
         activeSub: '',
       }
@@ -45,7 +47,7 @@ class App extends React.Component {
 
     renderSubs() {
         return this.state.subreddits.map((sub) => {
-            return (< div className = "column" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
+            return (< div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
         }).slice(0, 5);
     }
 
@@ -83,38 +85,40 @@ class App extends React.Component {
         } else if (view === 'post') {
 
         } else if ((view === 'createSubreddit' || view === 'createPost') && this.state.loggedIn === false) {
-            this.setState({view: logIn});
+            this.setState({view: 'logIn'});
         }
     }
 
     render() {
         return (
+        <div>
             <div>
-                <div>
                     {/* THIS IS A TESTING AREA, use this area to try out your features */}
-                </div>    
+            </div>    
 
-
-
-                <div>
-                    <h1 className="float-left space-right">Logo</h1>
-                    <div className="clear-float"></div>
-                    <div className="ui grid">
-                        <div className="eight column row">
-                            {this.renderSubs()}
-                        </div>
+            <div>
+                <div className="ui grid subs">
+                    <div className="eight column row">
+                        {this.renderSubs()}
                     </div>
-                    <div>
-                        <Login />
-                    </div>
-                    <div>
-                        {this.renderView()}
-                    </div>
-
-
                 </div>
-
             </div>
+
+            <div>
+                <h1 className="float-left space-right">Reddit</h1>
+                <div className="clear-float"></div>
+            </div>
+
+            <div>
+                {this.state.loggedIn ? <div className='loginform'>Logged in as Username: {this.state.username} </div> : <Login />}
+            </div>
+
+            <div className='ui buttons'>
+                {this.renderView()}
+            </div>
+
+
+        </div>
         );
     }
 }
