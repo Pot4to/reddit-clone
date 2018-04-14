@@ -16,9 +16,12 @@ class CreatePost extends React.Component {
 
     
     handleSubmit() {
-        var username = "aaron123";
-        axios.post(`api/create-post/${username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit}`);
-        // change view prop in index.jsx state to home page view
+        axios.post(`api/create-post/${this.props.username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit}`)
+        .then(() => {
+            // change view prop in index.jsx state to home page view
+            console.log('after the post call')
+            this.props.changeView(null, 'feed');
+        });
     }
 
     handleChange(e) {

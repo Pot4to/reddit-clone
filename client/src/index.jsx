@@ -9,6 +9,7 @@ import CreatePost from './components/createPost.jsx';
 import Post from './components/post.jsx';
 import Login from './components/login.jsx';
 import LoggedIn from './components/loggedIn.jsx';
+import User from './components/user.jsx';
 
 
 import axios from 'axios';
@@ -60,10 +61,6 @@ class App extends React.Component {
         );  
     }
 
-    // handleChangePost(event) {
-
-    // }
-
     renderSubs() {
         return this.state.subreddits.map((sub) => {
             return (< div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
@@ -71,7 +68,7 @@ class App extends React.Component {
     }
 
     changeActivePost(event, post) {
-        event.preventDefault();
+        if (event) event.preventDefault();
         this.setState({activePost: post, view: 'comments'});
     }
     
@@ -88,7 +85,7 @@ class App extends React.Component {
             return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
-            return (<Subreddit activeSub={this.state.activeSub} />)
+            return (<Subreddit changeView={this.changeView} activeSub={this.state.activeSub} />)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
             return <CreateSubreddit />
@@ -108,10 +105,10 @@ class App extends React.Component {
                 <Comments username={this.state.username} post={this.state.activePost}/></div>
             </div>
             )
-        } else if (view === 'post') {
-
         } else if ((view === 'createSubreddit' || view === 'createPost') && this.state.loggedIn === false) {
             this.setState({view: 'logIn'});
+        } else if (view === 'user') {
+            <User changeActivePost={this.changeActivePost} username={this.state.username} />
         }
     }
 
@@ -136,7 +133,7 @@ class App extends React.Component {
         return (
         <div>
             <div>
-                    {/* THIS IS A TESTING AREA, use this area to try out your features */}
+                {/* THIS IS A TESTING AREA, use this area to try out your features */}
             </div>    
 
             <div>

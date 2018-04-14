@@ -13,8 +13,7 @@ class User extends React.Component {
 //props: 
 
 //  username
-//  change view
-//  
+//  changeactivepost(event,post)
 
 
     componentWillMount() {

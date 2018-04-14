@@ -13,7 +13,7 @@ const Likes = require('./schemas/likes.js');
 
 const db = mongoose.connect(mongoUri);
 
-db.recursiveGetComments = (postId, callbcback) => {
+db.recursiveGetComments = (postId, cb) => {
 
     let children = [];
     let stack = [{_id: postId}];
@@ -38,7 +38,7 @@ db.recursiveGetComments = (postId, callbcback) => {
             })
         }
     }
-    loop(callback);
+    loop(cb);
 }
 
 db.getOnePost = (postId, cb) => {
@@ -162,7 +162,10 @@ db.getSubreddits = (cb) => {
 }
 
 db.getUserPosts = (username, cb) => {
-    Posts.find({username: username}).exec((err, data) => cb(err, data));
+    Posts.find({username: username}).exec((err, data) => {
+        if (err) cb(err);
+        cb(err, data)
+    });
 }
 
 
