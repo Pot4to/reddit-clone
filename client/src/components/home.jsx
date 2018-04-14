@@ -9,21 +9,17 @@ class Home extends React.Component {
             subreddits: [],
             mySubreddits: [],
             posts: [],
-            orderedByLikes: false,
-            orderedByTime: false
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
-        this.orderPostsByTimestamp = this.orderPostsByTimestamp.bind(this);
-        this.orderPostsByLikes = this.orderPostsByLikes.bind(this);
     }
 
     componentWillMount() {
-        this.fetchPosts(this.orderPostsByLikes);
+        this.fetchPosts();
     }
 
-    fetchPosts(orderCriteria) {
-        axios.get(`http://localhost:3000/api/home/posts`)
+    fetchPosts(orderCriteria = 'likes') {  // takes 'likes' or 'time'
+        axios.get(`http://localhost:3000/api/home/posts/${orderCriteria}`)
              .then((response) => {
                  this.setState({ posts: response.data });
              });
@@ -41,40 +37,35 @@ class Home extends React.Component {
         //      });
     }
 
-    fetchPostsByLikes() {
-        
-    }
+    // orderPostsByLikes() {
+    //     if (this.state.orderedByLikes) { return; }
+    //     const orderedPosts = this.state.posts.sort((a, b) => b.likes - a.likes);
+    //     this.setState({
+    //         posts: orderedPosts,
+    //         orderedByLikes: true,
+    //         orderedByTime: false
+    //     });
+    // }
 
-
-    orderPostsByLikes() {
-        if (this.state.orderedByLikes) { return; }
-        const orderedPosts = this.state.posts.sort((a, b) => b.likes - a.likes);
-        this.setState({
-            posts: orderedPosts,
-            orderedByLikes: true,
-            orderedByTime: false
-        });
-    }
-
-    orderPostsByTimestamp() {
-        if (this.state.orderedByTime) { return; }
-        const postsByTimestamp = this.state.posts.sort((a, b) => {
-            return new Date(a.createdAt).getMilliseconds() + new Date(b.createdAt).getMilliseconds();
-        });
-        this.setState({ 
-            posts: postsByTimestamp,
-            orderedByTime: true,
-            orderedByLikes: false
-        });
-    }
+    // orderPostsByTimestamp() {
+    //     if (this.state.orderedByTime) { return; }
+    //     const postsByTimestamp = this.state.posts.sort((a, b) => {
+    //         return new Date(a.createdAt).getMilliseconds() + new Date(b.createdAt).getMilliseconds();
+    //     });
+    //     this.setState({ 
+    //         posts: postsByTimestamp,
+    //         orderedByTime: true,
+    //         orderedByLikes: false
+    //     });
+    // }
 
     render() {
         return (
             <div>
                 <div>
                     <div className="ui buttons">
-                        <button className="ui button" onClick={this.orderPostsByLikes}>Top</button>
-                        <button className="ui button" onClick={this.orderPostsByTimestamp}>New</button>
+                        <button className="ui button" onClick={() => this.fetchPosts('likes')}>Top</button>
+                        <button className="ui button" onClick={() => this.fetchPosts('time')}>New</button>
                     </div>
                 </div>
                 {this.state.posts.map((post) => <Post key={post._id} post={post} changeActivePost={this.props.changeActivePost} fetchPosts={this.fetchPosts} />)}

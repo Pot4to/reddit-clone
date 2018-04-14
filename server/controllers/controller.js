@@ -6,9 +6,16 @@ const getSinglePost = (req, res) => {
     });
 };
 
-const getPostsOrderedByLikes = (req, res) => {
+const getPosts = (req, res) => {
     db.getMultiplePosts((data) => {
-        // data = data.sort((a, b) => b.likes - a.likes);
+        const {criteria} = req.params;
+        if (criteria === 'likes') {
+            data = data.sort((a, b) => b.likes - a.likes);
+        } else if (criteria === 'time') {
+            data = data.sort((a, b) => {
+                return new Date(a.createdAt).getMilliseconds() + new Date(b.createdAt).getMilliseconds();
+            });
+        }
         res.status(200).send(data);
     });
 };
@@ -89,7 +96,7 @@ const subscribe = (req, res) => {
 
 module.exports.getSinglePost = getSinglePost;
 module.exports.incrementVoteOnPost = incrementVoteOnPost;
-module.exports.getPostsOrderedByLikes = getPostsOrderedByLikes;
+module.exports.getPosts = getPosts;
 module.exports.getCommentsForPost = getCommentsForPost; 
 module.exports.postOnAComment = postOnAComment;
 module.exports.postSubreddit = postSubreddit;

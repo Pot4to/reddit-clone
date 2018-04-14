@@ -9,7 +9,7 @@ router.post('/post/vote/:postId/:username/:type', (req, res) => controller.incre
 router.get('/post/:postId', (req, res) => controller.getSinglePost(req, res));
 
 // handle GET for all Posts for home page
-router.get('/home/posts', (req, res) => controller.getPostsOrderedByLikes(req, res));
+router.get('/home/posts/:criteria', (req, res) => controller.getPosts(req, res));
 
 // handle GET for comments on a given post
 router.get('/comments/*', (req, res) => controller.getCommentsForPost(req, res));
@@ -29,7 +29,8 @@ router.post('/create-post/:username/:title/:url/:text/:subreddit', (req, res) =>
 // handle GET for the list of subreddits
 router.get('/subs', (req, res) => controller.subs(req, res));
 
-//handle POST for subscribing user
+// handle POST for subscribing user
 router.post('/subscription/*', (req, res) => controller.subscribe(req, res));
+
 
 module.exports = router;
