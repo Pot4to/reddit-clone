@@ -14,12 +14,18 @@ class Post extends React.Component {
 
     like() {
         axios.post(`http://localhost:3000/api/post/vote/${this.props.post._id}/${this.props.post.username}/increment`)
-             .then(this.props.fetchPosts);
+             .then(() => {
+                var criteria = this.props.order === 'likes' ? 'likes' : 'time';
+                this.props.fetchPosts(criteria);
+             });
     }
 
     dislike() {
         axios.post(`http://localhost:3000/api/post/vote/${this.props.post._id}/${this.props.post.username}/decrement`)
-             .then(this.props.fetchPosts);
+             .then(() => {
+                var criteria = this.props.order === 'likes' ? 'likes' : 'time';
+                this.props.fetchPosts(criteria);
+             });
     }
 
     render() {

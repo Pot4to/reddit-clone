@@ -9,9 +9,12 @@ class Home extends React.Component {
             subreddits: [],
             mySubreddits: [],
             posts: [],
+            postOrder: 'likes'
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
+        this.handleNewClick = this.handleNewClick.bind(this);
+        this.handleTopClick = this.handleTopClick.bind(this);
     }
 
     componentWillMount() {
@@ -23,52 +26,36 @@ class Home extends React.Component {
              .then((response) => {
                  this.setState({ posts: response.data });
              });
-        
-        // axios.get(`http://localhost:3000/api/home/posts`)
-        //      .then((response) => {
-        //          this.setState({ posts: response.data });
-        //      })
-        //      .then(() => {
-        //         if (this.state.orderedByLikes) {
-        //             this.orderPostsByLikes();
-        //          } else if (this.state.orderedByLikes) {
-        //             this.orderPostsByTimestamp();
-        //          }
-        //      });
+    }
+    
+    handleTopClick() {
+        this.fetchPosts('likes');
+        this.setState({ postOrder: 'likes' });
     }
 
-    // orderPostsByLikes() {
-    //     if (this.state.orderedByLikes) { return; }
-    //     const orderedPosts = this.state.posts.sort((a, b) => b.likes - a.likes);
-    //     this.setState({
-    //         posts: orderedPosts,
-    //         orderedByLikes: true,
-    //         orderedByTime: false
-    //     });
-    // }
-
-    // orderPostsByTimestamp() {
-    //     if (this.state.orderedByTime) { return; }
-    //     const postsByTimestamp = this.state.posts.sort((a, b) => {
-    //         return new Date(a.createdAt).getMilliseconds() + new Date(b.createdAt).getMilliseconds();
-    //     });
-    //     this.setState({ 
-    //         posts: postsByTimestamp,
-    //         orderedByTime: true,
-    //         orderedByLikes: false
-    //     });
-    // }
+    handleNewClick() {
+        this.fetchPosts('time');
+        this.setState({ postOrder: 'time' });
+    }
 
     render() {
         return (
             <div>
                 <div>
                     <div className="ui buttons">
-                        <button className="ui button" onClick={() => this.fetchPosts('likes')}>Top</button>
-                        <button className="ui button" onClick={() => this.fetchPosts('time')}>New</button>
+                        <button className="ui button" onClick={this.handleTopClick}>Top</button>
+                        <button className="ui button" onClick={this.handleNewClick}>New</button>
                     </div>
                 </div>
-                {this.state.posts.map((post) => <Post key={post._id} post={post} changeActivePost={this.props.changeActivePost} fetchPosts={this.fetchPosts} />)}
+                {this.state.posts.map((post) => {
+                    return <Post 
+                            key={post._id} 
+                            post={post} 
+                            changeActivePost={this.props.changeActivePost} 
+                            fetchPosts={this.fetchPosts}
+                            order={this.state.postOrder} 
+                            />
+                })}
             </div>
         );
     }
