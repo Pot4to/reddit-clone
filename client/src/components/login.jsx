@@ -22,7 +22,6 @@ class Login extends React.Component {
         axios.post('/api/user/signup', user)
           .then( response => {
              console.log('Server replied with... ', response);
-             response.send('Successful Signup');
           })
           .catch( err => {
               console.log('Server replied with ...', err);
