@@ -149,7 +149,7 @@ class App extends React.Component {
                 <div className="clear-float"></div>
             </div>
 
-            <div>
+            <div className="login">
                 {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
             </div>
 

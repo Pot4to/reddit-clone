@@ -85,13 +85,25 @@ table {
 .border-dotted {
 	box-sizing: border-box;
 	border-style: dotted;
-	border-width: 10px;
+	border-width: 2px;
 	border-color: red;
+	width: 100%;
+}
+
+.border-dotted-blue {
+	box-sizing: border-box;
+	border-style: dotted;
+	border-width: 2px;
+	border-color: blue;
 	width: 100%;
 }
 
 .float-top {
 	float: top;
+}
+
+.float-bottom {
+	float: bottom;
 }
 
 /***************************
@@ -118,6 +130,7 @@ table {
 .subreddit-header {
 	font-size: 36px;
 	font-weight: bold;
+	float: bottom;
 }
 
 .subreddit-header-image {
@@ -130,6 +143,18 @@ table {
 	height: auto;
 }
 
+.subscribe-button {
+	border: none;
+	font-size: 20px;
+	color: orangered;
+	border-style: dotted;
+	border-color: green;
+}
+
 .reddit-font-color {
 	color: orangered;
+}
+
+.login {
+	margin-bottom: 15px;
 }
