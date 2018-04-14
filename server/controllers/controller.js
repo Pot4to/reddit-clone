@@ -6,8 +6,9 @@ const getSinglePost = (req, res) => {
     });
 };
 
-const getPosts = (req, res) => {
+const getPostsOrderedByLikes = (req, res) => {
     db.getMultiplePosts((data) => {
+        data = data.sort((a, b) => b.likes - a.likes);
         res.status(200).send(data);
     });
 };
@@ -61,13 +62,14 @@ const subs = (req, res) => {
 }
 
 const addPost = (req, res) => {
-    const {username, title, url, text} = req.params;
+    const {username, title, url, text, subreddit} = req.params;
     db.savePost({
         username: username,
         title: title,
         url: url,
         text: text,
-        parent: null
+        parent: null,
+        subreddit: subreddit
     });
 };
 
@@ -88,7 +90,7 @@ const subscribe = (req, res) => {
 
 module.exports.getSinglePost = getSinglePost;
 module.exports.incrementVoteOnPost = incrementVoteOnPost;
-module.exports.getPosts = getPosts;
+module.exports.getPostsOrderedByLikes = getPostsOrderedByLikes;
 module.exports.getCommentsForPost = getCommentsForPost; 
 module.exports.postOnAComment = postOnAComment;
 module.exports.postSubreddit = postSubreddit;

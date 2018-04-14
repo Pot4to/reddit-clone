@@ -18,7 +18,7 @@ class Home extends React.Component {
         this.fetchPosts();
     }
 
-    fetchPosts(postId) {
+    fetchPosts() {
         axios.get(`http://localhost:3000/api/home/posts`)
              .then((response) => {
                  this.setState({
@@ -27,13 +27,17 @@ class Home extends React.Component {
              });
     }
 
+    getNewPosts() {
+        console.log('new post click')
+    }
+
     render() {
         return (
             <div>
                 <div>
                     <div className="ui buttons">
-                        <button className="ui button">Top</button>
-                        <button className="ui button">New</button>
+                        <button className="ui button" onClick={this.fetchPosts}>Top</button>
+                        <button className="ui button" onClick={this.getNewPosts}>New</button>
                     </div>
                 </div>
                 {this.state.posts.map((post) => <Post key={post._id} post={post} changeActivePost={this.props.changeActivePost} fetchPosts={this.fetchPosts} />)}
