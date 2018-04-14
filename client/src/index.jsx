@@ -9,6 +9,7 @@ import CreatePost from './components/createPost.jsx';
 import Post from './components/post.jsx';
 import Login from './components/login.jsx';
 import LoggedIn from './components/loggedIn.jsx';
+import Logout from './components/logout.jsx';
 
 import axios from 'axios';
 import $ from 'jquery';
@@ -20,7 +21,7 @@ class App extends React.Component {
         view: 'feed',
         subreddits: [],
         posts: [],
-        loggedIn: true,
+        loggedIn: false,
         activePost: '',
         activeSub: '',
         username: ''
@@ -33,6 +34,20 @@ class App extends React.Component {
 
     componentWillMount() {
         this.fetchSubs();
+        axios.get('/api/user/loggedIn')
+        .then(response => {
+            if (response.data.user) {
+                this.setState({
+                    loggedIn: true,
+                    username: response.data.user
+                })
+                console.log(this.state.username);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        }) 
+       
     }
 
     fetchSubs() {
@@ -80,7 +95,7 @@ class App extends React.Component {
         } else if (view === 'createPost' && this.state.loggedIn === true) {
             // view to create a new post
             return <CreatePost />
-        } else if (view === 'logIn') {
+        }  else if (view === 'logIn') {
             //view to log in
         } else if (view === 'signUp') {
             // view to sign up
@@ -122,6 +137,7 @@ class App extends React.Component {
         <div>
             <div>
                     {/* THIS IS A TESTING AREA, use this area to try out your features */}
+                    <Logout logOut={this.logoutHandler.bind(this)} />
             </div>    
 
             <div>
