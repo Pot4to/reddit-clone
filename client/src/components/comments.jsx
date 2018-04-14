@@ -54,6 +54,13 @@ class Comments extends React.Component {
             }
             commentObj[comment.parent].push(comment);
         }
+        console.log(commentObj);
+        for (var key in commentObj) {
+            commentObj[key].sort((a, b) => {
+                return b.likes - a.likes;
+            });
+        }
+        console.log(commentObj);
         this.setState({ comments: [commentObj] });
     }
 
