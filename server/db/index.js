@@ -8,7 +8,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const User = require('./schemas/user.js');
 const Subreddit = require('./schemas/subreddit.js');
 const Posts = require('./schemas/posts.js');
-const Subscriptions = require('./schemas/subscriptions.js');
+const Subscription = require('./schemas/subscriptions.js');
 const Likes = require('./schemas/likes.js');
 
 const db = mongoose.connect(mongoUri);
@@ -116,14 +116,25 @@ db.savePost = (post) => {
 
 
 db.getSubredditPosts = (subredditID, cb) => {
+    console.log('inside db index', subredditID)
     Posts
       .find({ subReddit: subredditID}, (err, posts) => {
           return err ? cb(err, null) : cb(null, posts);
       });
 };
 
-db.subscribeUser = () => {
-  
+db.subscribeUser = (subredditId, userId, cb) => {
+    const newSub = new Subscription({
+      username: userId,
+      postId: subredditId
+    });
+    newSub
+      .save((err) => {
+         if (err) {
+           return cb(err);
+         }
+      });
+    
 };
 
 db.getSubreddits = (callback) => {
