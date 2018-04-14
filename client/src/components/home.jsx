@@ -22,19 +22,29 @@ class Home extends React.Component {
         this.fetchPosts(this.orderPostsByLikes);
     }
 
-    fetchPosts(cb) {
+    fetchPosts(orderCriteria) {
         axios.get(`http://localhost:3000/api/home/posts`)
              .then((response) => {
                  this.setState({ posts: response.data });
-             })
-             .then(() => {
-                if (this.state.orderedByLikes) {
-                    this.orderPostsByLikes();
-                 } else if (this.state.orderedByLikes) {
-                    this.orderPostsByTimestamp();
-                 }
              });
+        
+        // axios.get(`http://localhost:3000/api/home/posts`)
+        //      .then((response) => {
+        //          this.setState({ posts: response.data });
+        //      })
+        //      .then(() => {
+        //         if (this.state.orderedByLikes) {
+        //             this.orderPostsByLikes();
+        //          } else if (this.state.orderedByLikes) {
+        //             this.orderPostsByTimestamp();
+        //          }
+        //      });
     }
+
+    fetchPostsByLikes() {
+        
+    }
+
 
     orderPostsByLikes() {
         if (this.state.orderedByLikes) { return; }
