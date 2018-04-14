@@ -21,7 +21,7 @@ class Login extends React.Component {
         axios.post('/api/user/signup', user)
           .then( response => {
              console.log('Server replied with... ', response);
-             res.send('Successful Signup');
+             response.send('Successful Signup');
           })
           .catch( err => {
               console.log('Server replied with ...', err);
@@ -37,6 +37,9 @@ class Login extends React.Component {
         axios.post(`/api/user/login`, user)
           .then( response => {
               console.log('Server replied with ... ', response);
+              var user = response.data.passport.user
+              console.log('USER ', user);
+              this.props.logIn(user);
           })
           .catch( err => {
               console.log('Server errored out with ', err);
@@ -48,6 +51,7 @@ class Login extends React.Component {
         axios.get('/api/logout')
           .then(response => {
               console.log('Sucessfully Logged Out', response);
+              this.props.logOut();
           })
           .catch( err => {
               console.log('There was an error Logging Out', err);

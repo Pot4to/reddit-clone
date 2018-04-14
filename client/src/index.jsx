@@ -23,6 +23,7 @@ class App extends React.Component {
         loggedIn: true,
         activePost: '',
         activeSub: '',
+        username: ''
       }
 
     this.fetchSubs = this.fetchSubs.bind(this);
@@ -99,6 +100,22 @@ class App extends React.Component {
         }
     }
 
+    loginHandler(param) {
+        console.log('In Log In Handler...');
+        this.setState({
+            loggedIn: true,
+            username: param
+         });
+        console.log('User changed to ...', this.state.username);
+        console.log('State changed to ...', this.state.loggedIn);
+    }
+
+    logoutHandler() {
+        this.setState({
+            loggedIn: false
+        });
+        console.log('State changed to ...', this.state.loggedIn)
+    }
 
     render() {
         return (
@@ -121,7 +138,7 @@ class App extends React.Component {
             </div>
 
             <div>
-                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} /> : <Login />}
+                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} /> : <Login logIn={this.loginHandler.bind(this)} logOut={this.logoutHandler.bind(this)} />}
             </div>
 
             <div className='ui buttons'>
