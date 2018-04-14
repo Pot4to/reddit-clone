@@ -22,7 +22,6 @@ app.use(session({
     secret: 'secret',
     resave: false,
     saveUnitialized: false,
-    unset: 'destroy'
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -33,7 +32,11 @@ const User = require('./db/schemas/user.js');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
+app.use((req, res, next) => {
+    res.locals.login = req.isAuthenticated();
+    res.locals.thisUser = req.user;
+    next();
+});
 
 
 
@@ -52,25 +55,30 @@ app.post('/api/user/signup', (req, res) => {
             return res.render('register', {user : user});
         }
         passport.authenticate('local')(req, res, function() {
-            console.log('success');
-            res.send('Signed Up');
+            res.status(201).send('Signed Up');
         });
     })
 })
 
-app.get('/api/user/login/:username/:password', (req, res) => {
-    console.log('In Login Get ...', req.params);
-    passport.authenticate(req.params.username, {
-        successRedirect: `/${req.params.username}/success`,
-        failureRedirect: `/${req.params.username}/failure`
-    })(req, res, function() {
-        console.log('Sucessful Login');
-    });
-});
+// app.get('/api/user/login/:username/:password', (req, res) => {
+//     console.log('In Login Get ...', req.params);
+//     passport.authenticate(req.params.username, {
+//         successRedirect: `/${req.params.username}/success`,
+//         failureRedirect: `/${req.params.username}/failure`
+//     })(req, res, function() {
+//         console.log('Sucessful Login');
+//     });
+// });
 
+
+
+app.get('/api/user/loggedIn', function(req, res) {
+    console.log('In Get LOGGEDIN Success', req.session.passport);
+    res.send(req.session.passport);
+})
 
 app.post('/api/user/login', passport.authenticate('local'), function(req, res) {
-    console.log('In Post Login Success', req.session.passport);
+    console.log('In Post Login Success', req.session);
     res.send(req.session);
 })
 

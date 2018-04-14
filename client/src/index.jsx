@@ -10,6 +10,7 @@ import Post from './components/post.jsx';
 import Login from './components/login.jsx';
 import LoggedIn from './components/loggedIn.jsx';
 
+
 import axios from 'axios';
 import $ from 'jquery';
 
@@ -20,7 +21,7 @@ class App extends React.Component {
         view: 'feed',
         subreddits: [],
         posts: [],
-        loggedIn: true,
+        loggedIn: false,
         activePost: '',
         activeSub: '',
         username: ''
@@ -32,7 +33,21 @@ class App extends React.Component {
     }
 
     componentWillMount() {
+        axios.get('/api/user/loggedIn')
+        .then(response => {
+            if (response.data.user) {
+                this.setState({
+                    loggedIn: true,
+                    username: response.data.user
+                })
+                console.log(this.state.username);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        }) 
         this.fetchSubs();
+       
     }
 
     fetchSubs() {
@@ -138,7 +153,7 @@ class App extends React.Component {
             </div>
 
             <div>
-                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} /> : <Login logIn={this.loginHandler.bind(this)} logOut={this.logoutHandler.bind(this)} />}
+                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} currentUser={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
             </div>
 
             <div className='ui buttons'>
