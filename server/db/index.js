@@ -97,8 +97,11 @@ db.adjustLike = (postId, username, postOwner, type) => {  // type = 'increment' 
 
                 Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
                 .exec((err) => {
-                    err ? console.log('Error updating post likes', err) : null;
-                
+                    if (err) return console.log('Error updating post likes', err);
+                    User.findOneAndUpdate({ username: postOwner }, { $inc: { 'userKarma': type === 'increment' ? 1 : -1 } })
+                        .exec((err) => {
+                            err ? console.log('Error updating user karma', err) : null;
+                        })
                 })
                     //above incremented like count on post
 

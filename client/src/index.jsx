@@ -24,7 +24,7 @@ class App extends React.Component {
         loggedIn: false,
         activePost: '',
         activeSub: '',
-        username: 'nick123'
+        username: 'newUser1'
       }
 
     this.fetchSubs = this.fetchSubs.bind(this);
