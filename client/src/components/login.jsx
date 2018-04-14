@@ -56,7 +56,7 @@ class Login extends React.Component {
     
     render() {
         return (
-            <div>
+            <div className='loginform'>
                 <div>Username: </div>
                 <input name='username' onChange={ this.onChangeHandler.bind(this) }/>
                 <div>Password: </div>

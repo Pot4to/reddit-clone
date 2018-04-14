@@ -82,6 +82,8 @@ class App extends React.Component {
             )
         } else if (view === 'post') {
 
+        } else if ((view === 'createSubreddit' || view === 'createPost') && this.state.loggedIn === false) {
+            this.setState({view: logIn});
         }
     }
 
