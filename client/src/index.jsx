@@ -94,7 +94,7 @@ class App extends React.Component {
             if (this.state.activeSub === '') {
                 return <div> You must be on a subreddit in order to create a post</div>
             } else {
-                return <CreatePost changeView={this.changeView} subreddit={this.state.activeSub === '' ? 'main' : this.state.activeSub._id} username={this.state.username} />
+                return <CreatePost changeView={this.changeView} subreddit={this.state.activeSub === '' ? 'main' : this.state.activeSub} username={this.state.username} />
             }
         } else if (view === 'logIn') {
             //view to log in

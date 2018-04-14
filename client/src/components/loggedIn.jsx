@@ -28,6 +28,7 @@ class LoggedIn extends React.Component {
             <div className='loginform'>
             <div onClick={(event) => this.clickHandler(event, 'user')}>Logged in as Username: <br/>
             {this.props.username} </div> <br/>
+            <div>Total Karma: {this.props.userKarma}</div>
             <a href='#' onClick={(event) => this.clickHandler(event, 'createSubreddit')} >Create Subreddit</a> <br/>
             <a href='#' onClick={(event) => this.clickHandler(event, 'createPost')} >Create Post</a> <br/>
             <a href='#' onClick={this.logoutHandler.bind(this)}>Logout</a>
