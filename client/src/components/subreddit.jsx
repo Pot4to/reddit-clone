@@ -24,7 +24,7 @@ class Subreddit extends React.Component {
         var appThis = this;
        axios.get(`api/subreddit/${subredditId}`, {
            params: {
-               id: 'memes' //need to change to subredditId
+               id: 'cats' //need to change to subredditId
            }
        })
        .then(function (response) {
@@ -54,13 +54,22 @@ class Subreddit extends React.Component {
     render() {
         return (
             <div>
-                <h1>{ this.props.title }</h1>
-                <div>
-                {this.state.subPosts.map(post => <Post post={post} />)}
+                <div className="subscribe-button">
+                <button onClick={() => {this.subscribeUser('testsubredditId', 'testUserId')}}>Subscribe</button>
                 </div>
-                <button onClick={() => {this.subscribeUser('testsubredditId', 'testUserId')}}>Subscribe!</button>
+
+                <div>
+                <h2 className="subreddit-header space-left border-dotted-blue">
+                    <img className="subreddit-header-image" src={require("../../dist/defaultsubreddit.png")} />
+                    Subreddit Topic {/* { this.props.title } */}
+                </h2>
+                </div>
+
+                <div>
+                    {this.state.subPosts.map(post => <Post post={post} />)}
+                </div>
             </div>
-        )
+        );
     }
 }
 

@@ -69,9 +69,41 @@ table {
 	padding-right: 10%;
 }
 
+.space-left {
+	padding-left: 15px;
+}
+
 .center {
 	position: relative;
 	margin: auto;
+}
+
+.float-right {
+	float: right;
+}
+
+.border-dotted {
+	box-sizing: border-box;
+	border-style: dotted;
+	border-width: 2px;
+	border-color: red;
+	width: 100%;
+}
+
+.border-dotted-blue {
+	box-sizing: border-box;
+	border-style: dotted;
+	border-width: 2px;
+	border-color: blue;
+	width: 100%;
+}
+
+.float-top {
+	float: top;
+}
+
+.float-bottom {
+	float: bottom;
 }
 
 /***************************
@@ -89,4 +121,40 @@ table {
 .show, .hide {
 	resize: none;
 	width: 80%;
+}
+
+
+/***************************
+      Subreddit Topic
+****************************/
+.subreddit-header {
+	font-size: 36px;
+	font-weight: bold;
+	float: bottom;
+}
+
+.subreddit-header-image {
+	width: 75px;
+	height: 75px;
+}
+
+.subreddit-posts {
+	width: auto;
+	height: auto;
+}
+
+.subscribe-button {
+	border: none;
+	font-size: 20px;
+	color: orangered;
+	border-style: dotted;
+	border-color: green;
+}
+
+.reddit-font-color {
+	color: orangered;
+}
+
+.login {
+	margin-bottom: 15px;
 }
