@@ -8,23 +8,34 @@ class Home extends React.Component {
         this.state = {
             subreddits: [],
             mySubreddits: [],
-            posts: []
+            posts: [],
+            postOrder: 'likes'
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
+        this.handleNewClick = this.handleNewClick.bind(this);
+        this.handleTopClick = this.handleTopClick.bind(this);
     }
 
     componentWillMount() {
         this.fetchPosts();
     }
 
-    fetchPosts(postId) {
-        axios.get(`http://localhost:3000/api/home/posts`)
+    fetchPosts(orderCriteria = 'likes') {  // takes 'likes' or 'time'
+        axios.get(`http://localhost:3000/api/home/posts/${orderCriteria}`)
              .then((response) => {
-                 this.setState({
-                     posts: response.data
-                 });
+                 this.setState({ posts: response.data });
              });
+    }
+    
+    handleTopClick() {
+        this.fetchPosts('likes');
+        this.setState({ postOrder: 'likes' });
+    }
+
+    handleNewClick() {
+        this.fetchPosts('time');
+        this.setState({ postOrder: 'time' });
     }
 
     render() {
@@ -32,11 +43,19 @@ class Home extends React.Component {
             <div>
                 <div>
                     <div className="ui buttons">
-                        <button className="ui button">Top</button>
-                        <button className="ui button">New</button>
+                        <button className="ui button" onClick={this.handleTopClick}>Top</button>
+                        <button className="ui button" onClick={this.handleNewClick}>New</button>
                     </div>
                 </div>
-                {this.state.posts.map((post) => <Post key={post._id} post={post} changeActivePost={this.props.changeActivePost} fetchPosts={this.fetchPosts} />)}
+                {this.state.posts.map((post) => {
+                    return <Post 
+                            key={post._id} 
+                            post={post} 
+                            changeActivePost={this.props.changeActivePost} 
+                            fetchPosts={this.fetchPosts}
+                            order={this.state.postOrder} 
+                            />
+                })}
             </div>
         );
     }

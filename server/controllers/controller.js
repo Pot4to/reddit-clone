@@ -8,6 +8,14 @@ const getSinglePost = (req, res) => {
 
 const getPosts = (req, res) => {
     db.getMultiplePosts((data) => {
+        const {criteria} = req.params;
+        if (criteria === 'likes') {
+            data = data.sort((a, b) => b.likes - a.likes);
+        } else if (criteria === 'time') {
+            data = data.sort((a, b) => {
+                return new Date(a.createdAt).getMilliseconds() + new Date(b.createdAt).getMilliseconds();
+            });
+        }
         res.status(200).send(data);
     });
 };
@@ -61,13 +69,14 @@ const subs = (req, res) => {
 }
 
 const addPost = (req, res) => {
-    const {username, title, url, text} = req.params;
+    const {username, title, url, text, subreddit} = req.params;
     db.savePost({
         username: username,
         title: title,
         url: url,
         text: text,
-        parent: null
+        parent: null,
+        subreddit: subreddit
     });
 };
 
@@ -83,7 +92,6 @@ const subscribe = (req, res) => {
       }
     });
 }
-
 
 
 module.exports.getSinglePost = getSinglePost;
