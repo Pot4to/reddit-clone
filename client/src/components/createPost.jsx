@@ -30,6 +30,7 @@ class CreatePost extends React.Component {
     render() {
         return (
         <div>
+            <h1>Create a new Post</h1>
             <div className="ui large form">
                 <div className="two fields">
                     <div className="field">

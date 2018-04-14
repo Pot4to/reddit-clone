@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import Comments from './components/comments.jsx'
 import Home from './components/home.jsx';
 import CreateSubreddit from './components/createSubreddit.jsx';
@@ -7,6 +8,7 @@ import Subreddit from './components/subreddit.jsx';
 import CreatePost from './components/createPost.jsx';
 import Post from './components/post.jsx';
 import Login from './components/login.jsx';
+import LoggedIn from './components/loggedIn.jsx';
 
 import axios from 'axios';
 import $ from 'jquery';
@@ -25,6 +27,7 @@ class App extends React.Component {
 
     this.fetchSubs = this.fetchSubs.bind(this);
     this.changeActivePost = this.changeActivePost.bind(this);
+    this.changeView = this.changeView.bind(this);
     }
 
     componentWillMount() {
@@ -48,12 +51,17 @@ class App extends React.Component {
     renderSubs() {
         return this.state.subreddits.map((sub) => {
             return (< div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
-        }).slice(0, 5);
+        }).slice(0, 7);
     }
 
     changeActivePost(event, post) {
         event.preventDefault();
         this.setState({activePost: post, view: 'comments'});
+    }
+    
+    changeView(event, view) {
+        event.preventDefault();
+        this.setState({view: view});
     }
 
     renderView() {
@@ -67,8 +75,10 @@ class App extends React.Component {
             return (<Subreddit activeSub={this.state.activeSub} />)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
+            return <CreateSubreddit />
         } else if (view === 'createPost' && this.state.loggedIn === true) {
             // view to create a new post
+            return <CreatePost />
         } else if (view === 'logIn') {
             //view to log in
         } else if (view === 'signUp') {
@@ -89,6 +99,7 @@ class App extends React.Component {
         }
     }
 
+
     render() {
         return (
         <div>
@@ -105,12 +116,12 @@ class App extends React.Component {
             </div>
 
             <div>
-                <h1 className="float-left space-right">Reddit</h1>
+                <h1 className="float-left space-right" onClick={(event) => this.changeView(event, 'feed')} >Reddit</h1>
                 <div className="clear-float"></div>
             </div>
 
             <div>
-                {this.state.loggedIn ? <div className='loginform'>Logged in as Username: {this.state.username} </div> : <Login />}
+                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} /> : <Login />}
             </div>
 
             <div className='ui buttons'>

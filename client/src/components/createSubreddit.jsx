@@ -31,6 +31,8 @@ class CreateSubreddit extends React.Component {
     render() {
         return (
             <div>
+                <h1>Create a new Subreddit</h1>
+                <br/>
                 <div className="ui input">
                     <form onSubmit={(event) => this.handleSubmit(event)}>
                         <input onChange={(event) => this.setState({name: event.target.value})} type="text" placeholder="Subreddit Name" />
