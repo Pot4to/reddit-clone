@@ -12,12 +12,24 @@ class LoggedIn extends React.Component {
         this.props.changeView(event, view);
     }
 
+    logoutHandler() {
+        axios.get('/api/logout')
+          .then(response => {
+              console.log('Sucessfully Logged Out', response);
+              this.props.logOut();
+          })
+          .catch( err => {
+              console.log('There was an error Logging Out', err);
+          });
+    }
+
     render() {
         return (
             <div className='loginform'>
-            <div >Logged in as Username: {this.state.username} </div> <br/>
+            <div >Logged in as Username: {this.props.currentUser} </div> <br/>
             <a href='#' onClick={(event) => this.clickHandler(event, 'createSubreddit')} >Create Subreddit</a> <br/>
             <a href='#' onClick={(event) => this.clickHandler(event, 'createPost')} >Create Post</a> <br/>
+            <a href='#' onClick={this.logoutHandler.bind(this)}>Logout</a>
             </div>
         )
     }

@@ -55,21 +55,20 @@ app.post('/api/user/signup', (req, res) => {
             return res.render('register', {user : user});
         }
         passport.authenticate('local')(req, res, function() {
-            console.log('success');
-            res.send('Signed Up');
+            res.status(201).send('Signed Up');
         });
     })
 })
 
-app.get('/api/user/login/:username/:password', (req, res) => {
-    console.log('In Login Get ...', req.params);
-    passport.authenticate(req.params.username, {
-        successRedirect: `/${req.params.username}/success`,
-        failureRedirect: `/${req.params.username}/failure`
-    })(req, res, function() {
-        console.log('Sucessful Login');
-    });
-});
+// app.get('/api/user/login/:username/:password', (req, res) => {
+//     console.log('In Login Get ...', req.params);
+//     passport.authenticate(req.params.username, {
+//         successRedirect: `/${req.params.username}/success`,
+//         failureRedirect: `/${req.params.username}/failure`
+//     })(req, res, function() {
+//         console.log('Sucessful Login');
+//     });
+// });
 
 
 

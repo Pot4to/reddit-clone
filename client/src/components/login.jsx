@@ -29,7 +29,6 @@ class Login extends React.Component {
     }
 
     onLoginHandler() {
-        console.log('fired login handler');
         var user = {
             username: this.state.username,
             password: this.state.password
@@ -68,7 +67,6 @@ class Login extends React.Component {
                 <br/><br/>
                 <button className='login' onClick={this.onLoginHandler.bind(this)} >Login</button>
                 <button className='signup' onClick={this.signUpHandler.bind(this)} > Sign Up</button>
-                <button className='logout' onClick={this.logoutHandler.bind(this)} >Logout</button>
             </div>
         )
     }
