@@ -32,7 +32,7 @@ class Post extends React.Component {
 
     render() {
         return (
-            <div className="ui cards">
+            <div className="ui cards border-dotted">
                 <div className="card">
                     <div className="content">
                     <div className="header" onClick={(event) => this.props.changeActivePost(event, this.props.post) } >{this.props.post.title}</div>

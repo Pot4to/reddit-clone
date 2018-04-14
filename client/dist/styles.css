@@ -78,6 +78,22 @@ table {
 	margin: auto;
 }
 
+.float-right {
+	float: right;
+}
+
+.border-dotted {
+	box-sizing: border-box;
+	border-style: dotted;
+	border-width: 10px;
+	border-color: red;
+	width: 100%;
+}
+
+.float-top {
+	float: top;
+}
+
 /***************************
         Comment Box
 ****************************/
@@ -107,6 +123,11 @@ table {
 .subreddit-header-image {
 	width: 75px;
 	height: 75px;
+}
+
+.subreddit-posts {
+	width: auto;
+	height: auto;
 }
 
 .reddit-font-color {

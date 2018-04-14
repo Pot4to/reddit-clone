@@ -153,7 +153,7 @@ class App extends React.Component {
                 {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
             </div>
 
-            <div className='ui buttons'>
+            <div className='ui buttons border-dotted'>
                 {this.renderView()}
             </div>
 
