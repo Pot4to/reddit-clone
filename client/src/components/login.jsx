@@ -44,6 +44,7 @@ class Login extends React.Component {
           })
           .catch( err => {
               console.log('Server errored out with ', err);
+              alert('Incorrect Username or Password. Please try again!');
           })
 
     }
