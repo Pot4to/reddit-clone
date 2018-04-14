@@ -56,18 +56,31 @@ class Login extends React.Component {
     
     render() {
         return (
-            <div>
+            <div className='loginform'>
                 <div>Username: </div>
                 <input name='username' onChange={ this.onChangeHandler.bind(this) }/>
                 <div>Password: </div>
                 <input name='password' type='password' onChange={ this.onChangeHandler.bind(this) }/>
                 <br/><br/>
-                <button onClick={this.signUpHandler.bind(this)} > Sign Up</button>
-                <button onClick={this.onLoginHandler.bind(this)} >Login</button>
-                <button onClick={this.logoutHandler.bind(this)} >Logout</button>
+                <button className='login' onClick={this.onLoginHandler.bind(this)} >Login</button>
+                <button className='signup' onClick={this.signUpHandler.bind(this)} > Sign Up</button>
+                <button className='logout' onClick={this.logoutHandler.bind(this)} >Logout</button>
             </div>
         )
     }
 }
 
 export default Login
+
+// {
+//             <Button color='teal' fluid size='large'>Login</Button>
+//                             </Segment>
+//                         </Form>
+//                         <Message>
+//                             New to us? <a href='#'>Sign Up</a>
+//                         </Message>
+//                     </Grid.Column>
+//                 </Grid>
+//             </div>
+        
+// </div>}
