@@ -15,8 +15,12 @@ class Subreddit extends React.Component {
         this.getSubPost = this.getSubPost.bind(this);
     }
     
-    componentWillMount() {
-      this.getSubPost(this.props.activeSub._id);
+    componentWillMount() { 
+        this.getSubPost(this.props.activeSub._id)
+    }
+
+    componentDidUpdate() {
+        this.getSubPost(this.props.activeSub._id);
     }
 
     getSubPost(subredditId) {
