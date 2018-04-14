@@ -42,7 +42,7 @@ const postOnAComment = (req, res) => {
 };
 
 const postSubreddit = (req, res) => {
-    db.postSubreddit(req.body.name, req.body.description, (err) => {
+    db.postSubreddit(req.body.name, req.body.description, req.body.image, (err) => {
         if (err) return res.status(404).send();
         res.status(200).send();
     })

@@ -127,11 +127,12 @@ db.postOnAComment = (parent, username, text, callback) => {
     })
 }
 
-db.postSubreddit = (name, description, callback) => {
+db.postSubreddit = (name, description, image, callback) => {
     
     let sub = new Subreddit ({
         name,
         description,
+        image, 
     });
     sub.save((err) => {
         if (err) return callback(err);
