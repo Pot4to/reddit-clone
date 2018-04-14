@@ -21,8 +21,9 @@ const getPosts = (req, res) => {
 };
 
 const incrementVoteOnPost = (req, res) => {
-    const {postId, username, type} = req.params;
-    db.adjustLike(postId, username, type);
+    console.log(req.params);
+    const {postId, username, postOwner, type} = req.params;
+    db.adjustLike(postId, username, postOwner, type);
     res.status(201).send();
 };
 

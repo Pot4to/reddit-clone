@@ -24,7 +24,7 @@ class App extends React.Component {
         loggedIn: false,
         activePost: '',
         activeSub: '',
-        username: ''
+        username: 'nick123'
       }
 
     this.fetchSubs = this.fetchSubs.bind(this);
@@ -85,7 +85,7 @@ class App extends React.Component {
 
         if (view === 'feed') {
             // home feed with all the top posts
-            return (<Home changeActivePost={this.changeActivePost} />)
+            return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
             return (<Subreddit activeSub={this.state.activeSub} />)
@@ -94,7 +94,7 @@ class App extends React.Component {
             return <CreateSubreddit />
         } else if (view === 'createPost' && this.state.loggedIn === true) {
             // view to create a new post
-            return <CreatePost />
+            return <CreatePost username={this.state.username} />
         } else if (view === 'logIn') {
             //view to log in
         } else if (view === 'signUp') {
@@ -103,9 +103,9 @@ class App extends React.Component {
             // view to display comments on a post
             return (
             <div>
-                <Post post={this.state.activePost} />
+                <Post username={this.state.username} post={this.state.activePost} changeActivePost={this.changeActivePost}/>
                 <div>
-                <Comments post={this.state.activePost}/></div>
+                <Comments username={this.state.username} post={this.state.activePost}/></div>
             </div>
             )
         } else if (view === 'post') {

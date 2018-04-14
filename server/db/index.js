@@ -53,7 +53,7 @@ db.getMultiplePosts = (cb) => {
     });
 };
 
-db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decrement'
+db.adjustLike = (postId, username, postOwner, type) => {  // type = 'increment' or 'decrement'
     // check if postId and username exists in likes table
     Likes.find({postId: postId, username: username}, (err, data) => {
         if (data.length > 0) {  // user found
@@ -61,12 +61,31 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
                 return false;
             } else {
                 data[0].update({type: type}, (err) => { // change type, run findOneAndUpdate
-                    Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
-                         .exec((err) => err ? console.log('Error updating post likes', err) : null);
-                });
+
+
+                    Posts.findOneAndUpdate({_id: ObjectId(postId)}, { $inc : {'likes' : type === 'increment' ? 1 : -1 }})
+                    .exec((err) => {
+                        if (err) return console.log('Error updating post likes', err);
+                        User.findOneAndUpdate({ username: postOwner }, { $inc : {'userKarma' : type === 'increment' ? 1 : -1 }})
+                        .exec((err) => {
+                            err ? console.log('Error updating user karma', err) : null;
+                        })
+
+                    
+                    
+                    
+                    //need to update the user karma for the user who posted the liked or disliked post 
+                    //above updated the likes count on the post
+                    
+                    //update likes count on the postOwner
+
+
+                    });
+                })
             }
         } else {
             // add user to likes table and increment likes for that post
+            // need to add: increment user karma for the user who posted the liked post
             var newLike = new Likes({
                 username: username,
                 postId: postId,
@@ -74,10 +93,18 @@ db.adjustLike = (postId, username, type) => {  // type = 'increment' or 'decreme
             });
             newLike.save((err) => {
                 if (err) { console.log('Error saving new like', err); }
-                Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
-                         .exec((err) => err ? console.log('Error updating post likes', err) : null);
-            });
 
+
+                Posts.findOneAndUpdate({_id: ObjectId(postId)}, {$inc : {'likes' : type === 'increment' ? 1 : -1}})
+                .exec((err) => {
+                    err ? console.log('Error updating post likes', err) : null;
+                
+                })
+                    //above incremented like count on post
+
+
+                    //increment likes count on the post owner
+            });
         }
     });
 };

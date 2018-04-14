@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/controller.js');
 
-// handle POST for vote
-router.post('/post/vote/:postId/:username/:type', (req, res) => controller.incrementVoteOnPost(req, res));
+// handle POST for Vote
+router.post('/post/vote/:postId/:username/:postOwner/:type', (req, res) => controller.incrementVoteOnPost(req, res));
 
 // handle GET for single post
 router.get('/post/:postId', (req, res) => controller.getSinglePost(req, res));
