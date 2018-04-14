@@ -8,7 +8,7 @@ const getSinglePost = (req, res) => {
 
 const getPostsOrderedByLikes = (req, res) => {
     db.getMultiplePosts((data) => {
-        data = data.sort((a, b) => b.likes - a.likes);
+        // data = data.sort((a, b) => b.likes - a.likes);
         res.status(200).send(data);
     });
 };
@@ -85,7 +85,6 @@ const subscribe = (req, res) => {
       }
     });
 }
-
 
 
 module.exports.getSinglePost = getSinglePost;
