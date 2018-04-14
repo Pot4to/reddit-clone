@@ -42,7 +42,7 @@ const posts = [
     url: 'https://i.imgur.com/i44HiFN.jpg',
     likes: 117,
     username: 'joseph123',
-    subReddit: '5ad13856c24d420bf38c237e',
+    subReddit: '5ad14cf739d2733452d7168b',
     text: 'filler text',
     parent: null,
   },

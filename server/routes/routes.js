@@ -29,4 +29,7 @@ router.post('/create-post/:username/:title/:url/:text', (req, res) => controller
 //handle GET for the list of subreddits
 router.get('/subs', (req, res) => controller.subs(req, res));
 
+//handle POST for subscribing user
+router.post('/subscription/*', (req, res) => controller.subscribe(req, res));
+
 module.exports = router;
