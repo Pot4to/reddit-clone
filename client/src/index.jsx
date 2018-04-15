@@ -31,6 +31,7 @@ class App extends React.Component {
     this.fetchSubs = this.fetchSubs.bind(this);
     this.changeActivePost = this.changeActivePost.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.renderSubs = this.renderSubs.bind(this);
     }
 
     componentDidMount() {
@@ -46,9 +47,11 @@ class App extends React.Component {
         })
         .catch(err => {
             console.log(err);
-        }) 
+        });
+    }
+
+    componentWillMount() {
         this.fetchSubs();
-       
     }
 
     fetchSubs() {
@@ -63,7 +66,7 @@ class App extends React.Component {
 
     renderSubs() {
         return this.state.subreddits.map((sub) => {
-            return (< div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
+            return (<div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
         }).slice(0, 7);
     }
 
@@ -85,7 +88,7 @@ class App extends React.Component {
             return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
-            return (<Subreddit changeView={this.changeView} activeSub={this.state.activeSub} />)
+            return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} activeSub={this.state.activeSub} username={this.state.username}/>)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
             return <CreateSubreddit />

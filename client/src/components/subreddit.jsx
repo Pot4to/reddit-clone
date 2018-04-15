@@ -7,33 +7,33 @@ class Subreddit extends React.Component {
     constructor(props) {
         super(props);
         this.state =  {
-          subPosts: [],
-          currentUser: '',
-          subscribed: false,
+          subPosts: [], 
+          subscribed: false, //Need to check on clicking into this sub if the user is subbed and react accordingly
         }
         this.subscribeUser = this.subscribeUser.bind(this);
         this.getSubPost = this.getSubPost.bind(this);
     }
-    
-    componentWillMount() { 
-        this.getSubPost(this.props.activeSub._id)
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.name !== nextProps.name) {
+            this.getSubPost(nextProps.activeSub._id);
+        }
     }
 
-    componentDidUpdate() {
+    componentWillMount() {
         this.getSubPost(this.props.activeSub._id);
     }
 
     getSubPost(subredditId) {
-        var appThis = this;
         axios.get(`api/subreddit/${subredditId}`, {
             params: {
                 id: subredditId //need to change to subredditId
             }
         })
-        .then(function (response) {
-            appThis.setState({ subPosts: response.data });
+        .then((response) => {
+            this.setState({subPosts: response.data });
         })
-        .catch(function(error) {
+        .catch((error) => {
             console.log(error);
         });
     }
@@ -44,10 +44,10 @@ class Subreddit extends React.Component {
                userId,
                subRedditId
        })
-       .then(function(response) {
+       .then((response) => {
            console.log('subscribe subreddit inside response: ', response);
        })
-       .catch(function(error) {
+       .catch((error) => {
           console.log(error);
        }); 
     }
