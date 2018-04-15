@@ -58,7 +58,8 @@ class App extends React.Component {
         axios.get(`http://localhost:3000/api/subs`)
             .then((response) => {
                 this.setState({
-                    subreddits: response.data
+                    subreddits: response.data,
+                    view: 'feed'
                 });
             }
         );  
@@ -91,7 +92,7 @@ class App extends React.Component {
             return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} activeSub={this.state.activeSub} username={this.state.username}/>)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
-            return <CreateSubreddit />
+            return <CreateSubreddit changeView={this.changeView} fetchSubs={this.fetchSubs} />
         } else if (view === 'createPost' && this.state.loggedIn === true) {
             // view to create a new post
             if (this.state.activeSub === '') {

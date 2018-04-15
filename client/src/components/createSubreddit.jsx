@@ -27,7 +27,7 @@ class CreateSubreddit extends React.Component {
             url: 'http://localhost:3000/api/subreddits',
             method: 'POST',
             data: data,
-        })
+        }).done(() => this.props.fetchSubs());
     }
 
     render() {
