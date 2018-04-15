@@ -60,13 +60,13 @@ db.adjustLike = (postId, username, postOwner, type) => {  // type = 'increment' 
             if (type === data[0].type){ // check if type of like is same
                 return false;
             } else {
-                data[0].update({type: type}, (err) => { // change type, run findOneAndUpdate
-                    //update likes count on posts
+                var action = ['increment', 'decrement'].includes(data[0].type) ? 'none' : type;
+                data[0].update({type: action}, (err) => { // change type, run findOneAndUpdate
+                    // update likes count on posts
                     Posts.findOneAndUpdate({_id: ObjectId(postId)}, { $inc : {'likes' : type === 'increment' ? 1 : -1 }})
                     .exec((err) => {
                         if (err) return console.log('Error updating post likes', err);
-
-                        //now update likes count on the owner of the post
+                        // now update likes count on the owner of the post
                         User.findOneAndUpdate({ username: postOwner }, { $inc : {'userKarma' : type === 'increment' ? 1 : -1 }})
                         .exec((err) => {
                             err ? console.log('Error updating user karma', err) : null;
