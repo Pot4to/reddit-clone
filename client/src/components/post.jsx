@@ -37,11 +37,10 @@ class Post extends React.Component {
                     <div className="content">
                     <div className="header" onClick={(event) => this.props.changeActivePost(event, this.props.post) } >{this.props.post.title}</div>
                     <div className="meta">{this.props.post.username}</div>
-                    <div className="meta">Likes: {this.props.post.likes}
-                        <div className="ui large buttons">
-                            <button className="ui button" onClick={this.like}>Like</button>
-                            <button className="ui button" onClick={this.dislike}>Dislike</button>
-                        </div>
+                    <div className="float-left space-right">
+                        <i className="long arrow alternate up icon likes" onClick={this.like}></i>
+                        <div className="meta">{this.props.post.likes}</div>
+                        <i className="long arrow alternate down icon likes" onClick={this.dislike}></i>
                     </div>
                     <a className="meta">Comments</a>
                     </div>
