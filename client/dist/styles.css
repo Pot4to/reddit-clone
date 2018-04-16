@@ -158,3 +158,11 @@ table {
 .login {
 	margin-bottom: 15px;
 }
+
+/***************************
+           Posts
+****************************/
+
+.like-arrows {
+	cursor: pointer;
+}
