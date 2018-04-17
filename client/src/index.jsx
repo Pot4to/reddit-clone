@@ -153,6 +153,10 @@ class App extends React.Component {
             </div>
 
             <div>
+                <img className="img-size float-left" src={require('../dist/splashy.png')} alt="reddit whale"/>
+            </div>
+
+            <div>
                 <h1 className="float-left space-right pointer" onClick={(event) => this.changeView(event, 'feed')} >Reddit</h1>
                 <div className="clear-float"></div>
             </div>
