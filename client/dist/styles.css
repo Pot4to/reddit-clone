@@ -106,6 +106,10 @@ table {
 	float: bottom;
 }
 
+.pointer {
+	cursor: pointer;
+}
+
 /***************************
         Comment Box
 ****************************/
@@ -162,7 +166,3 @@ table {
 /***************************
            Posts
 ****************************/
-
-.like-arrows {
-	cursor: pointer;
-}

@@ -153,7 +153,7 @@ class App extends React.Component {
             </div>
 
             <div>
-                <h1 className="float-left space-right" onClick={(event) => this.changeView(event, 'feed')} >Reddit</h1>
+                <h1 className="float-left space-right pointer" onClick={(event) => this.changeView(event, 'feed')} >Reddit</h1>
                 <div className="clear-float"></div>
             </div>
 
