@@ -32,20 +32,16 @@ class Post extends React.Component {
 
     render() {
         return (
-            <div className="ui cards border-dotted">
-                <div className="card">
-                    <div className="content">
-                    <div className="header pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>{this.props.post.title}</div>
-                    <div className="meta">{this.props.post.username}</div>
-                    <div className="float-left space-right">
-                        <i className="long arrow alternate up icon likes pointer" onClick={this.like}></i>
-                        <div className="meta">{this.props.post.likes}</div>
-                        <i className="long arrow alternate down icon likes pointer" onClick={this.dislike}></i>
-                    </div>
-                    <a className="meta" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>Comments</a>
-                    </div>
+            <div className="border">
+                <div className="float-left">
+                    <i className="long arrow alternate up icon likes pointer" onClick={this.like}></i>
+                    <div className="meta">{this.props.post.likes}</div>
+                    <i className="long arrow alternate down icon likes pointer" onClick={this.dislike}></i>
                 </div>
-            </div>
+                <a className="header pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>{this.props.post.title}</a>
+                <div className="meta">posted by: {this.props.post.username}</div>
+                <p className="meta pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>Comments</p>
+            </div>    
         );
     }
 }

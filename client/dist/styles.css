@@ -106,8 +106,16 @@ table {
 	float: bottom;
 }
 
-.pointer {
+.pointer, .btn {
 	cursor: pointer;
+}
+
+.btn {
+	border: 1px solid grey;
+	color: #0957B8;
+	font-weight: 800;
+	background-color: #BBD9FF;
+	padding: 2px;
 }
 
 /***************************
@@ -170,4 +178,38 @@ table {
 .img-size {
 	width: 10%;
 	height: 10%;
+}
+
+/***************************
+           Posts
+****************************/
+
+.border {
+	border-bottom: 1px solid grey;
+	padding: 5px 0 10px 15px;
+}
+
+.posts-pos {
+	position: relative;
+	top: -70px;
+	width: 100%;
+}
+
+/***************************
+      Filter Buttons
+****************************/
+
+.filters {
+	position: relative;
+	top: -160px;
+	left: 125px;
+}
+
+/***************************
+        Login Form
+****************************/
+
+.login-pos {
+	position: relative;
+	top: -90px;
 }

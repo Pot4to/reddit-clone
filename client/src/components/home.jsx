@@ -42,11 +42,12 @@ class Home extends React.Component {
         return (
             <div>
                 <div>
-                    <div className="ui buttons">
-                        <button className="ui button" onClick={this.handleTopClick}>Top</button>
-                        <button className="ui button" onClick={this.handleNewClick}>New</button>
+                    <div className="filters">
+                        <a className="btn" onClick={this.handleTopClick}>Top</a>
+                        <a className="btn" onClick={this.handleNewClick}>New</a>
                     </div>
                 </div>
+                <div>
                 {this.state.posts.map((post) => {
                     return <Post 
                             username={this.props.username} 
@@ -57,6 +58,7 @@ class Home extends React.Component {
                             order={this.state.postOrder} 
                             />
                 })}
+                </div>
             </div>
         );
     }
