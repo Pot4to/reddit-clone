@@ -119,6 +119,11 @@ table {
 	padding: 2px;
 }
 
+.light-font {
+	font-size: 12px;
+	font-weight: 100;
+}
+
 /***************************
         Comment Box
 ****************************/
@@ -193,6 +198,14 @@ table {
 	position: relative;
 	top: -70px;
 	width: 100%;
+}
+
+.slight-right {
+	margin-left: 3px;
+}
+
+.pad-left {
+	padding-left: 30px;
 }
 
 /***************************

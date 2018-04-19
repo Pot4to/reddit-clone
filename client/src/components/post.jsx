@@ -35,12 +35,14 @@ class Post extends React.Component {
             <div className="border">
                 <div className="float-left">
                     <i className="long arrow alternate up icon likes pointer" onClick={this.like}></i>
-                    <div className="meta">{this.props.post.likes}</div>
+                    <div className="meta slight-right">{this.props.post.likes}</div>
                     <i className="long arrow alternate down icon likes pointer" onClick={this.dislike}></i>
                 </div>
-                <a className="header pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>{this.props.post.title}</a>
-                <div className="meta">posted by: {this.props.post.username}</div>
-                <p className="meta pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>Comments</p>
+                <div className="pad-left">
+                    <a className="header pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>{this.props.post.title}</a>
+                    <div className="meta"><span className="light-font">posted by:</span> {this.props.post.username}</div>
+                    <p className="meta pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>Comments</p>
+                </div>
             </div>    
         );
     }

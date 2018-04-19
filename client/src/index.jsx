@@ -67,7 +67,7 @@ class App extends React.Component {
 
     renderSubs() {
         return this.state.subreddits.map((sub) => {
-            return (<div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
+            return (<div className="ui orange basic button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
         }).slice(0, 7);
     }
 
