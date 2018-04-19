@@ -28,6 +28,10 @@ app.use(passport.session());
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use('/api', router);
 
+app.get('/favicon.ico', (req, res) => {
+    res.status(200).send();
+});
+
 const User = require('./db/schemas/user.js');
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
