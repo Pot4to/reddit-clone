@@ -17,6 +17,11 @@ var LocalStrategy = require('passport-local').Strategy;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.get('/favicon.ico', (req, res) => {
+    res.status(200).send();
+});
+
 app.use(cookieParser());
 app.use(session({
     secret: 'secret',
@@ -29,9 +34,6 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use('/api', router);
 
 
-app.get('/favicon.ico', (req, res) => {
-    res.status(200).send();
-});
 
 const User = require('./db/schemas/user.js');
 passport.use(new LocalStrategy(User.authenticate()));
