@@ -29,7 +29,7 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use('/api', router);
 
 
-app.get('/favicon', (req, res) => {
+app.get('/favicon.ico', (req, res) => {
     res.status(200).send();
 });
 

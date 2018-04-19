@@ -11,7 +11,7 @@ const Posts = require('./schemas/posts.js');
 const Subscription = require('./schemas/subscriptions.js');
 const Likes = require('./schemas/likes.js');
 
-const db = mongoose.connect(MONGODB_URI);
+const db = mongoose.connect(mongoUri);
 
 db.recursiveGetComments = (postId, cb) => {
 

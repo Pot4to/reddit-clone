@@ -11,7 +11,6 @@ import Login from './components/login.jsx';
 import LoggedIn from './components/loggedIn.jsx';
 import User from './components/user.jsx';
 
-
 import axios from 'axios';
 import $ from 'jquery';
 
