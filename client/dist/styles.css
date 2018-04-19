@@ -53,6 +53,7 @@ table {
 /***************************
         Custom Styles
 ****************************/
+
 .background {
 	background-color: white;
 }
@@ -135,10 +136,10 @@ table {
 	width: 80%;
 }
 
-
 /***************************
       Subreddit Topic
 ****************************/
+
 .subreddit-header {
 	font-size: 36px;
 	font-weight: bold;
@@ -185,7 +186,6 @@ table {
 ****************************/
 
 .border {
-	border-bottom: 1px solid grey;
 	padding: 5px 0 10px 15px;
 }
 
@@ -201,7 +201,7 @@ table {
 
 .filters {
 	position: relative;
-	top: -160px;
+	top: -90px;
 	left: 125px;
 }
 
@@ -211,5 +211,47 @@ table {
 
 .login-pos {
 	position: relative;
-	top: -90px;
+	top: -83px;
+}
+
+/***************************
+           Banner
+****************************/
+
+.orange-banner {
+	display: inline-block;
+	background-color: #FF8b60;
+	width: 63%;
+	height: 95px;
+	top: 7%;
+	right: 19%;
+	border-radius: 5px;
+}
+
+.position, .orange-banner {
+	position: absolute;
+}
+
+.big-font, .med-font {
+	position: relative;
+}
+
+.big-font {
+	font-weight: 800;
+	font-size: 22px;
+	left: 10%;
+	top: 10%;
+}
+
+.med-font {
+	font-weight: 600;
+	left: 10%;
+}
+
+.face {
+	position: relative;
+	height: 80px;
+	width: 80px;
+	top: -80px;
+	left: 450px;
 }
