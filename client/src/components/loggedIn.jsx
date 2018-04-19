@@ -25,7 +25,7 @@ class LoggedIn extends React.Component {
 
     render() {
         return (
-            <div className='loginform'>
+            <div className='loginform login-pos'>
             <div onClick={(event) => this.clickHandler(event, 'user')}>Logged in as Username: <br/>
             {this.props.username} </div> <br/>
             <div>Total Karma: {this.props.userKarma}</div>

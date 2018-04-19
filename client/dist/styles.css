@@ -53,6 +53,7 @@ table {
 /***************************
         Custom Styles
 ****************************/
+
 .background {
 	background-color: white;
 }
@@ -106,6 +107,23 @@ table {
 	float: bottom;
 }
 
+.pointer, .btn {
+	cursor: pointer;
+}
+
+.btn {
+	border: 1px solid grey;
+	color: #0957B8;
+	font-weight: 800;
+	background-color: #BBD9FF;
+	padding: 2px;
+}
+
+.light-font {
+	font-size: 12px;
+	font-weight: 100;
+}
+
 /***************************
         Comment Box
 ****************************/
@@ -123,10 +141,10 @@ table {
 	width: 80%;
 }
 
-
 /***************************
       Subreddit Topic
 ****************************/
+
 .subreddit-header {
 	font-size: 36px;
 	font-weight: bold;
@@ -157,4 +175,96 @@ table {
 
 .login {
 	margin-bottom: 15px;
+}
+
+/***************************
+           Logo
+****************************/
+
+.img-size {
+	width: 10%;
+	height: 10%;
+}
+
+/***************************
+           Posts
+****************************/
+
+.border {
+	padding: 5px 0 10px 15px;
+}
+
+.posts-pos {
+	position: relative;
+	top: -70px;
+	width: 100%;
+}
+
+.slight-right {
+	margin-left: 3px;
+}
+
+.pad-left {
+	padding-left: 30px;
+}
+
+/***************************
+      Filter Buttons
+****************************/
+
+.filters {
+	position: relative;
+	top: -90px;
+	left: 125px;
+}
+
+/***************************
+        Login Form
+****************************/
+
+.login-pos {
+	position: relative;
+	top: -83px;
+}
+
+/***************************
+           Banner
+****************************/
+
+.orange-banner {
+	display: inline-block;
+	background-color: #FF8b60;
+	width: 63%;
+	height: 95px;
+	top: 7%;
+	right: 19%;
+	border-radius: 5px;
+}
+
+.position, .orange-banner {
+	position: absolute;
+}
+
+.big-font, .med-font {
+	position: relative;
+}
+
+.big-font {
+	font-weight: 800;
+	font-size: 22px;
+	left: 10%;
+	top: 10%;
+}
+
+.med-font {
+	font-weight: 600;
+	left: 10%;
+}
+
+.face {
+	position: relative;
+	height: 80px;
+	width: 80px;
+	top: -80px;
+	left: 450px;
 }

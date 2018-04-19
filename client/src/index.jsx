@@ -67,7 +67,7 @@ class App extends React.Component {
 
     renderSubs() {
         return this.state.subreddits.map((sub) => {
-            return (<div className = "ui button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
+            return (<div className="ui orange basic button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
         }).slice(0, 7);
     }
 
@@ -153,15 +153,25 @@ class App extends React.Component {
             </div>
 
             <div>
-                <h1 className="float-left space-right" onClick={(event) => this.changeView(event, 'feed')} >Reddit</h1>
+                <img className="img-size float-left" src={require('../dist/splashy.png')} alt="reddit whale"/>
+            </div>
+
+            <div>
+                <h1 className="float-left space-right pointer" onClick={(event) => this.changeView(event, 'feed')} >Reddit</h1>
                 <div className="clear-float"></div>
+            </div>
+
+            <div className="orange-banner">
+                <p className="big-font">Welcome to Reddit</p>
+                <p className="med-font">login or sign up to start posting</p>
+                <img className="img-size float-left face" src={require('../dist/icon.png')} alt="reddit face"/>
             </div>
 
             <div className="login">
                 {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
             </div>
 
-            <div className='ui buttons border-dotted'>
+            <div className='ui buttons posts-pos'>
                 {this.renderView()}
             </div>
 

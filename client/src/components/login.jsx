@@ -59,14 +59,14 @@ class Login extends React.Component {
     
     render() {
         return (
-            <div className='loginform'>
+            <div className='loginform login-pos'>
                 <div>Username: </div>
                 <input name='username' onChange={ this.onChangeHandler.bind(this) }/>
                 <div>Password: </div>
                 <input name='password' type='password' onChange={ this.onChangeHandler.bind(this) }/>
                 <br/><br/>
-                <button className='login' onClick={this.onLoginHandler.bind(this)} >Login</button>
-                <button className='signup' onClick={this.signUpHandler.bind(this)} > Sign Up</button>
+                <button className='btn' onClick={this.onLoginHandler.bind(this)} >Login</button>
+                <button className='btn' onClick={this.signUpHandler.bind(this)} > Sign Up</button>
             </div>
         )
     }
