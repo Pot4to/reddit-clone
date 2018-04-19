@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'Axios';
+import axios from 'axios';
 
 class Post extends React.Component {
     constructor(props) {
