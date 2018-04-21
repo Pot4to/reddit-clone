@@ -90,8 +90,7 @@ app.get('/api/logout', function(req, res) {
 
 app.use('/api', router);
 
-
-let PORT = 3000;
+let port = process.env.PORT || 3000;
 
 app.listen(3000, function() {
     console.log(`Server is listening on ${PORT}`);
