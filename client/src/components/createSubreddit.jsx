@@ -24,7 +24,7 @@ class CreateSubreddit extends React.Component {
 
     sendRequest(data) {
         $.ajax({
-            url: 'http://localhost:3000/api/subreddits',
+            url: 'https://reddit-clone-hrla21.herokuapp.com/api/subreddits',
             method: 'POST',
             data: data,
         }).done(() => this.props.fetchSubs());

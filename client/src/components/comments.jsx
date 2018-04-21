@@ -34,7 +34,7 @@ class Comments extends React.Component {
     commentOnAComment(event, commentId) {
         event.preventDefault();
         $.ajax({
-            url: `http://localhost:3000/api/comments/${commentId}`,
+            url: `https://reddit-clone-hrla21.herokuapp.com/api/comments/${commentId}`,
             method: 'POST',
             data: {
                 username: `${this.state.username}`,
