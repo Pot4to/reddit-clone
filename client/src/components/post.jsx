@@ -13,7 +13,7 @@ class Post extends React.Component {
     }
 
     like() {
-        axios.post(`http://localhost:3000/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/increment`)
+        axios.post(`https://reddit-clone-hrla21.herokuapp.com/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/increment`)
              .then(() => {
                 var criteria = this.props.order === 'likes' ? 'likes' : 'time';
                 this.props.fetchPosts(criteria);
@@ -21,7 +21,7 @@ class Post extends React.Component {
     }
 
     dislike() {
-        axios.post(`http://localhost:3000/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/decrement`)
+        axios.post(`https://reddit-clone-hrla21.herokuapp.com/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/decrement`)
             .then(() => {
                 var criteria = this.props.order === 'likes' ? 'likes' : 'time';
                 this.props.fetchPosts(criteria);

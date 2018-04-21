@@ -17,7 +17,7 @@ class CreatePost extends React.Component {
     
     handleSubmit(e) {
         e.preventDefault();
-        axios.post(`http://localhost:3000/api/create-post/${this.props.username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit._id}`)
+        axios.post(`https://reddit-clone-hrla21.herokuapp.com/${this.props.username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit._id}`)
         .then((e) => {
             // change view prop in index.jsx state to home page view
             console.log('after the post call')

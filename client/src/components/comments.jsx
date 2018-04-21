@@ -24,7 +24,7 @@ class Comments extends React.Component {
 
     getAndRenderComments() {
         $.ajax({
-            url: `http://localhost:3000/api/comments/${this.props.post._id}`,
+            url: `https://reddit-clone-hrla21.herokuapp.com/api/comments/${this.props.post._id}`,
             method: 'GET'
         }).done((data) => {
             this.formatCommentObject(data);

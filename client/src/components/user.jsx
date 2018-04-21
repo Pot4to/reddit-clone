@@ -13,7 +13,7 @@ class User extends React.Component {
     componentWillMount() {
 
         //server call for all of users particular posts
-        axios.get(`http://localhost:3000/api/userPosts/${this.props.username}`)
+        axios.get(`https://reddit-clone-hrla21.herokuapp.com/api/userPosts/${this.props.username}`)
             .then((data) => {
                 this.setState({posts: data.data});
             });
