@@ -1,7 +1,7 @@
 // import Post from '../../client/src/components/post.js';
 
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://localhost/reddit';
+// const mongoUri = 'mongodb://localhost/reddit';
 const ObjectId = require('mongoose').Types.ObjectId;
 
 //Schemas
@@ -11,7 +11,8 @@ const Posts = require('./schemas/posts.js');
 const Subscription = require('./schemas/subscriptions.js');
 const Likes = require('./schemas/likes.js');
 
-const db = mongoose.connect(MONGODB_URI);
+//Connect to heroku mongodb or local db
+const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test");
 
 db.recursiveGetComments = (postId, cb) => {
 

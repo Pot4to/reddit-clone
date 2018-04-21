@@ -31,7 +31,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
-app.use('/api', router);
+// app.use('/api', router);
 
 
 
@@ -87,11 +87,9 @@ app.get('/api/logout', function(req, res) {
 })
 
 
-
 app.use('/api', router);
 
-let port = process.env.PORT || 3000;
-
-app.listen(3000, function() {
-    console.log(`Server is listening on ${PORT}`);
-})
+app.listen(process.env.PORT || 8080, function () {
+    var port = server.address().port;
+    console.log("App now running on port", port);
+});
