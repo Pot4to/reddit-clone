@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import $ from 'jquery';
+import SignUp from './signup.jsx';
 
 class Login extends React.Component {
     constructor(props) {

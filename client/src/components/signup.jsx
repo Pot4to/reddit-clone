@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -9,6 +10,7 @@ class SignUp extends React.Component {
             password: '',
             password2: ''
         }
+        this.signUpHandler.bind(this);
     }
     onChangeHandler(e) {
         this.setState({ [e.target.name]: e.target.value});
