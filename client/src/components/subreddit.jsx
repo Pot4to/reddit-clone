@@ -25,7 +25,7 @@ class Subreddit extends React.Component {
     }
 
     getSubPost(subredditId) {
-        axios.get(`api/subreddit/${subredditId}`, {
+        axios.get(`/api/subreddit/${subredditId}`, {
             params: {
                 id: subredditId //need to change to subredditId
             }
@@ -40,7 +40,7 @@ class Subreddit extends React.Component {
 
     subscribeUser(subRedditId, userId) {
        var appThis = this;
-       axios.post(`api/subscription/${userId}`, {
+       axios.post(`/api/subscription/${userId}`, {
                userId,
                subRedditId
        })

@@ -54,7 +54,7 @@ class App extends React.Component {
     }
 
     fetchSubs() {
-        axios.get(`https://reddit-clone-hrla21.herokuapp.com/api/subs`)
+        axios.get(`/api/subs`)
             .then((response) => {
                 this.setState({
                     subreddits: response.data,

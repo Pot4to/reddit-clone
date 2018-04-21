@@ -22,7 +22,7 @@ class Home extends React.Component {
     }
 
     fetchPosts(orderCriteria = 'likes') {  // takes 'likes' or 'time'
-        axios.get(`https://reddit-clone-hrla21.herokuapp.com/api/home/posts/${orderCriteria}`)
+        axios.get(`/api/home/posts/${orderCriteria}`)
              .then((response) => {
                  this.setState({ posts: response.data });
              });
