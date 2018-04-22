@@ -12,7 +12,7 @@
     "server-dev": "nodemon server/index.js",
     "insert-data": "node server/db/exampleData.js",
     "start": "node server/index.js",
-    "build": "webpack -d",
+    "build": "webpack -d"
   },
   "author": "Joseph Nguyen, Aaron Melendez, David Engelstad, Nick Vrdoljak",
   "license": "ISC",
