@@ -56,7 +56,7 @@ class App extends React.Component {
     fetchSubs() {
         axios.get(`/api/subs`)
             .then((response) => {
-                console.log(response.data);
+                console.log('subs have been fetched'. response);
                 this.setState({
                     subreddits: response.data,
                     view: 'feed'
@@ -66,7 +66,7 @@ class App extends React.Component {
     }
 
     renderSubs() {
-        console.log('Rendering subs', this.state);
+        console.log('Rendering subs, state is now', this.state);
         return this.state.subreddits.map((sub) => {
             return (<div className="ui orange basic button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
         }).slice(0, 7);
