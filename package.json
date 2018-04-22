@@ -13,7 +13,6 @@
     "insert-data": "node server/db/exampleData.js",
     "start": "node server/index.js",
     "build": "webpack -d",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "Joseph Nguyen, Aaron Melendez, David Engelstad, Nick Vrdoljak",
   "license": "ISC",
