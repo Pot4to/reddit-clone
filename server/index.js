@@ -26,9 +26,9 @@ app.use(allowCrossDomain);
 
 
 
-app.get('/favicon.ico', (req, res) => {
-    res.status(200).send();
-});
+// app.get('/favicon.ico', (req, res) => {
+//     res.status(200).send();
+// });
 
 
 app.use(cookieParser());
@@ -41,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// app.use(express.static(path.resolve(__dirname, '../client/dist')));
+app.use(express.static(path.resolve(__dirname, '../client/dist')));
 // app.use('/api', router);
 
 
