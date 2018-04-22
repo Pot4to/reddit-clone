@@ -12,15 +12,8 @@ const uuid = require('uuid');
 const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-app.get('/favicon.ico', (req, res) => {
-    res.status(200).send();
-});
 
 var allowCrossDomain = function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -30,6 +23,13 @@ var allowCrossDomain = function (req, res, next) {
 }
 
 app.use(allowCrossDomain);
+
+
+
+app.get('/favicon.ico', (req, res) => {
+    res.status(200).send();
+});
+
 
 app.use(cookieParser());
 app.use(session({
