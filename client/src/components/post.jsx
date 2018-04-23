@@ -44,6 +44,12 @@ class Post extends React.Component {
                     <div className="meta"><span className="light-font">posted by:</span> {this.props.post.username}</div>
                     <p className="meta pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>Comments</p>
                 </div>
+                <div>
+                    {this.props.post.imageurl ? <img src={this.props.post.imageurl} /> : null}
+                    {/* { if (this.props.post.imageurl !== "") {
+                        <img src={this.props.post.imageurl} />
+                    }} */}
+                </div>
             </div>    
         );
     }
