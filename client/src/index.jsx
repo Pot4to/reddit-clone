@@ -56,7 +56,7 @@ class App extends React.Component {
     fetchSubs() {
         axios.get(`/api/subs`)
             .then((response) => {
-                console.log('subs have been fetched'. response);
+                console.log('subs have been fetched', response);
                 this.setState({
                     subreddits: response.data,
                     view: 'feed'

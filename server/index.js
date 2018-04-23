@@ -42,8 +42,8 @@ app.use(passport.session());
 
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
-// app.use('/api', router);
 
+app.use('/api', router);
 
 
 const User = require('./db/schemas/user.js');
