@@ -7,26 +7,34 @@ class Post extends React.Component {
         this.state = {
 
         };
-        console.log('post.jsx props', this.props);
-
+        
         this.like = this.like.bind(this);
         this.dislike = this.dislike.bind(this);
     }
 
     like() {
-        axios.post(`/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/increment`)
-             .then(() => {
-                var criteria = this.props.order === 'likes' ? 'likes' : 'time';
-                this.props.fetchPosts(criteria);
-             });
+
+        if (this.props.username === '') {
+            console.log('error, cannot vote without logging in');
+        } else {
+            axios.post(`/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/increment`)
+                .then(() => {
+                    var criteria = this.props.order === 'likes' ? 'likes' : 'time';
+                    this.props.fetchPosts(criteria);
+                });
+        }
     }
 
     dislike() {
-        axios.post(`/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/decrement`)
-            .then(() => {
-                var criteria = this.props.order === 'likes' ? 'likes' : 'time';
-                this.props.fetchPosts(criteria);
-            });
+        if (this.props.username === '') {
+            console.log('error, cannot vote without logging in');
+        } else {
+            axios.post(`/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/decrement`)
+                .then(() => {
+                    var criteria = this.props.order === 'likes' ? 'likes' : 'time';
+                    this.props.fetchPosts(criteria);
+                });
+        }
              
     }
 
