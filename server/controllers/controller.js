@@ -43,7 +43,8 @@ const postOnAComment = (req, res) => {
 };
 
 const postSubreddit = (req, res) => {
-    db.postSubreddit(req.body.name, req.body.description, req.body.image, (err) => {
+    const {name, description, url} = req.params;
+    db.postSubreddit(name, description, url, (err) => {
         if (err) return res.status(404).send();
         res.status(200).send();
     })
@@ -51,7 +52,6 @@ const postSubreddit = (req, res) => {
 
 
 const getSubredditPost = (req, res) => {
-    console.log('req body inside controller: ', req.query.id);
     db.getSubredditPosts(req.query.id, function(error, data) {
       if (error) {
         res.statusCode = 404;
@@ -64,7 +64,6 @@ const getSubredditPost = (req, res) => {
 }
 
 const subs = (req, res) => {
-    console.log('getting subs');
     db.getSubreddits((err, data) => {
         if (err) return res.status(400).send();
         res.status(200).send(data);
@@ -72,7 +71,7 @@ const subs = (req, res) => {
 }
 
 const addPost = (req, res) => {
-    console.log('adding post')
+    console.log('adding the post');
     const {username, title, url, text, subreddit} = req.params;
     db.savePost({
         username: username,
@@ -88,7 +87,6 @@ const addPost = (req, res) => {
 };
 
 const subscribe = (req, res) => {
-    console.log('req body inside subscribe controller: ', req.body.subRedditId, req.body.userId);
     db.subscribeUser(req.body.subRedditId, req.body.userId, function(error) {
       if (error) {
         res.statusCode = 404;

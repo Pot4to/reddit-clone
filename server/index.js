@@ -10,24 +10,18 @@ const mongoose = require('mongoose');
 const FileStore = require('session-file-store')(session);
 const uuid = require('uuid');
 const passport = require('passport');
-const proxy = require('http-proxy-middleware');
+
 var LocalStrategy = require('passport-local').Strategy;
-
-proxy.createProxyServer({
-    target: 'https://reddit-clone-hrla21.herokuapp.com',
-    toProxy: true, 
-    changeOrigin: true, 
-    xfwd: true
-})
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE");
+    next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/api', router);
 
@@ -45,7 +39,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
-
 
 const User = require('./db/schemas/user.js');
 passport.use(new LocalStrategy(User.authenticate()));
@@ -82,31 +75,28 @@ app.post('/api/user/signup', (req, res) => {
 
 
 app.get('/api/user/loggedIn', function(req, res) {
-    console.log('In Get LOGGEDIN Success', req.session.passport);
     res.send(req.session.passport);
 })
 
 app.post('/api/user/login', passport.authenticate('local'), function(req, res) {
-    console.log('In Post Login Success', req.session);
     res.send(req.session);
 })
 
 app.get('/api/logout', function(req, res) {
-    console.log('BEFORE LOGOUT ', req.session.passport);
     req.logout();
-    console.log('AFTER LOGOUT ', req.session.passport);
     res.send('Success');
 })
 
 
 app.use('/api', router);
 
-// app.listen(process.env.PORT || 8080, function () {
-//     // var port = app.address().port;
-//     console.log("App now running");
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+})
 
-app.listen(8080, function () {
+let port = process.env.PORT || 3000;
+
+app.listen(port, function () {
     // var port = app.address().port;
-    console.log("App now running");
+    console.log(`App now running on port ${port}`);
 });

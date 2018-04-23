@@ -12,7 +12,6 @@ import LoggedIn from './components/loggedIn.jsx';
 import User from './components/user.jsx';
 
 import axios from 'axios';
-import $ from 'jquery';
 
 class App extends React.Component {
     constructor(props) {

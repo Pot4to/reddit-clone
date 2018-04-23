@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "heroku-postbuild": "./node_modules/webpack/bin/webpack.js -p --config ./webpack.config.js --progress",
+    "postinstall": "./node_modules/webpack/bin/webpack.js -p --config ./webpack.config.js --progress",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "insert-data": "node server/db/exampleData.js",
@@ -40,6 +40,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.0",
+    "proxy-middleware": "^0.15.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.7",

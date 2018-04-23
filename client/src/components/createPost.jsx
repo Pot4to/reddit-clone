@@ -17,7 +17,8 @@ class CreatePost extends React.Component {
     
     handleSubmit(e) {
         e.preventDefault();
-        axios.post(`/create-post/${this.props.username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit._id}`)
+        console.log('sending a post');
+        axios.post(`/api/create-post/${this.props.username}/${this.state.title}/${this.state.url}/${this.state.text}/${this.props.subreddit._id}`)
         .then((e) => {
             // change view prop in index.jsx state to home page view
             console.log('after the post call')
