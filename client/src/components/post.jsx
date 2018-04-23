@@ -45,7 +45,14 @@ class Post extends React.Component {
                     <p className="meta pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>Comments</p>
                 </div>
                 <div>
-                    {this.props.post.imageurl ? <img src={this.props.post.imageurl} /> : null}
+                    {this.props.currentView === 'comments' ? 
+                    <div>
+                        <div>{this.props.post.text}</div> 
+                        <div>
+                        {this.props.post.imageurl !== 'none' ? <img src={this.props.post.imageurl} /> : null}
+                        </div>
+                    </div> : null}
+                    
                 </div>
             </div>    
         );

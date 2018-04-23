@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema({
     url: String,                        //For post, null for comment
     likes: {type: Number, default: 0},  //Linked to the likes table
     subReddit: String,                  //ID of subreddit
-    imageurl: { type: String, default: '' }
+    imageurl: { type: String, default: 'none' }
 },
     {
         timestamps: true

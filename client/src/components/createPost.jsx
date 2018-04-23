@@ -8,7 +8,7 @@ class CreatePost extends React.Component {
             title: '',
             url: '',
             text: '',
-            imageurl: ''
+            imageurl: 'none'
         }
 
         this.handleChange = this.handleChange.bind(this);
