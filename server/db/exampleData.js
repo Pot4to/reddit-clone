@@ -6,7 +6,7 @@ const Users = require('./schemas/user.js');
 
 const likes = [
   {
-    _id: ObjectId(1),
+    identification: 42,
     username: 'nick123',
     postId: 1,
     type: 'increment'

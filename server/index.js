@@ -10,8 +10,9 @@ const mongoose = require('mongoose');
 const FileStore = require('session-file-store')(session);
 const uuid = require('uuid');
 const passport = require('passport');
-
 var LocalStrategy = require('passport-local').Strategy;
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -87,6 +88,27 @@ app.get('/api/logout', function(req, res) {
     res.send('Success');
 })
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(fileUpload());
+app.use('/public', express.static(__dirname + '/public'));
+
+
+app.post('/upload', (req, res, next) => {
+  console.log(req);
+  let imageFile = req.files.file;
+
+  imageFile.mv(`${__dirname}/public/${req.body.filename}.jpg`, function(err) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    res.json({file: `public/${req.body.filename}.jpg`});
+  });
+
+})
 
 app.use('/api', router);
 

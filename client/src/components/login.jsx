@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 
 class Login extends React.Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class Login extends React.Component {
               var user = response.data.passport.user
               console.log('USER ', user);
               this.props.logIn(user);
+
           })
           .catch( err => {
               console.log('Server errored out with ', err);
