@@ -22,7 +22,6 @@ class Home extends React.Component {
     }
 
     fetchPosts(orderCriteria = 'likes') {  // takes 'likes' or 'time'
-    console.log('fetching posts');
         axios.get(`/api/home/posts/${orderCriteria}`)
              .then((response) => {
                  this.setState({ posts: response.data });

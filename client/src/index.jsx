@@ -30,6 +30,7 @@ class App extends React.Component {
     this.changeActivePost = this.changeActivePost.bind(this);
     this.changeView = this.changeView.bind(this);
     this.renderSubs = this.renderSubs.bind(this);
+    this.fetchPosts = this.fetchPosts.bind(this);
     }
 
     componentDidMount() {
@@ -82,6 +83,15 @@ class App extends React.Component {
         this.setState({view: view});
     }
 
+    fetchPosts() {
+        console.log('fetching posts', this.state);
+        axios.get(`/api/post/${this.state.activePost._id}`)
+            .then((response) => {
+                console.log('fetch post response', response.data)
+                this.setState({ activePost: response.data[0] });
+            });
+    }
+
     renderView() {
         const { view } = this.state;
 
@@ -101,15 +111,11 @@ class App extends React.Component {
             } else {
                 return <CreatePost changeView={this.changeView} subreddit={this.state.activeSub === '' ? 'main' : this.state.activeSub} username={this.state.username} />
             }
-        } else if (view === 'logIn') {
-            //view to log in
-        } else if (view === 'signUp') {
-            // view to sign up
         } else if (view === 'comments') {
             // view to display comments on a post
             return (
             <div>
-                <Post username={this.state.username} post={this.state.activePost} changeActivePost={this.changeActivePost} currentView={this.state.view}/>
+                <Post username={this.state.username} fetchPosts={this.fetchPosts} post={this.state.activePost} changeActivePost={this.changeActivePost} currentView={this.state.view}/>
                 <div>
                 <Comments username={this.state.username} post={this.state.activePost}/></div>
             </div>
