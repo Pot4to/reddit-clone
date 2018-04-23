@@ -46,9 +46,6 @@ class Post extends React.Component {
                 </div>
                 <div>
                     {this.props.post.imageurl ? <img src={this.props.post.imageurl} /> : null}
-                    {/* { if (this.props.post.imageurl !== "") {
-                        <img src={this.props.post.imageurl} />
-                    }} */}
                 </div>
             </div>    
         );
