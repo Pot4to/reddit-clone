@@ -10,6 +10,7 @@ import Post from './components/post.jsx';
 import Login from './components/login.jsx';
 import LoggedIn from './components/loggedIn.jsx';
 import User from './components/user.jsx';
+import AllSubreddits from './components/allSubreddits.jsx';
 
 import axios from 'axios';
 
@@ -30,6 +31,7 @@ class App extends React.Component {
     this.changeActivePost = this.changeActivePost.bind(this);
     this.changeView = this.changeView.bind(this);
     this.renderSubs = this.renderSubs.bind(this);
+    this.changeSub = this.changeSub.bind(this);
     }
 
     componentDidMount() {
@@ -82,12 +84,16 @@ class App extends React.Component {
         this.setState({view: view});
     }
 
+    changeSub(sub) {
+        this.setState({ activeSub: sub });
+    }
+
     renderView() {
         const { view } = this.state;
 
         if (view === 'feed') {
             // home feed with all the top posts
-            return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
+            return (<Home username={this.state.username} changeActivePost={this.changeActivePost} changeView={this.changeView} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
             return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} changeActivePost={this.changeActivePost} activeSub={this.state.activeSub} username={this.state.username}/>)
@@ -118,6 +124,8 @@ class App extends React.Component {
             this.setState({view: 'logIn'});
         } else if (view === 'user') {
             return <User changeActivePost={this.changeActivePost} username={this.state.username} />
+        } else if (view === 'allSubreddits') {
+            return <AllSubreddits changeSub={this.changeSub} changeView={this.changeView} subreddits={this.state.subreddits}/>
         }
     }
 
@@ -144,7 +152,7 @@ class App extends React.Component {
             <div>
                 {/* THIS IS A TESTING AREA, use this area to try out your features */}
             </div>    
-
+            
             <div>
                 <div className="ui grid subs">
                     <div className="eight column row">

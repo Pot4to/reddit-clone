@@ -124,6 +124,10 @@ table {
 	font-weight: 100;
 }
 
+.left-center {
+	margin: 0 43%;
+}
+
 /***************************
         Comment Box
 ****************************/
@@ -214,8 +218,14 @@ table {
 
 .filters {
 	position: relative;
-	top: -90px;
+	top: -110px;
 	left: 125px;
+}
+
+.all-subreddits {
+	position: relative;
+	top: -60px;
+	left: 120px;
 }
 
 /***************************

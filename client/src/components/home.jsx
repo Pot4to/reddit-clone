@@ -15,7 +15,7 @@ class Home extends React.Component {
         this.fetchPosts = this.fetchPosts.bind(this);
         this.handleNewClick = this.handleNewClick.bind(this);
         this.handleTopClick = this.handleTopClick.bind(this);
-
+        this.showAllSubreddits = this.showAllSubreddits.bind(this);
         console.log('home.jsx props', this.props);
     }
 
@@ -41,10 +41,15 @@ class Home extends React.Component {
         this.setState({ postOrder: 'time' });
     }
 
+    showAllSubreddits() {
+        this.props.changeView(null, 'allSubreddits');
+    }
+
     render() {
         return (
             <div>
                 <div>
+                    <a className="btn all-subreddits" onClick={this.showAllSubreddits}>Subreddits</a>
                     <div className="filters">
                         <a className="btn" onClick={this.handleTopClick}>Top</a>
                         <a className="btn" onClick={this.handleNewClick}>New</a>

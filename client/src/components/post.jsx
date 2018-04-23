@@ -40,7 +40,7 @@ class Post extends React.Component {
                     <i className="long arrow alternate down icon likes pointer" onClick={this.dislike}></i>
                 </div>
                 <div className="pad-left">
-                    <a className="header pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>{this.props.post.title}</a>
+                    <a className="header pointer" href={`http://${this.props.post.url}`} target="_blank">{this.props.post.title}</a>
                     <div className="meta"><span className="light-font">posted by:</span> {this.props.post.username}</div>
                     <p className="meta pointer" onClick={(event) => this.props.changeActivePost(event, this.props.post)}>Comments</p>
                 </div>
