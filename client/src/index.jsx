@@ -182,12 +182,12 @@ class App extends React.Component {
                 <div className="clear-float"></div>
             </div>
 
-            <div className="orange-banner">
+            {this.state.loggedIn === false ? <div className="orange-banner">
                 <p className="big-font">Welcome to Reddit</p>
-                {this.state.loggedIn === false ? <p className="med-font">login or sign up to start posting</p> : null}
+                <p className="med-font">login or sign up to start posting</p>
                 
                 <img className="img-size float-left face" src={require('../dist/icon.png')} alt="reddit face"/>
-            </div>
+            </div> : <div></div>}
 
             <div className="login">
                 {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
