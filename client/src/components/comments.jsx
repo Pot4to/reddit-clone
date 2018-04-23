@@ -23,6 +23,21 @@ class Comments extends React.Component {
         this.getAndRenderComments();
     }
 
+    like(comment) {
+        axios.post(`/api/post/vote/${comment._id}/${this.props.username}/${comment.username}/increment`)
+            .then(() => {
+                this.getAndRenderComments();
+            });
+    }
+
+    dislike(comment) {
+        axios.post(`/api/post/vote/${comment._id}/${this.props.username}/${comment.username}/decrement`)
+            .then(() => {
+                this.getAndRenderComments();
+            });
+
+    }
+
     getAndRenderComments() {
         axios.get(`/api/comments/${this.props.post._id}`).then((response) => {
             this.formatCommentObject(response.data);
@@ -80,8 +95,8 @@ class Comments extends React.Component {
 
                                 <div className="ui small buttons">
 
-                                    <button className="ui button" onClick={this.like}>Like</button>
-                                    <button className="ui button" onClick={this.dislike}>Dislike</button>
+                                    <button className="ui button" onClick={() => this.like(comment)}>Like</button>
+                                    <button className="ui button" onClick={() => this.dislike(comment)}>Dislike</button>
                                 </div>
                             </div>
                             

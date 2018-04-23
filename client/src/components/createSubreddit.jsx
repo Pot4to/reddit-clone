@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import axios from 'axios';
 
 class CreateSubreddit extends React.Component {
     constructor(props) {
@@ -14,20 +15,12 @@ class CreateSubreddit extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.sendRequest({
-            name: this.state.name,
-            description: this.state.description,
-            image: this.state.image
-        })
-
+        this.sendRequest();
     }
 
-    sendRequest(data) {
-        $.ajax({
-            url: 'https://reddit-clone-hrla21.herokuapp.com/api/subreddits',
-            method: 'POST',
-            data: data,
-        }).done(() => this.props.fetchSubs());
+    sendRequest() {
+        axios.post(`/api/subreddits/${this.state.name}/${this.state.description}/${this.state.image}`)
+        .then(() => this.props.fetchSubs());
     }
 
     render() {

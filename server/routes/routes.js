@@ -18,7 +18,7 @@ router.get('/comments/:postId', (req, res) => controller.getCommentsForPost(req,
 router.post('/comments/:parent/:username/:text', (req, res) => controller.postOnAComment(req, res));
 
 // handle POST for creating a new subreddit
-router.post('/subreddits', (req, res) => controller.postSubreddit(req, res));
+router.post('/subreddits/:name/:description/:url', (req, res) => controller.postSubreddit(req, res));
 
 // handle GET for getting all post under a subreddit
 router.get('/subreddit/*', (req, res) => controller.getSubredditPost(req, res));

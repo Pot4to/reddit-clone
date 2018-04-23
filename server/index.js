@@ -11,17 +11,7 @@ const FileStore = require('session-file-store')(session);
 const uuid = require('uuid');
 const passport = require('passport');
 
-// const proxy = require('http-proxy');
-
 var LocalStrategy = require('passport-local').Strategy;
-
-// proxy.createProxyServer({
-//     target: 'https://reddit-clone-hrla21.herokuapp.com',
-//     toProxy: true, 
-//     changeOrigin: true, 
-//     xfwd: true
-// });
-console.log('arriving in the server');
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -32,8 +22,6 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-
 
 app.use('/api', router);
 

@@ -43,7 +43,8 @@ const postOnAComment = (req, res) => {
 };
 
 const postSubreddit = (req, res) => {
-    db.postSubreddit(req.body.name, req.body.description, req.body.image, (err) => {
+    const {name, description, url} = req.params;
+    db.postSubreddit(name, description, url, (err) => {
         if (err) return res.status(404).send();
         res.status(200).send();
     })
@@ -70,6 +71,7 @@ const subs = (req, res) => {
 }
 
 const addPost = (req, res) => {
+    console.log('adding the post');
     const {username, title, url, text, subreddit} = req.params;
     db.savePost({
         username: username,
