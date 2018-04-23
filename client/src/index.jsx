@@ -115,7 +115,13 @@ class App extends React.Component {
             // view to display comments on a post
             return (
             <div>
-                <Post username={this.state.username} fetchPosts={this.fetchPosts} post={this.state.activePost} changeActivePost={this.changeActivePost} currentView={this.state.view}/>
+                <Post 
+                    username={this.state.username} 
+                    fetchPosts={this.fetchPosts} 
+                    post={this.state.activePost} 
+                    changeActivePost={this.changeActivePost} 
+                    currentView={this.state.view}
+                />
                 <div>
                 <Comments username={this.state.username} post={this.state.activePost}/></div>
             </div>

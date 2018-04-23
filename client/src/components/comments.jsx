@@ -46,10 +46,14 @@ class Comments extends React.Component {
 
     commentOnAComment(event, commentId) {
         event.preventDefault();
-        axios.post(`/api/comments/${commentId}/${this.state.username}/${this.state.newCommentText}`)
-            .then((response) => {
-            this.setState({activeComment: '0'}, () => this.getAndRenderComments());
-        })
+        if (this.state.username === '') {
+            console.log('cannot comment without logging in')
+        } else {
+            axios.post(`/api/comments/${commentId}/${this.state.username}/${this.state.newCommentText}`)
+                .then((response) => {
+                this.setState({activeComment: '0'}, () => this.getAndRenderComments());
+            })
+        }
     }
 
     formatCommentObject(comments) {
