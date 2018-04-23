@@ -15,8 +15,6 @@ class Home extends React.Component {
         this.fetchPosts = this.fetchPosts.bind(this);
         this.handleNewClick = this.handleNewClick.bind(this);
         this.handleTopClick = this.handleTopClick.bind(this);
-
-        console.log('home.jsx props', this.props);
     }
 
     componentWillMount() {
@@ -24,9 +22,9 @@ class Home extends React.Component {
     }
 
     fetchPosts(orderCriteria = 'likes') {  // takes 'likes' or 'time'
+    console.log('fetching posts');
         axios.get(`/api/home/posts/${orderCriteria}`)
              .then((response) => {
-                 console.log('posts fetched, response is: ', response);
                  this.setState({ posts: response.data });
              });
     }
