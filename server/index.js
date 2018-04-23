@@ -10,7 +10,9 @@ const mongoose = require('mongoose');
 const FileStore = require('session-file-store')(session);
 const uuid = require('uuid');
 const passport = require('passport');
-const proxy = require('http-proxy-middleware');
+
+const proxy = require('http-proxy');
+
 var LocalStrategy = require('passport-local').Strategy;
 
 proxy.createProxyServer({
@@ -18,7 +20,7 @@ proxy.createProxyServer({
     toProxy: true, 
     changeOrigin: true, 
     xfwd: true
-})
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -108,5 +110,5 @@ app.use('/api', router);
 
 app.listen(8080, function () {
     // var port = app.address().port;
-    console.log("App now running");
+    console.log("App now running on port 8080");
 });
