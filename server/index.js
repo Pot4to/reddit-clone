@@ -11,16 +11,16 @@ const FileStore = require('session-file-store')(session);
 const uuid = require('uuid');
 const passport = require('passport');
 
-// const proxy = require('http-proxy');
+const proxy = require('http-proxy');
 
 var LocalStrategy = require('passport-local').Strategy;
 
-// proxy.createProxyServer({
-//     target: 'https://reddit-clone-hrla21.herokuapp.com',
-//     toProxy: true, 
-//     changeOrigin: true, 
-//     xfwd: true
-// });
+proxy.createProxyServer({
+    target: 'https://reddit-clone-hrla21.herokuapp.com',
+    toProxy: true, 
+    changeOrigin: true, 
+    xfwd: true
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -49,11 +49,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
-
-app.get('/', (req, res) => {
-    console.log('requesting root page');
-    res.status(200).send();
-})
 
 const User = require('./db/schemas/user.js');
 passport.use(new LocalStrategy(User.authenticate()));
@@ -90,19 +85,15 @@ app.post('/api/user/signup', (req, res) => {
 
 
 app.get('/api/user/loggedIn', function(req, res) {
-    console.log('In Get LOGGEDIN Success', req.session.passport);
     res.send(req.session.passport);
 })
 
 app.post('/api/user/login', passport.authenticate('local'), function(req, res) {
-    console.log('In Post Login Success', req.session);
     res.send(req.session);
 })
 
 app.get('/api/logout', function(req, res) {
-    console.log('BEFORE LOGOUT ', req.session.passport);
     req.logout();
-    console.log('AFTER LOGOUT ', req.session.passport);
     res.send('Success');
 })
 
@@ -116,5 +107,5 @@ app.use('/api', router);
 
 app.listen(3000, function () {
     // var port = app.address().port;
-    console.log("App now running on port 8080");
+    console.log("App now running on port 3000");
 });

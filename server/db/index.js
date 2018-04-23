@@ -157,7 +157,6 @@ db.subscribeUser = (subredditId, userId, cb) => {
 db.getSubreddits = (cb) => {
     Subreddit.find({}, (err, data) => {
         if (err) return cb(err);
-        console.log('got the stuff', data);
         cb(null, data);
     })
 }
