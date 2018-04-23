@@ -15,11 +15,8 @@ class Home extends React.Component {
         this.fetchPosts = this.fetchPosts.bind(this);
         this.handleNewClick = this.handleNewClick.bind(this);
         this.handleTopClick = this.handleTopClick.bind(this);
-<<<<<<< HEAD
-=======
         this.showAllSubreddits = this.showAllSubreddits.bind(this);
         console.log('home.jsx props', this.props);
->>>>>>> User can now view list of all subreddits
     }
 
     componentWillMount() {
