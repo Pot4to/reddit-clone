@@ -24,7 +24,7 @@ router.post('/subreddits/:name/:description/:url', (req, res) => controller.post
 router.get('/subreddit/*', (req, res) => controller.getSubredditPost(req, res));
 
 // handle POST for Create Post
-router.post('/create-post/:username/:title/:url/:text/:subreddit', (req, res) => controller.addPost(req, res));
+router.post('/create-post/:username/:title/:url/:text/:subreddit/:imageurl', (req, res) => controller.addPost(req, res));
 
 // handle GET for the list of subreddits
 router.get('/subs', (req, res) => controller.subs(req, res));
