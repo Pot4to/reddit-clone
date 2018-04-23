@@ -87,7 +87,7 @@ class App extends React.Component {
 
         if (view === 'feed') {
             // home feed with all the top posts
-            return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
+            return (<Home username={this.state.username} changeActivePost={this.changeActivePost} currentView={this.state.view}/>)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
             return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} changeActivePost={this.changeActivePost} activeSub={this.state.activeSub} username={this.state.username}/>)
@@ -109,7 +109,7 @@ class App extends React.Component {
             // view to display comments on a post
             return (
             <div>
-                <Post username={this.state.username} post={this.state.activePost} changeActivePost={this.changeActivePost}/>
+                <Post username={this.state.username} post={this.state.activePost} changeActivePost={this.changeActivePost} currentView={this.state.view}/>
                 <div>
                 <Comments username={this.state.username} post={this.state.activePost}/></div>
             </div>
@@ -164,7 +164,8 @@ class App extends React.Component {
 
             <div className="orange-banner">
                 <p className="big-font">Welcome to Reddit</p>
-                <p className="med-font">login or sign up to start posting</p>
+                {this.state.loggedIn === false ? <p className="med-font">login or sign up to start posting</p> : null}
+                
                 <img className="img-size float-left face" src={require('../dist/icon.png')} alt="reddit face"/>
             </div>
 
