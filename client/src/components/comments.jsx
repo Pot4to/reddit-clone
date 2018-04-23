@@ -9,7 +9,7 @@ class Comments extends React.Component {
         this.state =  {
             comments: [],
             newCommentText: '',
-            username: 'nickv',
+            username: this.props.username,
             activeComment: '0'
         }
         this.renderComments = this.renderComments.bind(this);
