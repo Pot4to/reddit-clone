@@ -21,6 +21,7 @@ var LocalStrategy = require('passport-local').Strategy;
 //     changeOrigin: true, 
 //     xfwd: true
 // });
+
 console.log('arriving in the server');
 
 app.use((req, res, next) => {
