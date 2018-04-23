@@ -7,6 +7,7 @@ class Post extends React.Component {
         this.state = {
 
         };
+        console.log('post.jsx props', this.props);
 
         this.like = this.like.bind(this);
         this.dislike = this.dislike.bind(this);

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const mongoUri = 'mongodb://localhost/reddit';
+const mongoUri = 'mongodb://localhost/reddit';
 const ObjectId = require('mongoose').Types.ObjectId;
 
 //Schemas
@@ -11,7 +11,7 @@ const Likes = require('./schemas/likes.js');
 
 //Connect to heroku mongodb or local db
 // const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test");
-const db = mongoose.connect("mongodb://localhost:27017/test");
+const db = mongoose.connect(mongoUri);
 
 db.recursiveGetComments = (postId, cb) => {
 
@@ -136,7 +136,6 @@ db.savePost = (post, cb) => {
 
 
 db.getSubredditPosts = (subredditID, cb) => {
-    console.log('inside db index', subredditID)
     Posts
       .find({ subReddit: subredditID}, (err, posts) => {
           return err ? cb(err, null) : cb(null, posts);
@@ -158,7 +157,6 @@ db.subscribeUser = (subredditId, userId, cb) => {
 };
 
 db.getSubreddits = (cb) => {
-    console.log('getting subreddits from db: ', db, 'subreddit schema: ', Subreddit);
     Subreddit.find({}, (err, data) => {
         if (err) return cb(err);
         console.log('got the stuff', data);
@@ -167,10 +165,8 @@ db.getSubreddits = (cb) => {
 }
 
 db.getUserPosts = (username, cb) => {
-    console.log('getting user posts');
     Posts.find({username: username}).exec((err, data) => {
         if (err) cb(err);
-        console.log(data);
         cb(null, data);
     });
 }

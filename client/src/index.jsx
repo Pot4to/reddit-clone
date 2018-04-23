@@ -73,6 +73,7 @@ class App extends React.Component {
     }
 
     changeActivePost(event, post) {
+        console.log('chnaging active post,', event, post);
         if (event) event.preventDefault();
         this.setState({activePost: post, view: 'comments'});
     }
@@ -90,7 +91,7 @@ class App extends React.Component {
             return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
-            return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} activeSub={this.state.activeSub} username={this.state.username}/>)
+            return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} changeActivePost={this.changeActivePost} activeSub={this.state.activeSub} username={this.state.username}/>)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
             return <CreateSubreddit changeView={this.changeView} fetchSubs={this.fetchSubs} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import axios from 'axios';
 
 class Comments extends React.Component {
     constructor(props) {
@@ -23,26 +24,16 @@ class Comments extends React.Component {
     }
 
     getAndRenderComments() {
-        $.ajax({
-            url: `https://reddit-clone-hrla21.herokuapp.com/api/comments/${this.props.post._id}`,
-            method: 'GET'
-        }).done((data) => {
-            this.formatCommentObject(data);
+        axios.get(`/api/comments/${this.props.post._id}`).then((response) => {
+            this.formatCommentObject(response.data);
         });
     }
 
     commentOnAComment(event, commentId) {
         event.preventDefault();
-        $.ajax({
-            url: `https://reddit-clone-hrla21.herokuapp.com/api/comments/${commentId}`,
-            method: 'POST',
-            data: {
-                username: `${this.state.username}`,
-                text: `${this.state.newCommentText}`,
-                parent: `${commentId}`
-            }
-        }).done((response) => {
-            this.setState({activeComment: '0', }, () => this.getAndRenderComments());
+        axios.post(`/api/comments/${commentId}/${this.state.username}/${this.state.newCommentText}`)
+            .then((response) => {
+            this.setState({activeComment: '0'}, () => this.getAndRenderComments());
         })
     }
 

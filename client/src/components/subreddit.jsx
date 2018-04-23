@@ -67,7 +67,7 @@ class Subreddit extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.subPosts.map(post => <Post key={Math.random()} post={post} />)}
+                    {this.state.subPosts.map(post => <Post key={Math.random()} changeActivePost={this.props.changeActivePost} post={post} />)}
                 </div>
             </div>
         );

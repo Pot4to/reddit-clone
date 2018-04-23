@@ -15,6 +15,8 @@ class Home extends React.Component {
         this.fetchPosts = this.fetchPosts.bind(this);
         this.handleNewClick = this.handleNewClick.bind(this);
         this.handleTopClick = this.handleTopClick.bind(this);
+
+        console.log('home.jsx props', this.props);
     }
 
     componentWillMount() {
@@ -51,12 +53,12 @@ class Home extends React.Component {
                 <div>
                 {this.state.posts.map((post) => {
                     return <Post 
-                            username={this.props.username} 
-                            key={post._id} 
-                            post={post} 
-                            changeActivePost={this.props.changeActivePost} 
-                            fetchPosts={this.fetchPosts}
-                            order={this.state.postOrder} 
+                            username = {this.props.username} 
+                            key = {post._id} 
+                            post = {post} 
+                            changeActivePost = {this.props.changeActivePost} 
+                            fetchPosts = {this.fetchPosts}
+                            order = {this.state.postOrder} 
                             />
                 })}
                 </div>

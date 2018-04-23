@@ -21,21 +21,22 @@ const getPosts = (req, res) => {
 };
 
 const incrementVoteOnPost = (req, res) => {
-    console.log(req.params);
     const {postId, username, postOwner, type} = req.params;
     db.adjustLike(postId, username, postOwner, type);
     res.status(201).send();
 };
 
 const getCommentsForPost = (req, res) => {
-    db.recursiveGetComments(req.url.slice(10), (err, data) => {
+    const {postId} = req.params;
+    db.recursiveGetComments(postId, (err, data) => {
         if (err) return res.status(404).send();
         res.status(200).send(data);
     })
 };
 
 const postOnAComment = (req, res) => {
-    db.postOnAComment(req.body.parent, req.body.username, req.body.text, (err) => {
+    const {parent, username, text} = req.params;
+    db.postOnAComment(parent, username, text, (err) => {
         if (err) return res.status(404).send();
         res.status(200).send();
     })
