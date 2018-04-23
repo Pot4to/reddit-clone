@@ -182,8 +182,6 @@ class App extends React.Component {
     }
 }
 
-let x = { _id: '5ace72088ce4a740e83be47e'}
-
 ReactDOM.render(
     <App />,
     document.getElementById('app')

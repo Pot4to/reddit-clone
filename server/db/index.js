@@ -10,7 +10,8 @@ const Subscription = require('./schemas/subscriptions.js');
 const Likes = require('./schemas/likes.js');
 
 //Connect to heroku mongodb or local db
-const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test");
+// const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test");
+const db = mongoose.connect("mongodb://localhost:27017/test");
 
 db.recursiveGetComments = (postId, cb) => {
 
@@ -157,8 +158,10 @@ db.subscribeUser = (subredditId, userId, cb) => {
 };
 
 db.getSubreddits = (cb) => {
+    console.log('getting subreddits from db: ', db, 'subreddit schema: ', Subreddit);
     Subreddit.find({}, (err, data) => {
         if (err) return cb(err);
+        console.log('got the stuff', data);
         cb(null, data);
     })
 }
