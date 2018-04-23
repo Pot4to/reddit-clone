@@ -105,7 +105,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
 })
 
-app.listen(3000, function () {
+let port = process.env.PORT || 3000;
+
+app.listen(port, function () {
     // var port = app.address().port;
-    console.log("App now running on port 3000");
+    console.log(`App now running on port ${port}`);
 });
