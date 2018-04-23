@@ -88,7 +88,7 @@ const addPost = (req, res) => {
 };
 
 const subscribe = (req, res) => {
-    db.subscribeUser(req.body.subRedditId, req.body.userId, function(error) {
+    db.subscribeUser(req.body.subRedditId, req.body.username, function(error) {
       if (error) {
         res.statusCode = 404;
         res.send('Error subscribing');
