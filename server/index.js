@@ -15,11 +15,12 @@ var LocalStrategy = require('passport-local').Strategy;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
+app.use('/api', router);
 
 app.get('/favicon.ico', (req, res) => {
     res.status(200).send();
@@ -36,7 +37,6 @@ app.use(passport.session());
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
-// app.use('/api', router);
 
 const User = require('./db/schemas/user.js');
 passport.use(new LocalStrategy(User.authenticate()));
