@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "npm": "5.6.0",
+    "node": "8.10.0"
+  },
   "scripts": {
+    "start": "node server/index.js",
+    "heroku-postbuild": "./node_modules/webpack/bin/webpack.js -p --config ./webpack.config.js --progress",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "insert-data": "node server/db/exampleData.js",
-    "start": "npm-run-all -p react-dev server-dev"
+    "build": "webpack -d"
   },
   "author": "Joseph Nguyen, Aaron Melendez, David Engelstad, Nick Vrdoljak",
   "license": "ISC",
@@ -27,12 +33,13 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.0",
     "express-session": "^1.15.6",
+    "http-proxy": "^1.17.0",
     "jquery": "^3.1.1",
     "mongoose": "^4.13.12",
+    "npm-run-all": "^4.1.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.0",
-    "npm-run-all": "^4.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.7",

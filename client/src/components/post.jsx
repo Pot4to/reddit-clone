@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'Axios';
+import axios from 'axios';
 
 class Post extends React.Component {
     constructor(props) {
@@ -7,13 +7,14 @@ class Post extends React.Component {
         this.state = {
 
         };
+        console.log('post.jsx props', this.props);
 
         this.like = this.like.bind(this);
         this.dislike = this.dislike.bind(this);
     }
 
     like() {
-        axios.post(`http://localhost:3000/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/increment`)
+        axios.post(`/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/increment`)
              .then(() => {
                 var criteria = this.props.order === 'likes' ? 'likes' : 'time';
                 this.props.fetchPosts(criteria);
@@ -21,7 +22,7 @@ class Post extends React.Component {
     }
 
     dislike() {
-        axios.post(`http://localhost:3000/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/decrement`)
+        axios.post(`/api/post/vote/${this.props.post._id}/${this.props.username}/${this.props.post.username}/decrement`)
             .then(() => {
                 var criteria = this.props.order === 'likes' ? 'likes' : 'time';
                 this.props.fetchPosts(criteria);

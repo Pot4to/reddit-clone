@@ -11,7 +11,6 @@ import Login from './components/login.jsx';
 import LoggedIn from './components/loggedIn.jsx';
 import User from './components/user.jsx';
 
-
 import axios from 'axios';
 import $ from 'jquery';
 
@@ -55,8 +54,9 @@ class App extends React.Component {
     }
 
     fetchSubs() {
-        axios.get(`http://localhost:3000/api/subs`)
+        axios.get(`/api/subs`)
             .then((response) => {
+                console.log('subs have been fetched', response);
                 this.setState({
                     subreddits: response.data,
                     view: 'feed'
@@ -66,12 +66,14 @@ class App extends React.Component {
     }
 
     renderSubs() {
+        console.log('Rendering subs, state is now', this.state);
         return this.state.subreddits.map((sub) => {
             return (<div className="ui orange basic button" key={Math.random()} onClick={() => this.setState({ view: 'subreddit', activeSub: sub })}> {sub.name} </div >);
         }).slice(0, 7);
     }
 
     changeActivePost(event, post) {
+        console.log('chnaging active post,', event, post);
         if (event) event.preventDefault();
         this.setState({activePost: post, view: 'comments'});
     }
@@ -89,7 +91,7 @@ class App extends React.Component {
             return (<Home username={this.state.username} changeActivePost={this.changeActivePost} />)
         } else if (view === 'subreddit'){
             // view to display an individual subreddit
-            return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} activeSub={this.state.activeSub} username={this.state.username}/>)
+            return (<Subreddit name={this.state.activeSub.name} changeView={this.changeView} changeActivePost={this.changeActivePost} activeSub={this.state.activeSub} username={this.state.username}/>)
         } else if (view === 'createSubreddit' && this.state.loggedIn === true) {
             // view to create a subreddit
             return <CreateSubreddit changeView={this.changeView} fetchSubs={this.fetchSubs} />
@@ -180,8 +182,6 @@ class App extends React.Component {
         );
     }
 }
-
-let x = { _id: '5ace72088ce4a740e83be47e'}
 
 ReactDOM.render(
     <App />,

@@ -12,10 +12,10 @@ router.get('/post/:postId', (req, res) => controller.getSinglePost(req, res));
 router.get('/home/posts/:criteria', (req, res) => controller.getPosts(req, res));
 
 // handle GET for comments on a given post
-router.get('/comments/*', (req, res) => controller.getCommentsForPost(req, res));
+router.get('/comments/:postId', (req, res) => controller.getCommentsForPost(req, res));
 
 // handle POST for comments on either posts or other comments
-router.post('/comments/*', (req, res) => controller.postOnAComment(req, res));
+router.post('/comments/:parent/:username/:text', (req, res) => controller.postOnAComment(req, res));
 
 // handle POST for creating a new subreddit
 router.post('/subreddits', (req, res) => controller.postSubreddit(req, res));
