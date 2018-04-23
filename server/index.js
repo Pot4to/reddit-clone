@@ -11,19 +11,16 @@ const FileStore = require('session-file-store')(session);
 const uuid = require('uuid');
 const passport = require('passport');
 
-const proxy = require('http-proxy');
+// const proxy = require('http-proxy');
 
 var LocalStrategy = require('passport-local').Strategy;
 
-proxy.createProxyServer({
-    target: 'https://reddit-clone-hrla21.herokuapp.com',
-    toProxy: true, 
-    changeOrigin: true, 
-    xfwd: true
-});
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+// proxy.createProxyServer({
+//     target: 'https://reddit-clone-hrla21.herokuapp.com',
+//     toProxy: true, 
+//     changeOrigin: true, 
+//     xfwd: true
+// });
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -31,6 +28,10 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE");
     next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 
 app.use('/api', router);
@@ -100,10 +101,9 @@ app.get('/api/logout', function(req, res) {
 
 app.use('/api', router);
 
-// app.listen(process.env.PORT || 8080, function () {
-//     // var port = app.address().port;
-//     console.log("App now running");
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+})
 
 app.listen(3000, function () {
     // var port = app.address().port;
