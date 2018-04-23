@@ -64,18 +64,6 @@ app.post('/api/user/signup', (req, res) => {
     })
 })
 
-// app.get('/api/user/login/:username/:password', (req, res) => {
-//     console.log('In Login Get ...', req.params);
-//     passport.authenticate(req.params.username, {
-//         successRedirect: `/${req.params.username}/success`,
-//         failureRedirect: `/${req.params.username}/failure`
-//     })(req, res, function() {
-//         console.log('Sucessful Login');
-//     });
-// });
-
-
-
 app.get('/api/user/loggedIn', function(req, res) {
     res.send(req.session.passport);
 })
