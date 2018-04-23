@@ -10,7 +10,6 @@ class SignUp extends React.Component {
             password: '',
             password2: ''
         }
-        this.signUpHandler.bind(this);
     }
     onChangeHandler(e) {
         this.setState({ [e.target.name]: e.target.value});
@@ -24,10 +23,10 @@ class SignUp extends React.Component {
             }
             axios.post('/api/user/signup', user)
               .then( response => {
-                 console.log('Server replied with... ', response);
+                 console.log('Sign up response... ', response);
               })
               .catch( err => {
-                  console.log('Server replied with ...', err);
+                  console.log('Sign up error...', err);
               })
         } else {
             alert('Passwords did not match. Please try again!');
