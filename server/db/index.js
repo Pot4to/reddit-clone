@@ -1,5 +1,3 @@
-// import Post from '../../client/src/components/post.js';
-
 const mongoose = require('mongoose');
 // const mongoUri = 'mongodb://localhost/reddit';
 const ObjectId = require('mongoose').Types.ObjectId;
