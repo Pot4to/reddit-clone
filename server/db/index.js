@@ -140,9 +140,9 @@ db.getSubredditPosts = (subredditID, cb) => {
       });
 };
 
-db.subscribeUser = (subredditId, userId, cb) => {
+db.subscribeUser = (subredditId, username, cb) => {
     const newSub = new Subscription({
-      username: userId,
+      username: username,
       postId: subredditId
     });
     newSub

@@ -12,6 +12,7 @@ class Subreddit extends React.Component {
         }
         this.subscribeUser = this.subscribeUser.bind(this);
         this.getSubPost = this.getSubPost.bind(this);
+        console.log('props inside subreddit',this.props);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -38,10 +39,10 @@ class Subreddit extends React.Component {
         });
     }
 
-    subscribeUser(subRedditId, userId) {
+    subscribeUser(subRedditId, username) {
        var appThis = this;
-       axios.post(`/api/subscription/${userId}`, {
-               userId,
+       axios.post(`/api/subscription/${username}`, {
+               username,
                subRedditId
        })
        .then((response) => {
@@ -56,7 +57,7 @@ class Subreddit extends React.Component {
         return (
             <div>
                 <div className="subscribe-button">
-                <button onClick={() => {this.subscribeUser(this.props.subreddit._id, this.props.username._id)}}>Subscribe</button>
+                <button onClick={() => {this.subscribeUser(this.props.activeSub._id, this.props.username)}}>Subscribe</button>
                 </div>
 
                 <div>
