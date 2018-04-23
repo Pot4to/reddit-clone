@@ -31,11 +31,8 @@ class App extends React.Component {
     this.changeActivePost = this.changeActivePost.bind(this);
     this.changeView = this.changeView.bind(this);
     this.renderSubs = this.renderSubs.bind(this);
-<<<<<<< HEAD
     this.fetchPosts = this.fetchPosts.bind(this);
-=======
     this.changeSub = this.changeSub.bind(this);
->>>>>>> User can now view list of all subreddits
     }
 
     componentDidMount() {
