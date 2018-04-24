@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const FileStore = require('session-file-store')(session);
 const uuid = require('uuid');
 const passport = require('passport');
+
 var LocalStrategy = require('passport-local').Strategy;
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
@@ -63,18 +64,6 @@ app.post('/api/user/signup', (req, res) => {
     })
 })
 
-// app.get('/api/user/login/:username/:password', (req, res) => {
-//     console.log('In Login Get ...', req.params);
-//     passport.authenticate(req.params.username, {
-//         successRedirect: `/${req.params.username}/success`,
-//         failureRedirect: `/${req.params.username}/failure`
-//     })(req, res, function() {
-//         console.log('Sucessful Login');
-//     });
-// });
-
-
-
 app.get('/api/user/loggedIn', function(req, res) {
     res.send(req.session.passport);
 })
@@ -110,7 +99,7 @@ app.post('/upload', (req, res, next) => {
 
 })
 
-app.use('/api', router);
+// app.use('/api', router);
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));

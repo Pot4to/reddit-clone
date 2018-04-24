@@ -141,6 +141,18 @@ class App extends React.Component {
         }
     }
 
+    //if signup is sucessful, call login handler with the username
+    //so user can be logged in on successful signup
+    signuphandler() {
+        console.log('In sign up handler ...');
+        this.setState({
+            loggedIn: true,
+            username: param
+        });
+        console.log('User changed to ...', this.state.username)
+        console.log('State changed to... ', this.state.loggedIn)
+    }
+    
     loginHandler(param) {
         console.log('In Log In Handler...');
         this.setState({
@@ -190,7 +202,7 @@ class App extends React.Component {
             </div> : <div></div>}
 
             <div className="login">
-                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} />}
+                {this.state.loggedIn ? <LoggedIn changeView={this.changeView} logOut={this.logoutHandler.bind(this)} username={this.state.username}/> : <Login logIn={this.loginHandler.bind(this)} signUp={this.signuphandler.bind(this)} />}
             </div>
 
             <div className='ui buttons posts-pos'>

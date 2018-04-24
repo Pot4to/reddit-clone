@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import $ from 'jquery';
+import SignUp from './signup.jsx';
 
 class Login extends React.Component {
     constructor(props) {
@@ -21,11 +21,11 @@ class Login extends React.Component {
         }
         axios.post('/api/user/signup', user)
           .then( response => {
-             console.log('Server replied with... ', response);
-             response.send('Successful Signup');
+             console.log('Sign up response... ', response);
+             this.onLoginHandler();
           })
           .catch( err => {
-              console.log('Server replied with ...', err);
+              console.log('Signup error...', err);
           })
     }
 
@@ -36,14 +36,15 @@ class Login extends React.Component {
         }
         axios.post(`/api/user/login`, user)
           .then( response => {
-              console.log('Server replied with ... ', response);
+            //   console.log('Server replied with ... ', response);
               var user = response.data.passport.user
               console.log('USER ', user);
               this.props.logIn(user);
 
           })
           .catch( err => {
-              console.log('Server errored out with ', err);
+              console.log('Error in login handler... ', err);
+              alert('Incorrect Username or Password. Please try again!');
           })
 
     }
